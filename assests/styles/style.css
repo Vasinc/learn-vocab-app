@@ -12,4 +12,71 @@ body {
   font-size: 100%;
   font-family: 'Rubik', sans-serif;
 }
+
+body {
+  background: #0d1117;
+  color: white;
+}
+
+.main-content {
+  height: 100vh;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1.5rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.main-content h1 {
+  font-size: 2rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.main-content input {
+  background: none;
+  color: white;
+  font-size: 1.25rem;
+  border: none;
+  border-bottom: 2px solid #30363d;
+}
+
+.main-content input:focus {
+  outline: none;
+}
+
+.main-content button {
+  padding: .5rem 1rem;
+  border: none;
+  background: white;
+  font-size: 1rem;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 50ms linear;
+  transition: -webkit-transform 50ms linear;
+  transition: transform 50ms linear;
+  transition: transform 50ms linear, -webkit-transform 50ms linear;
+}
+
+.main-content button:active {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+
+@media screen and (min-width: 800px) {
+  body main .main-content h1 {
+    font-size: 3rem;
+  }
+}
 /*# sourceMappingURL=style.css.map */

@@ -20,3 +20,43 @@ $red : #a7171a
 $green: #4fbf26
 
 // actual styling
+body
+    background: $black
+    color: white
+
+.main-content
+    height: 100vh
+    width: 100%
+    display: flex
+    flex-direction: column
+    gap: 1.5rem
+    align-items: center
+    justify-content: center
+    h1
+        font-size: 2rem
+        user-select: none
+    input
+        background: none
+        color: white
+        font-size: 1.25rem
+        border: none
+        border-bottom: 2px solid $grey
+        &:focus
+            outline: none
+    button
+        padding: .5rem 1rem
+        border: none
+        background: white
+        // font-weight: 700
+        font-size: 1rem
+        cursor: pointer
+        transition: transform 50ms linear
+        &:active
+            transform: scale(.95)
+
+@media screen and ( min-width: 800px )
+    body
+        main
+            .main-content
+                h1
+                    font-size: 3rem
