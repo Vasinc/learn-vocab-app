@@ -29,7 +29,8 @@ let words = {
     hermano: 'brother',
     hermana: 'sister',
     madre: 'mother',
-    padre: 'father'
+    padre: 'father',
+    uno: 'one'
 }
 
 function generateNewWord () {
@@ -38,7 +39,7 @@ function generateNewWord () {
 }
 
 function checkWords() {
-    if (randomWordInput.value == Object.values(words)[rndNum]) {
+    if (randomWordInput.value.toLowerCase().trim() == Object.values(words)[rndNum]) {
         randomWordInput.style.borderBottom = '2px solid #4fbf26';
     } else {
         randomWordInput.style.borderBottom = '2px solid #a7171a';
