@@ -53,14 +53,18 @@ button.addEventListener('click', () => {
         randomWordInput.value = '';
         generateNewWord();
         button.textContent = 'Check'
-    } else {
+    } else if(button.textContent == 'Check'){
         checkWords();
         button.textContent = 'Generating...'
+        button.style.cursor = 'not-allowed'
+        randomWordInput.disabled = true
         setTimeout(()=> {
             randomWordInput.style.borderBottom = '2px solid #30363d';
             randomWordInput.style.color = 'white';
             randomWordInput.value = '';
             button.textContent = 'Check'
+            button.style.cursor = 'pointer'
+            randomWordInput.disabled = false
             generateNewWord();
         }, 1000)
     }
