@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Learn language</title>
         <link rel="stylesheet" href="./assests/styles/style.css">
+        <script src="./assests/scripts/words.json"></script>
         <script src="./assests/scripts/script.js" defer></script>
     </head>
     <body>
@@ -17,8 +18,13 @@
                 <h1>
                     Random word
                 </h1>
-                <input type="text" id="randomWordInput" placeholder="Write here..." maxlength="20">
-                <button>Generate word</button>
+                <form>
+                    <input type="text" id="randomWordInput" placeholder="Write here..." maxlength="20">
+                    <button type="submit">Generate word</button>
+                </form>
+                <div id="combo">
+                    0
+                </div>
             </div>
         </main>
         <footer>

@@ -32,6 +32,10 @@ body
     gap: 1.5rem
     align-items: center
     justify-content: center
+    form
+        display: flex
+        flex-direction: column
+        gap: 1.5rem
     h1
         font-size: 2rem
         user-select: none
@@ -45,6 +49,8 @@ body
             outline: none
     button
         padding: .5rem 1rem
+        margin: auto
+        max-width: 10rem
         border: none
         background: white
         // font-weight: 700
@@ -53,6 +59,15 @@ body
         transition: transform 50ms linear
         &:active
             transform: scale(.95)
+    #combo
+        font-size: 1.5rem
+        font-weight: 700
+        transition: color 100ms linear
+        &::after
+            content: 'x combo'
+            font-size: 2rem
+            font-weight: 400
+            color: white
 
 @media screen and ( min-width: 800px )
     body

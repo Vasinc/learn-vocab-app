@@ -37,6 +37,17 @@ body {
           justify-content: center;
 }
 
+.main-content form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1.5rem;
+}
+
 .main-content h1 {
   font-size: 2rem;
   -webkit-user-select: none;
@@ -59,6 +70,8 @@ body {
 
 .main-content button {
   padding: .5rem 1rem;
+  margin: auto;
+  max-width: 10rem;
   border: none;
   background: white;
   font-size: 1rem;
@@ -72,6 +85,20 @@ body {
 .main-content button:active {
   -webkit-transform: scale(0.95);
           transform: scale(0.95);
+}
+
+.main-content #combo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  -webkit-transition: color 100ms linear;
+  transition: color 100ms linear;
+}
+
+.main-content #combo::after {
+  content: 'x combo';
+  font-size: 2rem;
+  font-weight: 400;
+  color: white;
 }
 
 @media screen and (min-width: 800px) {
