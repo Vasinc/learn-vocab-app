@@ -87,15 +87,58 @@ body {
           transform: scale(0.95);
 }
 
-.main-content #combo {
+.combos {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: .2rem;
+}
+
+.combos #combo {
   font-size: 1.5rem;
   font-weight: 700;
   -webkit-transition: color 100ms linear;
   transition: color 100ms linear;
 }
 
-.main-content #combo::after {
+.combos #combo::after {
   content: 'x combo';
+  font-size: 2rem;
+  font-weight: 400;
+  color: white;
+}
+
+.combos #max-combo {
+  color: yellow;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.combos #max-combo::before {
+  content: '(';
+  color: white;
+  font-weight: 400;
+}
+
+.combos #max-combo::after {
+  content: ')';
+  color: white;
+  font-weight: 400;
+}
+
+.fails-section #fails {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: red;
+  -webkit-transition: color 100ms linear;
+  transition: color 100ms linear;
+}
+
+.fails-section #fails::after {
+  content: 'x fails';
   font-size: 2rem;
   font-weight: 400;
   color: white;

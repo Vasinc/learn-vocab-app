@@ -1,9 +1,15 @@
+// https://1000mostcommonwords.com/1000-most-common-german-words/
+
 const randomWord = document.querySelector('h1');
 const randomWordInput = document.getElementById('randomWordInput');
 const button = document.querySelector('button');
 const combo = document.getElementById('combo');
+const fails = document.getElementById('fails');
+const maxCombo = document.getElementById('max-combo');
 
 let comboNumber = parseInt(combo.textContent);
+let failsNumber = parseInt(fails.textContent);
+let maxComboNumber = parseInt(maxCombo.textContent);
 let words;
 let rndNum;
 
@@ -28,13 +34,19 @@ function checkWords() {
         comboNumber++;
         combo.textContent = comboNumber;
         combo.style.color = '#4fbf26';
+        if (comboNumber > maxComboNumber ) {
+            maxComboNumber = comboNumber;
+            maxCombo.textContent = maxComboNumber;
+        }
     } else {
         randomWordInput.style.borderBottom = '2px solid #a7171a';
         randomWordInput.style.color = '#a7171a';
         randomWordInput.value = `${randomWordInput.value}(${Object.values(words)[rndNum]})`
         comboNumber = 0;
         combo.textContent = comboNumber;
-        combo.style.color = '#a7171a';
+        combo.style.color = 'white';
+        failsNumber++;
+        fails.textContent = failsNumber;
         setTimeout(() => {
             combo.style.color = 'white';
         }, 1000)
@@ -61,6 +73,6 @@ button.addEventListener('click', event => {
             randomWordInput.disabled = false
             generateNewWord();
             randomWordInput.focus();
-        }, 1000)
+        }, 2000)
     }
 })
