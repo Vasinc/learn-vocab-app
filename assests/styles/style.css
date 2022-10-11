@@ -4,6 +4,7 @@
   padding: 0;
   -webkit-box-sizing: inherit;
           box-sizing: inherit;
+  webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -11,6 +12,95 @@ body {
           box-sizing: border-box;
   font-size: 100%;
   font-family: 'Rubik', sans-serif;
+}
+
+.display-block {
+  display: block !important;
+}
+
+.display-flex {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+#backdrop {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.fails-list__UI {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  height: 90%;
+  width: 75%;
+  max-width: 600px;
+  background: #1a222e;
+  z-index: 10000;
+}
+
+.fails-list__UI h2 {
+  position: relative;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.fails-list__UI h2::after {
+  content: '"word(typed word) - correct word"';
+  position: absolute;
+  text-align: center;
+  bottom: -.25rem;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  font-size: .75rem;
+  color: #c86596;
+}
+
+.fails-list__UI .fails-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: .5rem;
+  width: 90%;
+  max-width: 400px;
+  height: 75%;
+  padding: .5rem 2rem;
+  font-size: 1.15rem;
+  margin: auto;
+  overflow-y: auto;
+  background: #1f2938;
+  color: #cccccc;
+}
+
+.fails-list__UI .fails-list .word {
+  color: #f8f29a;
+}
+
+.fails-list__UI .fails-list .wrong-word {
+  color: #e22d31;
+}
+
+.fails-list__UI .fails-list .correct-word {
+  color: #4fbf26;
 }
 
 body {
@@ -129,6 +219,16 @@ body {
   font-weight: 400;
 }
 
+.fails-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: .5rem;
+}
+
 .fails-section #fails {
   font-size: 1.5rem;
   font-weight: 700;
@@ -144,7 +244,47 @@ body {
   color: white;
 }
 
+.fails-section .fails-list__button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: .3rem;
+  width: 1.85rem;
+  background: white;
+  padding: .3rem;
+  border-radius: .2rem;
+  cursor: pointer;
+}
+
+.fails-section .fails-list__button:hover .fail-list__line {
+  background: #3b4d68;
+}
+
+.fails-section .fails-list__button .fail-list__line {
+  width: 100%;
+  height: 2px;
+  background: #0d1117;
+  -webkit-transition: background 200ms linear;
+  transition: background 200ms linear;
+}
+
 @media screen and (min-width: 800px) {
+  body .fails-list__UI h2 {
+    font-size: 2.5rem;
+  }
+  body .fails-list__UI::after {
+    font-size: 1rem;
+    bottom: -.05rem;
+  }
+  body .fails-list__UI .fails-list {
+    padding: 1rem 2rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
   body main .main-content h1 {
     font-size: 3rem;
   }

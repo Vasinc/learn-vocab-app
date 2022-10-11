@@ -1,5 +1,9 @@
 // https://1000mostcommonwords.com/1000-most-common-german-words/
 
+const backdrop = document.getElementById('backdrop');
+const failsUI = document.querySelector('.fails-list__UI');
+const failsButton = document.querySelector('.fails-list__button');
+const failsList = document.querySelector('.fails-list');
 const randomWord = document.querySelector('h1');
 const randomWordInput = document.getElementById('randomWordInput');
 const button = document.querySelector('button');
@@ -39,6 +43,11 @@ function checkWords() {
             maxCombo.textContent = maxComboNumber;
         }
     } else {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <span class="word">${Object.keys(words)[rndNum]} </span>( <span class="wrong-word">${randomWordInput.value}</span> ) - <span class="correct-word">${Object.values(words)[rndNum]}</span>
+        `;
+        failsList.appendChild(li);
         randomWordInput.style.borderBottom = '2px solid #a7171a';
         randomWordInput.style.color = '#a7171a';
         randomWordInput.value = `${randomWordInput.value}(${Object.values(words)[rndNum]})`
@@ -51,6 +60,12 @@ function checkWords() {
             combo.style.color = 'white';
         }, 1000)
     }
+}
+
+function removeBackdrop () {
+    document.body.style.overflow = 'visible';
+    backdrop.classList.remove('display-block');
+    failsUI.classList.remove('display-flex');
 }
 
 button.addEventListener('click', event => {
@@ -76,3 +91,12 @@ button.addEventListener('click', event => {
         }, 2000)
     }
 })
+
+failsButton.addEventListener('click', () => {
+    backdrop.scrollIntoView();
+    document.body.style.overflow = 'hidden';
+    backdrop.classList.add('display-block');
+    failsUI.classList.add('display-flex');
+})
+
+backdrop.addEventListener('click', removeBackdrop);
