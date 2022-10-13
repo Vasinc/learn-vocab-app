@@ -184,39 +184,24 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  font-size: 1.75rem;
+  font-weight: 400;
   gap: .2rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .combos #combo {
-  font-size: 1.5rem;
   font-weight: 700;
   -webkit-transition: color 100ms linear;
   transition: color 100ms linear;
 }
 
-.combos #combo::after {
-  content: 'x combo';
-  font-size: 2rem;
-  font-weight: 400;
-  color: white;
-}
-
 .combos #max-combo {
   color: yellow;
-  font-size: 1.5rem;
   font-weight: 700;
-}
-
-.combos #max-combo::before {
-  content: '(';
-  color: white;
-  font-weight: 400;
-}
-
-.combos #max-combo::after {
-  content: ')';
-  color: white;
-  font-weight: 400;
 }
 
 .fails-section {
@@ -226,22 +211,21 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  font-size: 1.75rem;
+  font-weight: 400;
   gap: .5rem;
 }
 
 .fails-section #fails {
-  font-size: 1.5rem;
   font-weight: 700;
   color: red;
   -webkit-transition: color 100ms linear;
   transition: color 100ms linear;
-}
-
-.fails-section #fails::after {
-  content: 'x fails';
-  font-size: 2rem;
-  font-weight: 400;
-  color: white;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .fails-section .fails-list__button {
@@ -287,6 +271,12 @@ body {
   }
   body main .main-content h1 {
     font-size: 3rem;
+  }
+  body main .main-content .combos {
+    font-size: 2rem;
+  }
+  body main .main-content .fails-section {
+    font-size: 2rem;
   }
 }
 /*# sourceMappingURL=style.css.map */

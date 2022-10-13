@@ -126,43 +126,29 @@ body
 .combos
     display: flex
     align-items: center
-    gap: .2rem            
+    font-size: 1.75rem
+    font-weight: 400
+    gap: .2rem
+    user-select: none     
     #combo
-        font-size: 1.5rem
         font-weight: 700
         transition: color 100ms linear
-        &::after
-            content: 'x combo'
-            font-size: 2rem
-            font-weight: 400
-            color: white
     #max-combo
         color: yellow
-        font-size: 1.5rem
         font-weight: 700
-        &::before
-            content: '('
-            color: white
-            font-weight: 400
-        &::after
-            content: ')'
-            color: white
-            font-weight: 400
 
 .fails-section
     display: flex
     align-items: center
+    font-size: 1.75rem
+    font-weight: 400
     gap: .5rem
     #fails
-        font-size: 1.5rem
         font-weight: 700
         color: red
         transition: color 100ms linear
-        &::after
-            content: 'x fails'
-            font-size: 2rem
-            font-weight: 400
-            color: white
+        cursor: pointer
+        user-select: none
     .fails-list__button
         display: flex
         flex-direction: column
@@ -197,3 +183,7 @@ body
             .main-content
                 h1
                     font-size: 3rem
+                .combos
+                    font-size: 2rem
+                .fails-section
+                    font-size: 2rem
