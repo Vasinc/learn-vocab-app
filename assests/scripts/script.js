@@ -1,5 +1,6 @@
 // https://1000mostcommonwords.com/1000-most-common-german-words/
 
+// elements
 const backdrop = document.getElementById('backdrop');
 const failsUI = document.querySelector('.fails-list__UI');
 const failsButton = document.querySelector('.fails-list__button');
@@ -11,14 +12,45 @@ const combo = document.getElementById('combo');
 const fails = document.getElementById('fails');
 const maxCombo = document.getElementById('max-combo');
 
-let failedWords = [];
+// sounds
+const clickSound = new Audio('./sounds/click.mp3');
+const correctSound = new Audio('./sounds/correct.mp3');
+const wrongSound = new Audio('./sounds/wrong.mp3'); 
+const wooshSound = new Audio('./sounds/woosh.mp3');
 
+// change volume of sounds
+clickSound.volume = .7;
+correctSound.volume = .3;
+wrongSound.volume = .3;
+wooshSound.volume = .5;
+
+let failedWords = [];
+let data = {};
+
+// number value of elements
 let comboNumber = parseInt(combo.textContent);
 let failsNumber = parseInt(fails.textContent);
 let maxComboNumber = parseInt(maxCombo.textContent);
 let words;
 let rndNum;
 let rndFailedNum;
+let totalCombo;
+let totalFails;
+
+onload = () => {
+    if(localStorage.getItem('data')) {
+        data = JSON.parse(localStorage.getItem('data'));
+        maxComboNumber = data.maxComboData;
+        maxCombo.textContent = maxComboNumber;
+        failedWords = data.failedWordsData;
+        updateList();
+        failsNumber = failedWords.length;
+        fails.textContent = failsNumber;
+        totalCombo = data.totalComboData;
+        totalFails = data.totalFailsData;
+    }
+
+}
 
 fetch('./assests/scripts/words.json')
     .then(
@@ -55,18 +87,21 @@ function updateList () {
 function checkWords() {
     if (randomWordInput.value.toLowerCase().trim() == Object.values(words)[rndNum]) {
         randomWordInput.style.borderBottom = '2px solid #4fbf26';
-        console.log(combo);
+        totalCombo++;
+        data.totalComboData = totalCombo;
         comboNumber++;
         combo.textContent = comboNumber;
         combo.style.color = '#4fbf26';
         if (comboNumber > maxComboNumber ) {
             maxComboNumber = comboNumber;
             maxCombo.textContent = maxComboNumber;
+            data.maxComboData = maxComboNumber;
         }
+        correctSound.play();
     } else {
         failedWords.push({failedWord: Object.keys(words)[rndNum], typedWord: randomWordInput.value, correctWord: Object.values(words)[rndNum]});
         updateList();
-        console.log(failedWords);
+        data.failedWordsData = failedWords;
         randomWordInput.style.borderBottom = '2px solid #a7171a';
         randomWordInput.style.color = '#a7171a';
         randomWordInput.value = `${randomWordInput.value}(${Object.values(words)[rndNum]})`
@@ -75,24 +110,32 @@ function checkWords() {
         combo.style.color = 'white';
         failsNumber++;
         fails.textContent = failsNumber;
+        totalFails++
+        data.totalFailsData = totalFails;
         setTimeout(() => {
             combo.style.color = 'white';
         }, 1000)
+        wrongSound.play();
     }
+
+    localStorage.setItem('data', JSON.stringify(data));
 }
 
 function checkFailedWords () {
     if (failedWords[rndFailedNum].correctWord == randomWordInput.value.toLowerCase().trim()) {
         failedWords.splice(rndFailedNum, 1);
         updateList();
-        console.log(failedWords);
+        data.failedWordsData = failedWords;
         failsNumber--;
         fails.textContent = failsNumber;
         randomWordInput.style.borderBottom = '2px solid #4fbf26';
+        correctSound.play();
     } else {
         randomWordInput.style.borderBottom = '2px solid #a7171a';
+        wrongSound.play();
         return;
     }
+    localStorage.setItem('data', JSON.stringify(data));
 }
 
 function removeBackdrop () {
@@ -108,6 +151,7 @@ button.addEventListener('click', event => {
             randomWordInput.value = '';
             generateNewWord();
             button.textContent = 'Check'
+            clickSound.play();
             break;
 
         case 'Check':
@@ -128,6 +172,7 @@ button.addEventListener('click', event => {
             break;
         
         case 'From failed words':
+            clickSound.play();
             randomWordInput.value = '';
             generateNewFailedWord();
             button.textContent = 'Check failed word'
@@ -168,6 +213,7 @@ failsButton.addEventListener('click', () => {
     document.body.style.overflow = 'hidden';
     backdrop.classList.add('display-block');
     failsUI.classList.add('display-flex');
+    clickSound.play();
 })
 
 backdrop.addEventListener('click', removeBackdrop);
@@ -182,4 +228,6 @@ fails.addEventListener('click', () => {
         button.textContent = 'From failed words'
         randomWord.textContent = 'Random word';
     }
+
+    wooshSound.play();
 })
