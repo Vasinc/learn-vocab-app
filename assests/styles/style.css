@@ -24,6 +24,11 @@ body {
   display: flex !important;
 }
 
+.display-grid {
+  display: -ms-grid !important;
+  display: grid !important;
+}
+
 #backdrop {
   display: none;
   position: absolute;
@@ -33,6 +38,48 @@ body {
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
   z-index: 9999;
+}
+
+.burger-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: .3rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 1.75rem;
+  cursor: pointer;
+}
+
+.burger-menu .burger-line {
+  width: 100%;
+  height: 2px;
+  background: white;
+}
+
+.burger-menu .burger-line:nth-of-type(2) {
+  width: 75%;
+}
+
+.burger-menu .burger-line:last-of-type {
+  width: 50%;
+}
+
+.menu-UI {
+  display: none;
+  place-items: center;
+  font-size: 2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #161d27;
 }
 
 .fails-list__UI {

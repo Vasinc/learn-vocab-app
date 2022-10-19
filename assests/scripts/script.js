@@ -11,6 +11,8 @@ const button = document.querySelector('button');
 const combo = document.getElementById('combo');
 const fails = document.getElementById('fails');
 const maxCombo = document.getElementById('max-combo');
+const burgerMenu = document.querySelector('.burger-menu');
+const menuUI = document.querySelector('.menu-UI');
 
 // sounds
 const clickSound = new Audio('./sounds/click.mp3');
@@ -34,13 +36,18 @@ let maxComboNumber = parseInt(maxCombo.textContent);
 let words;
 let rndNum;
 let rndFailedNum;
-let totalCombo;
-let totalFails;
+let totalWords = 0;
+let totalCombo = 0;
+let totalFails = 0;
 
 onload = () => {
-    if(localStorage.getItem('data')) {
+    if(!localStorage.getItem('data')) return;
         data = JSON.parse(localStorage.getItem('data'));
-        maxComboNumber = data.maxComboData;
+        if(data.maxComboData) {
+            maxComboNumber = data.maxComboData;
+        } else {
+            maxComboNumber = 0;
+        }
         maxCombo.textContent = maxComboNumber;
         failedWords = data.failedWordsData;
         updateList();
@@ -48,8 +55,7 @@ onload = () => {
         fails.textContent = failsNumber;
         totalCombo = data.totalComboData;
         totalFails = data.totalFailsData;
-    }
-
+        totalWords = data.totalWordsData;
 }
 
 fetch('./assests/scripts/words.json')
@@ -89,6 +95,8 @@ function checkWords() {
         randomWordInput.style.borderBottom = '2px solid #4fbf26';
         totalCombo++;
         data.totalComboData = totalCombo;
+        totalWords++;
+        data.totalWordsData = totalWords;
         comboNumber++;
         combo.textContent = comboNumber;
         combo.style.color = '#4fbf26';
@@ -112,6 +120,8 @@ function checkWords() {
         fails.textContent = failsNumber;
         totalFails++
         data.totalFailsData = totalFails;
+        totalWords++;
+        data.totalWordsData = totalWords;
         setTimeout(() => {
             combo.style.color = 'white';
         }, 1000)
@@ -224,10 +234,27 @@ fails.addEventListener('click', () => {
     if (button.textContent == 'From failed words' || button.textContent == 'Check failed word') {
         button.textContent = 'Generate word';
         randomWord.textContent = 'Random word';
+        wooshSound.play();
+        setTimeout(() => {
+            wooshSound.pause();
+            wooshSound.currentTime = 0;
+        }, 350);
     } else  if (failsNumber > 0){
         button.textContent = 'From failed words'
         randomWord.textContent = 'Random word';
+        wooshSound.play();
+        setTimeout(() => {
+            wooshSound.pause();
+            wooshSound.currentTime = 0;
+        }, 350);
     }
 
-    wooshSound.play();
+})
+
+burgerMenu.addEventListener('click', () => {
+    menuUI.classList.add('display-grid');
+})
+
+menuUI.addEventListener('click', () => {
+    menuUI.classList.remove('display-grid');
 })
