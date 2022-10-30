@@ -13,6 +13,7 @@ const fails = document.getElementById('fails');
 const maxCombo = document.getElementById('max-combo');
 const burgerMenu = document.querySelector('.burger-menu');
 const menuUI = document.querySelector('.menu-UI');
+const options = document.getElementById('options');
 
 // sounds
 const clickSound = new Audio('./sounds/click.mp3');
@@ -58,7 +59,7 @@ onload = () => {
         totalWords = data.totalWordsData;
 }
 
-fetch('./assests/scripts/words.json')
+fetch('./assests/scripts/1000 words.json')
     .then(
         response => response.json()
     )
@@ -252,9 +253,22 @@ fails.addEventListener('click', () => {
 })
 
 burgerMenu.addEventListener('click', () => {
-    menuUI.classList.add('display-grid');
+    menuUI.classList.add('display-flex');
 })
 
 menuUI.addEventListener('click', () => {
-    menuUI.classList.remove('display-grid');
+    menuUI.classList.remove('display-flex');
+})
+
+options.addEventListener('change', () => {
+    fetch(`./assests/scripts/${options.value}.json`)
+    .then(
+        response => response.json()
+    )
+    .then(
+        (json) => words = json
+    );
+
+    button.textContent = 'Generate word';
+    randomWord.textContent = 'Random word';
 })
