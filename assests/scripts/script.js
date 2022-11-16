@@ -14,6 +14,17 @@ const maxCombo = document.getElementById('max-combo');
 const burgerMenu = document.querySelector('.burger-menu');
 const menuUI = document.querySelector('.menu-UI');
 const options = document.getElementById('options');
+const delayRange = document.getElementById('delay-range');
+const delayRangeNumber = document.querySelector('.delay-range__number');
+
+delayRange.oninput = () => {
+    delayRangeNumber.textContent = delayRange.value;
+    DELAY_NUMBER = parseInt(delayRange.value);
+}
+
+// global variables
+let option;
+let DELAY_NUMBER;
 
 // sounds
 const clickSound = new Audio('./sounds/click.mp3');
@@ -57,6 +68,8 @@ onload = () => {
         totalCombo = data.totalComboData;
         totalFails = data.totalFailsData;
         totalWords = data.totalWordsData;
+    delayRangeNumber.textContent = delayRange.value
+    DELAY_NUMBER = parseInt(delayRange.value);
 }
 
 fetch('./assests/scripts/1000 words.json')
@@ -125,7 +138,7 @@ function checkWords() {
         data.totalWordsData = totalWords;
         setTimeout(() => {
             combo.style.color = 'white';
-        }, 1000)
+        }, DELAY_NUMBER)
         wrongSound.play();
     }
 
@@ -153,6 +166,8 @@ function removeBackdrop () {
     document.body.style.overflow = 'visible';
     backdrop.classList.remove('display-block');
     failsUI.classList.remove('display-flex');
+    if(!option) return;
+    option.classList.remove('display-block');
 }
 
 button.addEventListener('click', event => {
@@ -179,7 +194,7 @@ button.addEventListener('click', event => {
                 randomWordInput.disabled = false
                 generateNewWord();
                 randomWordInput.focus();
-            }, 2000)
+            }, DELAY_NUMBER*2)
             break;
         
         case 'From failed words':
@@ -214,7 +229,7 @@ button.addEventListener('click', event => {
                     generateNewFailedWord();
                     randomWordInput.focus();
                 }
-            }, 2000)
+            }, DELAY_NUMBER * 2)
             break;
     }
 })
@@ -239,7 +254,7 @@ fails.addEventListener('click', () => {
         setTimeout(() => {
             wooshSound.pause();
             wooshSound.currentTime = 0;
-        }, 350);
+        }, Math.trunc(DELAY_NUMBER / 3));
     } else  if (failsNumber > 0){
         button.textContent = 'From failed words'
         randomWord.textContent = 'Random word';
@@ -247,7 +262,7 @@ fails.addEventListener('click', () => {
         setTimeout(() => {
             wooshSound.pause();
             wooshSound.currentTime = 0;
-        }, 350);
+        }, 300);
     }
 
 })
@@ -256,7 +271,11 @@ burgerMenu.addEventListener('click', () => {
     menuUI.classList.add('display-flex');
 })
 
-menuUI.addEventListener('click', () => {
+menuUI.addEventListener('click', event => {
+    if(event.target.tagName != 'LI') return;
+    option = document.querySelector(`.${event.target.textContent.trim().toLowerCase()}-UI`)
+    option.classList.add('display-block');
+    backdrop.classList.add('display-block');
     menuUI.classList.remove('display-flex');
 })
 
@@ -272,3 +291,4 @@ options.addEventListener('change', () => {
     button.textContent = 'Generate word';
     randomWord.textContent = 'Random word';
 })
+

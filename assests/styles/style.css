@@ -70,6 +70,125 @@ body {
   width: 50%;
 }
 
+.options-UI {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 70%;
+  height: 70%;
+  max-width: 800px;
+  background: #1f2938;
+  padding: 2rem 3rem;
+  z-index: 10000;
+  border-radius: .5rem;
+}
+
+.options-UI h2 {
+  text-align: center;
+}
+
+.options-UI .options-UI__options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 2rem;
+  height: 100%;
+}
+
+.options-UI .options-UI__options .options-UI__option {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: .5rem;
+}
+
+.options-UI .options-UI__options .options-UI__option [type='range'] {
+  -webkit-appearance: none;
+  height: 20px;
+  border: none;
+  border-radius: .5rem;
+  -webkit-box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+          box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+  background: #445979;
+  overflow: hidden;
+}
+
+.options-UI .options-UI__options .options-UI__option [type='range']:focus {
+  outline: none;
+}
+
+.options-UI .options-UI__options .options-UI__option [type='range']::-webkit-slider-runnable-track {
+  background: #445979;
+}
+
+.options-UI .options-UI__options .options-UI__option [type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+}
+
+.options-UI .options-UI__options .options-UI__option:first-of-type .delay-range__number {
+  font-weight: 700;
+}
+
+.options-UI .options-UI__options .options-UI__option:first-of-type .delay-range__number::after {
+  content: 'ms';
+}
+
+.options-UI .options-UI__options .options-UI__option:nth-of-type(2) {
+  border-top: 2px solid #0d1117;
+  padding-top: 2rem;
+}
+
+.stats-UI {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 70%;
+  height: 90%;
+  max-width: 800px;
+  background: #1f2938;
+  z-index: 10000;
+  border-radius: .5rem;
+}
+
+.shop-UI {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 70%;
+  height: 90%;
+  max-width: 800px;
+  background: #1f2938;
+  z-index: 10000;
+  border-radius: .5rem;
+}
+
 .menu-UI {
   display: none;
   -webkit-box-align: center;
