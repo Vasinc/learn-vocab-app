@@ -79,7 +79,7 @@ body {
           transform: translate(-50%, -50%);
   width: 70%;
   height: 70%;
-  max-width: 800px;
+  max-width: 600px;
   background: #1f2938;
   padding: 2rem 3rem;
   z-index: 10000;
@@ -106,27 +106,35 @@ body {
           justify-content: center;
   gap: 2rem;
   height: 100%;
+  width: 100%;
 }
 
 .options-UI .options-UI__options .options-UI__option {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
   gap: .5rem;
+  width: 100%;
+  text-align: center;
 }
 
 .options-UI .options-UI__options .options-UI__option [type='range'] {
   -webkit-appearance: none;
   height: 20px;
+  max-width: 350px;
+  background: #445979;
   border: none;
   border-radius: .5rem;
   -webkit-box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
           box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
-  background: #445979;
+  cursor: pointer;
   overflow: hidden;
 }
 
@@ -159,6 +167,14 @@ body {
   padding-top: 2rem;
 }
 
+.options-UI .options-UI__options .options-UI__option:last-of-type .sounds-range__number {
+  font-weight: 700;
+}
+
+.options-UI .options-UI__options .options-UI__option:last-of-type .sounds-range__number::after {
+  content: '%';
+}
+
 .stats-UI {
   display: none;
   position: absolute;
@@ -189,6 +205,21 @@ body {
   border-radius: .5rem;
 }
 
+.challenges-UI {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 70%;
+  height: 90%;
+  max-width: 800px;
+  background: #1f2938;
+  z-index: 10000;
+  border-radius: .5rem;
+}
+
 .menu-UI {
   display: none;
   -webkit-box-align: center;
@@ -200,7 +231,7 @@ body {
   left: 0;
   width: 100%;
   height: 100vh;
-  padding: 3rem 0;
+  padding: 2rem 0;
   background: #161d27;
 }
 
@@ -247,8 +278,12 @@ body {
   content: 'STATS';
 }
 
-.menu-UI .options .option:last-of-type::after {
+.menu-UI .options .option:nth-of-type(3)::after {
   content: 'SHOP';
+}
+
+.menu-UI .options .option:nth-of-type(4)::after {
+  content: 'CHALLENGES';
 }
 
 #options {
@@ -491,7 +526,25 @@ body {
   transition: background 200ms linear;
 }
 
+@media screen and (min-width: 360px) {
+  body .options-UI .options-UI__options .options-UI__option [type='range'] {
+    width: 100%;
+  }
+}
+
 @media screen and (min-width: 800px) {
+  body .options-UI .options-UI__options .options-UI__option {
+    font-size: 1.5rem;
+  }
+  body .options-UI .options-UI__options .options-UI__option [type='range'] {
+    width: 100%;
+    height: 30px;
+    border-radius: 30px;
+  }
+  body .options-UI .options-UI__options .options-UI__option [type='range']::-webkit-slider-thumb {
+    height: 30px;
+    width: 30px;
+  }
   body .fails-list__UI h2 {
     font-size: 2.5rem;
   }

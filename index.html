@@ -7,6 +7,10 @@
         <title>Learn language</title>
         <link rel="stylesheet" href="./assests/styles/style.css">
         <script src="./assests/scripts/script.js" defer></script>
+        <link rel="apple-touch-icon" sizes="180x180" href="./assests/images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./assests/images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./assests/images/favicon-16x16.png">
+        <!-- <link rel="manifest" href="/site.webmanifest"> -->
     </head>
     <body>
         <div id="backdrop"></div>
@@ -31,22 +35,25 @@
                 <li class="option">
                     SHOP    
                 </li>
+                <li class="option">
+                    CHALLENGES
+                </li>
             </ul>
         </div>
         <div class="options-UI">
             <h2>OPTIONS</h2>
             <div class="options-UI__options">
                 <div class="options-UI__option">
-                    <label for="delay-range">Delay(<span class="delay-range__number">250</span>):</label>
+                    <label for="delay-range">Delay(<span class="delay-range__number"></span>):</label>
                     <input type="range" name="delay-range" id="delay-range" min="300" max="2000">
                 </div>
                 <div class="options-UI__option">
-                    <label for="soundsCheck">Enable Sound:</label>
-                    <input type="checkbox" name="soundsCheck" id="soundsCheck">
+                    <label for="soundsCheck">Enable Sound</label>
+                    <input type="checkbox" name="soundsCheck" id="soundsCheck" checked="true">
                 </div>
-                <div class="options-UI__option">
-                    <input type="range" name="sounds-range" id="sounds-range">
-                    <label for="sounds-range">(Sounds Volume)</label>
+                <div class="options-UI__option options-UI__option-sound">
+                    <label for="sounds-range">Volume( <span class="sounds-range__number"></span> )</label>
+                    <input type="range" name="sounds-range" id="sounds-range" min="10" max="200">
                 </div>
             </div>
         </div>
@@ -55,6 +62,9 @@
         </div>
         <div class="shop-UI">
             <h2>SHOP</h2>
+        </div>
+        <div class="challenges-UI">
+            <h2>CHALLENGES</h2>
         </div>
         <div class="fails-list__UI">
             <h2>Failed Words</h2>

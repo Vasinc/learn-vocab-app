@@ -16,15 +16,33 @@ const menuUI = document.querySelector('.menu-UI');
 const options = document.getElementById('options');
 const delayRange = document.getElementById('delay-range');
 const delayRangeNumber = document.querySelector('.delay-range__number');
+const soundCheck = document.getElementById('soundsCheck');
+const soundRange = document.getElementById('sounds-range');
+const soundRangeNumber = document.querySelector('.sounds-range__number');
+
 
 delayRange.oninput = () => {
     delayRangeNumber.textContent = delayRange.value;
     DELAY_NUMBER = parseInt(delayRange.value);
+
+    optionsData.delayRangeData = delayRange.value;
+    localStorage.setItem('optionsData', JSON.stringify(optionsData));
+}
+
+soundRange.oninput = () => {
+    soundRangeNumber.textContent = soundRange.value;
+    SOUND_MULTIPLIER = parseFloat(soundRange.value / 100);
+    console.log(clickSound.volume);
+
+    optionsData.soundRangeData = soundRange.value;
+    localStorage.setItem('optionsData', JSON.stringify(optionsData));
+    changeVolumeAllSounds();
 }
 
 // global variables
 let option;
 let DELAY_NUMBER;
+let SOUND_MULTIPLIER = 1;
 
 // sounds
 const clickSound = new Audio('./sounds/click.mp3');
@@ -32,14 +50,15 @@ const correctSound = new Audio('./sounds/correct.mp3');
 const wrongSound = new Audio('./sounds/wrong.mp3'); 
 const wooshSound = new Audio('./sounds/woosh.mp3');
 
-// change volume of sounds
-clickSound.volume = .7;
-correctSound.volume = .3;
-wrongSound.volume = .3;
+// defaul volume of sounds
+clickSound.volume = .5;
+correctSound.volume = .5;
+wrongSound.volume = .5;
 wooshSound.volume = .5;
 
 let failedWords = [];
 let data = {};
+let optionsData = {};
 
 // number value of elements
 let comboNumber = parseInt(combo.textContent);
@@ -53,7 +72,7 @@ let totalCombo = 0;
 let totalFails = 0;
 
 onload = () => {
-    if(!localStorage.getItem('data')) return;
+    if(localStorage.getItem('data')) {
         data = JSON.parse(localStorage.getItem('data'));
         if(data.maxComboData) {
             maxComboNumber = data.maxComboData;
@@ -68,8 +87,38 @@ onload = () => {
         totalCombo = data.totalComboData;
         totalFails = data.totalFailsData;
         totalWords = data.totalWordsData;
-    delayRangeNumber.textContent = delayRange.value
-    DELAY_NUMBER = parseInt(delayRange.value);
+    }
+
+    if(localStorage.getItem('optionsData')) {
+        optionsData = JSON.parse(localStorage.getItem('optionsData'));
+        retrievedData = optionsData.delayRangeData;
+        delayRangeNumber.textContent = retrievedData;
+        delayRange.value = parseInt(retrievedData);
+        DELAY_NUMBER = parseInt(retrievedData);
+    } else {
+        delayRangeNumber.textContent = '1150';
+        delayRange.value = 1150;
+        DELAY_NUMBER = 1150;
+        optionsData.delayRangeData = delayRange.value;
+        localStorage.setItem('optionsData', JSON.stringify(optionsData));
+        optionsData.soundRangeData = 100;
+        localStorage.setItem('optionsData', JSON.stringify(optionsData));
+    }
+
+    if(localStorage.getItem('optionsData')) { 
+        optionsData = JSON.parse(localStorage.getItem('optionsData'));
+        retrievedData = optionsData.soundRangeData;
+        soundRangeNumber.textContent = retrievedData;
+        soundRange.value = parseInt(retrievedData);
+        SOUND_MULTIPLIER = parseFloat(retrievedData);
+    } else {
+        soundRangeNumber.textContent = '100';
+        soundRange.value = 100;
+        optionsData.delayRangeData = delayRange.value;
+        localStorage.setItem('optionsData', JSON.stringify(optionsData));
+        optionsData.soundRangeData = soundRange.value;
+        localStorage.setItem('optionsData', JSON.stringify(optionsData));
+    }
 }
 
 fetch('./assests/scripts/1000 words.json')
@@ -80,7 +129,36 @@ fetch('./assests/scripts/1000 words.json')
         (json) => words = json
     );
 
+function changeVolumeAllSounds () {
+    clickSound.volume = .5 * SOUND_MULTIPLIER;
+    correctSound.volume = .5 * SOUND_MULTIPLIER;
+    wrongSound.volume = .5 * SOUND_MULTIPLIER;
+    wooshSound.volume = .5 * SOUND_MULTIPLIER;
+}
 
+function checkedStyleSoundRange () {
+    soundRange.style.cursor = 'pointer';
+    soundRange.style.filter = 'grayscale(0)';
+    soundRange.disabled = false;
+
+    if(localStorage.getItem('optionsData')) { 
+        optionsData = JSON.parse(localStorage.getItem('optionsData'));
+        SOUND_MULTIPLIER = parseFloat(parseInt(optionsData.soundRangeData) / 100);
+        changeVolumeAllSounds();
+    } else {
+        SOUND_MULTIPLIER = 1
+        changeVolumeAllSounds();
+    }
+}
+
+function uncheckedStyleSoundRange () {
+    soundRange.style.cursor = 'not-allowed';
+    soundRange.style.filter = 'grayscale(1)';
+    soundRange.disabled = true;
+
+    SOUND_MULTIPLIER = 0;
+    changeVolumeAllSounds();
+}
 
 function generateNewWord () {
     rndNum = Math.floor(Math.random() * Object.keys(words).length);
@@ -292,3 +370,10 @@ options.addEventListener('change', () => {
     randomWord.textContent = 'Random word';
 })
 
+soundCheck.addEventListener('change', () => {
+    if(soundCheck.checked) {
+        checkedStyleSoundRange();
+    } else {
+        uncheckedStyleSoundRange();
+    }
+})

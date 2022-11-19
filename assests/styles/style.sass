@@ -69,7 +69,7 @@ $yellow: #f8f29a
     transform: translate(-50%, -50%)
     width: 70%
     height: 70%
-    max-width: 800px
+    max-width: 600px
     background: lighten($black, 10%)
     padding: 2rem 3rem
     z-index: 10000
@@ -83,17 +83,23 @@ $yellow: #f8f29a
         justify-content: center
         gap: 2rem
         height: 100%
+        width: 100%
         .options-UI__option
             display: flex
+            align-items: center
             flex-direction: column
             gap: .5rem
+            width: 100%
+            text-align: center
             [type='range']
                 -webkit-appearance: none
                 height: 20px
+                max-width: 350px
+                background: lighten($black, 30%)
                 border: none
                 border-radius: .5rem
                 box-shadow: 4px 4px 4px rgba(0, 0, 0, .4)
-                background: lighten($black, 30%)
+                cursor: pointer
                 overflow: hidden
                 &:focus
                     outline: none
@@ -113,6 +119,11 @@ $yellow: #f8f29a
         .options-UI__option:nth-of-type(2)
             border-top: 2px solid $black
             padding-top: 2rem
+        .options-UI__option:last-of-type
+            .sounds-range__number
+                font-weight: 700
+                &::after
+                    content: '%'
 
 
 .stats-UI
@@ -141,6 +152,19 @@ $yellow: #f8f29a
     z-index: 10000
     border-radius: .5rem
 
+.challenges-UI
+    display: none
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+    width: 70%
+    height: 90%
+    max-width: 800px
+    background: lighten($black, 10%)
+    z-index: 10000
+    border-radius: .5rem
+
 .menu-UI
     display: none
     align-items: center
@@ -150,7 +174,7 @@ $yellow: #f8f29a
     left: 0
     width: 100%
     height: 100vh
-    padding: 3rem 0
+    padding: 2rem 0
     background: lighten($black, 5%)
     .options
         list-style: none
@@ -184,9 +208,12 @@ $yellow: #f8f29a
         .option:nth-of-type(2)
             &::after
                 content: 'STATS'
-        .option:last-of-type
+        .option:nth-of-type(3)
             &::after
                 content: 'SHOP'
+        .option:nth-of-type(4)
+            &::after
+                content: 'CHALLENGES'
 
 #options
     position: absolute
@@ -331,8 +358,27 @@ body
             background: $black
             transition: background 200ms linear
 
+@media screen and ( min-width: 360px )
+    body
+        .options-UI
+            .options-UI__options 
+                .options-UI__option 
+                    [type='range']
+                        width: 100%
+
 @media screen and ( min-width: 800px )
     body
+        .options-UI
+            .options-UI__options 
+                .options-UI__option 
+                    font-size: 1.5rem
+                    [type='range']
+                        width: 100%
+                        height: 30px
+                        border-radius: 30px
+                        &::-webkit-slider-thumb
+                            height: 30px
+                            width: 30px
         .fails-list__UI
             h2
                 font-size: 2.5rem
