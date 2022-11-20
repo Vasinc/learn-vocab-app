@@ -170,6 +170,11 @@ function generateNewFailedWord () {
     randomWord.textContent = failedWords[rndFailedNum].failedWord;
 }
 
+function toggleFocus () {
+    if (backdrop.classList.contains('display-block') || menuUI.classList.contains('display-flex')) return;
+    randomWordInput.focus();
+}
+
 function updateList () {
     failsList.innerHTML = '';
     for (let i = 0; i < failedWords.length; i++) {
@@ -271,7 +276,7 @@ button.addEventListener('click', event => {
                 button.style.cursor = 'pointer'
                 randomWordInput.disabled = false
                 generateNewWord();
-                randomWordInput.focus();
+                toggleFocus();
             }, DELAY_NUMBER*2)
             break;
         
@@ -296,7 +301,7 @@ button.addEventListener('click', event => {
                     randomWordInput.value = '';
                     button.style.cursor = 'pointer'
                     randomWordInput.disabled = false
-                    randomWordInput.focus();
+                    toggleFocus();
                 } else {
                     randomWordInput.style.borderBottom = '2px solid #30363d';
                     randomWordInput.style.color = 'white';
@@ -305,7 +310,7 @@ button.addEventListener('click', event => {
                     button.style.cursor = 'pointer'
                     randomWordInput.disabled = false
                     generateNewFailedWord();
-                    randomWordInput.focus();
+                    toggleFocus();
                 }
             }, DELAY_NUMBER * 2)
             break;
