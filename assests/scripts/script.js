@@ -355,11 +355,14 @@ burgerMenu.addEventListener('click', () => {
 })
 
 menuUI.addEventListener('click', event => {
-    if(event.target.tagName != 'LI') return;
-    option = document.querySelector(`.${event.target.textContent.trim().toLowerCase()}-UI`)
-    option.classList.add('display-block');
-    backdrop.classList.add('display-block');
-    menuUI.classList.remove('display-flex');
+    if(event.target.tagName != 'LI') {
+        menuUI.classList.remove('display-flex');
+    } else {
+        option = document.querySelector(`.${event.target.textContent.trim().toLowerCase()}-UI`)
+        option.classList.add('display-block');
+        backdrop.classList.add('display-block');
+        menuUI.classList.remove('display-flex');
+    }
 })
 
 options.addEventListener('change', () => {

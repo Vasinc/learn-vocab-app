@@ -33,6 +33,10 @@ $yellow: #f8f29a
 
 
 // actual styling
+body
+    background: $black
+    color: white
+
 #backdrop
     display: none
     position: absolute
@@ -42,24 +46,6 @@ $yellow: #f8f29a
     height: 100vh
     background: rgba(0, 0, 0, .5)
     z-index: 9999
-
-.burger-menu
-    display: flex
-    flex-direction: column
-    gap: .3rem
-    position: absolute
-    top: 1rem
-    right: 1rem
-    width: 1.75rem
-    cursor: pointer
-    .burger-line
-        width: 100%
-        height: 2px
-        background: white
-    .burger-line:nth-of-type(2)
-        width: 75%
-    .burger-line:last-of-type
-        width: 50%
 
 .options-UI
     display: none
@@ -126,7 +112,7 @@ $yellow: #f8f29a
                     content: '%'
 
 
-.stats-UI
+.inventory-UI
     display: none
     position: absolute
     left: 50%
@@ -176,6 +162,7 @@ $yellow: #f8f29a
     height: 100vh
     padding: 2rem 0
     background: lighten($black, 5%)
+    z-index: 1000
     .options
         list-style: none
         height: 100%
@@ -207,7 +194,7 @@ $yellow: #f8f29a
                     opacity: 1
         .option:nth-of-type(2)
             &::after
-                content: 'STATS'
+                content: 'INVENTORY'
         .option:nth-of-type(3)
             &::after
                 content: 'SHOP'
@@ -215,10 +202,31 @@ $yellow: #f8f29a
             &::after
                 content: 'CHALLENGES'
 
-#options
+header
     position: absolute
-    top: .5rem
-    right: 6rem
+    width: 100%
+    display: flex
+    justify-content: flex-end
+    align-items: center
+    padding: .5rem
+    gap: 1.5rem
+
+.money
+    display: flex
+    align-items: center
+    gap: .3rem
+    font-weight: 700
+    font-size: 1.25rem
+    &::after
+        content: ''
+        background: url('../images/coin.png')
+        background-repeat: no-repeat
+        background-size: cover
+        background-position: center
+        width: 1.5rem
+        height: 1.5rem
+
+#options
     padding: .25rem .5rem
     border: 1px solid lighten($black, 50%)
     border-radius: .25rem
@@ -229,54 +237,23 @@ $yellow: #f8f29a
     option
         &:checked
             background: $black
-            
-.fails-list__UI
-    display: none
+
+.burger-menu
+    display: flex
     flex-direction: column
-    position: absolute
-    top: 50%
-    left: 50%
-    transform: translate(-50%, -50%)
-    height: 90%
-    width: 75%
-    max-width: 600px
-    background: lighten($black, 7%)
-    z-index: 10000
-    h2
-        position: relative
-        padding: 1.5rem
-        text-align: center
-        &::after
-            content: '"word(typed word) - correct word"'
-            position: absolute
-            text-align: center
-            bottom: -.25rem
-            left: 50%
-            transform: translateX(-50%)
-            font-size: .75rem
-            color: lighten($pink, 15%)
-    .fails-list
-        display: flex
-        flex-direction: column
-        gap: .5rem
-        width: 90%
-        max-width: 400px
-        height: 75%
-        padding: .5rem 2rem
-        font-size: 1.15rem
-        margin: auto
-        overflow-y: auto
-        background: lighten($black, 10%)
-        color: darken(white, 20%)
-        .word
-            color: $yellow
-        .wrong-word
-            color: lighten($red, 16%)
-        .correct-word
-            color: $green
-body
-    background: $black
-    color: white
+    gap: .3rem
+    width: 1.75rem
+    cursor: pointer
+    .burger-line
+        width: 100%
+        height: 2px
+        background: white
+    .burger-line:nth-of-type(2)
+        width: 75%
+    .burger-line:last-of-type
+        width: 50%
+
+
 
 .main-content
     height: 100vh
@@ -357,6 +334,51 @@ body
             height: 2px
             background: $black
             transition: background 200ms linear
+
+.fails-list__UI
+    display: none
+    flex-direction: column
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    height: 90%
+    width: 75%
+    max-width: 600px
+    background: lighten($black, 7%)
+    z-index: 10000
+    h2
+        position: relative
+        padding: 1.5rem
+        text-align: center
+        &::after
+            content: '"word(typed word) - correct word"'
+            position: absolute
+            text-align: center
+            bottom: -.25rem
+            left: 50%
+            transform: translateX(-50%)
+            font-size: .75rem
+            color: lighten($pink, 15%)
+    .fails-list
+        display: flex
+        flex-direction: column
+        gap: .5rem
+        width: 90%
+        max-width: 400px
+        height: 75%
+        padding: .5rem 2rem
+        font-size: 1.15rem
+        margin: auto
+        overflow-y: auto
+        background: lighten($black, 10%)
+        color: darken(white, 20%)
+        .word
+            color: $yellow
+        .wrong-word
+            color: lighten($red, 16%)
+        .correct-word
+            color: $green
 
 @media screen and ( min-width: 360px )
     body
