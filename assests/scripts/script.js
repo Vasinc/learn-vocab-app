@@ -19,7 +19,12 @@ const delayRangeNumber = document.querySelector('.delay-range__number');
 const soundCheck = document.getElementById('soundsCheck');
 const soundRange = document.getElementById('sounds-range');
 const soundRangeNumber = document.querySelector('.sounds-range__number');
+const money = document.querySelector('.money');
 
+// sa ti dea un 1 * combo banuti odata ce ghicesti un cuvant
+
+// sa apara o animatie cu 3x banuti.jpg, pozitie random pe langa
+// input si sa dea fade in sus
 
 delayRange.oninput = () => {
     delayRangeNumber.textContent = delayRange.value;
@@ -67,6 +72,7 @@ let maxComboNumber = parseInt(maxCombo.textContent);
 let words;
 let rndNum;
 let rndFailedNum;
+let moneyNumber = parseInt(money.textContent);
 let totalWords = 0;
 let totalCombo = 0;
 let totalFails = 0;
@@ -87,6 +93,13 @@ onload = () => {
         totalCombo = data.totalComboData;
         totalFails = data.totalFailsData;
         totalWords = data.totalWordsData;
+        if(data.moneyData) {
+            moneyNumber = data.moneyData;
+            updateMoney();
+        } else {
+            moneyNumber = 0;
+            updateMoney();
+        }
     }
 
     if(localStorage.getItem('optionsData')) {
@@ -128,6 +141,11 @@ fetch('./assests/scripts/1000 words.json')
     .then(
         (json) => words = json
     );
+
+function updateMoney (moneyMultiplier) {
+    moneyNumber += 1 * parseInt(moneyMultiplier);
+    money.textContent = moneyNumber;
+}
 
 function changeVolumeAllSounds () {
     clickSound.volume = .5 * SOUND_MULTIPLIER;
@@ -197,6 +215,8 @@ function checkWords() {
         comboNumber++;
         combo.textContent = comboNumber;
         combo.style.color = '#4fbf26';
+        updateMoney(comboNumber);
+        data.moneyData = moneyNumber;
         if (comboNumber > maxComboNumber ) {
             maxComboNumber = comboNumber;
             maxCombo.textContent = maxComboNumber;
@@ -231,6 +251,7 @@ function checkWords() {
 function checkFailedWords () {
     if (failedWords[rndFailedNum].correctWord == randomWordInput.value.toLowerCase().trim()) {
         failedWords.splice(rndFailedNum, 1);
+        updateMoney(1);
         updateList();
         data.failedWordsData = failedWords;
         failsNumber--;
