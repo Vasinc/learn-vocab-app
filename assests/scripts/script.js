@@ -20,11 +20,19 @@ const soundCheck = document.getElementById('soundsCheck');
 const soundRange = document.getElementById('sounds-range');
 const soundRangeNumber = document.querySelector('.sounds-range__number');
 const money = document.querySelector('.money');
+const moneyPopUp = document.querySelector('.money-info__pop-up');
+const moneyPopUpNumber = document.querySelector('.money-info__number')
+const level = document.getElementById('level');
+const currentXp = document.getElementById('currentXP');
+const requiredXp = document.getElementById('requiredXP')
+const progressBar = document.querySelector('.progress-bar');
+const xpPopUp = document.querySelector('.xp-info__pop-up');
+const xpPopUpNumber = document.querySelector('.xp-info__number');
 
-// sa ti dea un 1 * combo banuti odata ce ghicesti un cuvant
+// sa gandesc cat xp sa ti trebuiasca pentru fiecare level si cat sa
+// ti dea in functie de level
 
-// sa apara o animatie cu 3x banuti.jpg, pozitie random pe langa
-// input si sa dea fade in sus
+// sa restructurez un pic codul aici si la style sass
 
 delayRange.oninput = () => {
     delayRangeNumber.textContent = delayRange.value;
@@ -76,6 +84,17 @@ let moneyNumber = parseInt(money.textContent);
 let totalWords = 0;
 let totalCombo = 0;
 let totalFails = 0;
+let currentXpNumber = 0;
+let requiredXpNumber = 50;
+let levelNumber = 1;
+
+fetch('./assests/scripts/1000 words.json')
+    .then(
+        response => response.json()
+    )
+    .then(
+        (json) => words = json
+    );
 
 onload = () => {
     if(localStorage.getItem('data')) {
@@ -95,10 +114,33 @@ onload = () => {
         totalWords = data.totalWordsData;
         if(data.moneyData) {
             moneyNumber = data.moneyData;
-            updateMoney();
+            updateMoney(0);
         } else {
             moneyNumber = 0;
-            updateMoney();
+            updateMoney(0);
+        }
+
+        if (data.levelData) {
+            level.textContent = data.levelData;
+            levelNumber = data.levelData;
+            updateXP(data.currentXpNumberData);
+            requiredXpNumber = levelNumber * 50;
+            requiredXp.textContent = requiredXpNumber;
+        } else { 
+            return;
+        }
+
+        if (data.selectedData) {
+            options.value = data.selectedData;
+            fetch(`./assests/scripts/${options.value}.json`)
+                .then(
+                    response => response.json()
+                )
+                .then(
+                    (json) => words = json
+                );
+        } else {
+            return;
         }
     }
 
@@ -134,17 +176,65 @@ onload = () => {
     }
 }
 
-fetch('./assests/scripts/1000 words.json')
-    .then(
-        response => response.json()
-    )
-    .then(
-        (json) => words = json
-    );
+function moneyAndXpPopUpAnimation (moneyMultiplier, xpMultiplier) {
+    let rndNum = Math.trunc(Math.random() * 80)
+    moneyPopUp.classList.add('display-flex')
+    moneyPopUp.style.left = `${rndNum}%`
+    moneyPopUpNumber.textContent = 1 * parseInt(moneyMultiplier);
+    xpPopUp.classList.add('display-flex');
+    xpPopUp.style.left = `${rndNum}%`
+    xpPopUpNumber.textContent = 1 + ((10 + levelNumber - 1) * xpMultiplier) ;
+    setTimeout( () => {
+       moneyPopUp.classList.add('fade-up-more'); 
+       xpPopUp.classList.add('fade-up');
+    }, 1 )
+    
+    // setTimeout( () => {
+    // }, 200)
+        
+    // setTimeout( () => {
+    // }, 201)
+
+    setTimeout( () => {
+        moneyPopUp.classList.remove('fade-up-more');
+        moneyPopUp.classList.remove('display-flex');
+        xpPopUp.classList.remove('fade-up');
+        xpPopUp.classList.remove('display-flex')
+    }, 800)
+
+
+    // setTimeout( () => {
+    // }, 800)
+}    
 
 function updateMoney (moneyMultiplier) {
     moneyNumber += 1 * parseInt(moneyMultiplier);
     money.textContent = moneyNumber;
+}
+
+function updateProgressBar () {
+    progressBar.style.width = `${Math.trunc( ( currentXpNumber / requiredXpNumber ) * 100 )}%`
+}
+
+function updateLevel () {
+    if ( currentXpNumber < requiredXpNumber ) return;
+
+    levelNumber++;
+    level.textContent = levelNumber;
+    let difference = currentXpNumber - requiredXpNumber;
+    currentXpNumber = difference;
+    currentXp.textContent = currentXpNumber;
+    requiredXpNumber = levelNumber * 50;
+    requiredXp.textContent = requiredXpNumber;
+
+    updateProgressBar();
+}
+
+function updateXP (addXp) {
+    currentXpNumber += addXp;
+    currentXp.textContent = currentXpNumber;
+    updateProgressBar();
+    updateLevel();
 }
 
 function changeVolumeAllSounds () {
@@ -206,7 +296,7 @@ function updateList () {
 }
 
 function checkWords() {
-    if (randomWordInput.value.toLowerCase().trim() == Object.values(words)[rndNum]) {
+    if (randomWordInput.value.toLowerCase().trim() == Object.values(words)[rndNum].toLowerCase()) {
         randomWordInput.style.borderBottom = '2px solid #4fbf26';
         totalCombo++;
         data.totalComboData = totalCombo;
@@ -216,7 +306,11 @@ function checkWords() {
         combo.textContent = comboNumber;
         combo.style.color = '#4fbf26';
         updateMoney(comboNumber);
+        moneyAndXpPopUpAnimation(comboNumber, 1);
         data.moneyData = moneyNumber;
+        updateXP(10 + levelNumber);
+        data.levelData = levelNumber;
+        data.currentXpNumberData = currentXpNumber;
         if (comboNumber > maxComboNumber ) {
             maxComboNumber = comboNumber;
             maxCombo.textContent = maxComboNumber;
@@ -252,6 +346,10 @@ function checkFailedWords () {
     if (failedWords[rndFailedNum].correctWord == randomWordInput.value.toLowerCase().trim()) {
         failedWords.splice(rndFailedNum, 1);
         updateMoney(1);
+        updateXP(1);
+        data.levelData = levelNumber;
+        data.currentXpNumberData = currentXpNumber
+        moneyAndXpPopUpAnimation(1, 0);
         updateList();
         data.failedWordsData = failedWords;
         failsNumber--;
@@ -397,6 +495,9 @@ options.addEventListener('change', () => {
 
     button.textContent = 'Generate word';
     randomWord.textContent = 'Random word';
+
+    data.selectedData = options.value;
+    localStorage.setItem('data', JSON.stringify(data));
 })
 
 soundCheck.addEventListener('change', () => {

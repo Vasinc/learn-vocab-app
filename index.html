@@ -35,7 +35,7 @@
             <div class="options-UI__options">
                 <div class="options-UI__option">
                     <label for="delay-range">Delay(<span class="delay-range__number"></span>):</label>
-                    <input type="range" name="delay-range" id="delay-range" min="300" max="2000">
+                    <input type="range" name="delay-range" id="delay-range" min="600" max="2000">
                 </div>
                 <div class="options-UI__option">
                     <label for="soundsCheck">Enable Sound</label>
@@ -63,16 +63,24 @@
             </ul>
         </div>
         <header>
-            <div class="money">0</div>
-            <select id="options">
-                <option value="1000 words">1000 words</option>
-                <option value="German drills">German drills</option>
-                <option value="Notebook">Notebook</option>
-            </select>
-            <div class="burger-menu">
-                <span class="burger-line"></span>
-                <span class="burger-line"></span>
-                <span class="burger-line"></span>
+            <div class="header-first__section">
+                <div class="money">0</div>
+                <select id="options">
+                    <option value="1000 words">1000 words</option>
+                    <option value="German drills">German drills</option>
+                    <option value="Notebook">Notebook</option>
+                </select>
+                <div class="burger-menu">
+                    <span class="burger-line"></span>
+                    <span class="burger-line"></span>
+                    <span class="burger-line"></span>
+                </div>
+            </div>
+            <div class="header-second__section">
+                <div class="progress-bar"></div>
+                <p class="header-text">
+                    Level <span id="level">1</span> ( <span id="currentXP">0</span> / <span id="requiredXP">50</span> )
+                </p>
             </div>
         </header>
         <main>
@@ -81,6 +89,20 @@
                     Random word
                 </h1>
                 <form>
+                    <div class="money-info__pop-up">
+                        +
+                        <span class="money-info__number">
+                            0
+                        </span>
+                        <img src="./assests/images/coin.png" alt="coin">
+                    </div>
+                    <div class="xp-info__pop-up">
+                        +
+                        <span class="xp-info__number">
+                            0
+                        </span>
+                        <img src="./assests/images/xp.png" alt="xp">
+                    </div>
                     <input type="text" id="randomWordInput" placeholder="Write here..." maxlength="20">
                     <button type="submit">Generate word</button>
                 </form>
