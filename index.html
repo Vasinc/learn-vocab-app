@@ -49,6 +49,111 @@
         </div>
         <div class="inventory-UI">
             <h2>INVENTORY</h2>
+            <div class="inventory-content">
+                <div class="inventory-options">
+                    <button class="inventory-stats">Stats</button>
+                    <button class="inventory-boosts">Boosts</button>
+                    <button class="inventory-medals">Medals</button>
+                    <button class="inventory-skins">Skins</button>
+                    <button class="inventory-pets">Pets</button>
+                </div>
+                <div class="inventory-UIs">
+                    <section class="inventory-stats__UI">
+                        <h2>
+                            Stats
+                        </h2>
+                        <ul>
+                            <li>
+                                <p>
+                                    Highest combo: <span class="highest-combo__text number-span">0</span>
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Current words: <span class="current-words__text number-span">0</span>
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Total words: <span class="total-words__text number-span">0</span>
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                   
+                                    Total combo: <span class="total-combo__text number-span">0</span>
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                   
+                                    Total fails: <span class="total-fails__text number-span">0</span>
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                   
+                                    Total coins: <span class="total-coins__text number-span">0</span>
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                   
+                                    Total XP: <span class="total-XP__text number-span">0</span>
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Capacity of words: coming soon...
+                                </p>
+                            </li>
+
+                            <li>
+                                Boosts activated: coming soon...
+                            </li>
+                        </ul>
+                    </section>    
+                    <section class="inventory-boosts__UI">
+                        <h2>
+                            Boosts
+                        </h2>
+                        <h3>
+                            Coming soon...
+                        </h3>
+                    </section>    
+                    <section class="inventory-medals__UI">
+                        <h2>
+                            Medals
+                        </h2>
+                        <h3>
+                            Coming soon...
+                        </h3>
+                    </section>    
+                    <section class="inventory-skins__UI">
+                        <h2>
+                            Skins
+                        </h2>
+                        <h3>
+                            Coming soon...
+                        </h3>
+                    </section>    
+                    <section class="inventory-pets__UI">
+                        <h2>
+                            Pets
+                        </h2>
+                        <h3>
+                            Coming soon...
+                        </h3>
+                    </section>    
+                </div>
+            </div>
         </div>
         <div class="shop-UI">
             <h2>SHOP</h2>
@@ -104,7 +209,7 @@
                         <img src="./assests/images/xp.png" alt="xp">
                     </div>
                     <input type="text" id="randomWordInput" placeholder="Write here..." maxlength="20">
-                    <button type="submit">Generate word</button>
+                    <button type="submit" id="generate-button">Generate word</button>
                 </form>
                 <div class="combos">
                     <div id="combo">

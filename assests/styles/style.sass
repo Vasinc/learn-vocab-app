@@ -129,9 +129,66 @@ body
     width: 70%
     height: 90%
     max-width: 800px
+    padding: 1rem
     background: lighten($black, 10%)
-    z-index: 10000
     border-radius: .5rem
+    z-index: 10000
+    .inventory-content
+        display: flex
+        flex-direction: column
+        height: 100%
+        .inventory-options
+            display: flex
+            justify-content: space-evenly
+            flex-wrap: wrap
+            gap: .75rem
+            margin: 1rem 0
+            color: $black
+        .inventory-options > *
+            background: lighten($black, 50%)
+            padding: .25rem .5rem
+            border-radius: .1rem
+            font-weight: 700
+            border: none
+            transition: background 200ms linear
+            cursor: pointer
+            &:hover
+                background: lighten($black, 60%)
+        .inventory-stats
+            background: $pink
+        .inventory-UIs > *
+            position: relative
+            min-width: 100%
+            min-height: 100%
+            padding: .5rem
+            border-radius: .1rem
+            overflow: scroll
+            h2
+                text-align: center  
+            h3
+                margin: 2rem
+                text-align: center          
+        .inventory-UIs
+            display: flex
+            overflow-x: hidden
+            width: 100%
+            flex: .92
+            background: $black
+            .inventory-stats__UI
+                display: flex
+                flex-direction: column
+                gap: 1.5rem
+                text-align: center
+                ul
+                    display: flex
+                    gap: 1.5rem
+                    flex-direction: column
+                    list-style: none
+                    font-weight: 700
+                    li
+                        p
+                            .number-span
+                                color: darken($yellow, 30%)
 
 .shop-UI
     display: none

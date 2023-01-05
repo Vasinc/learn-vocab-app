@@ -7,7 +7,7 @@ const failsButton = document.querySelector('.fails-list__button');
 const failsList = document.querySelector('.fails-list');
 const randomWord = document.querySelector('h1');
 const randomWordInput = document.getElementById('randomWordInput');
-const button = document.querySelector('button');
+const button = document.getElementById('generate-button');
 const combo = document.getElementById('combo');
 const fails = document.getElementById('fails');
 const maxCombo = document.getElementById('max-combo');
@@ -28,29 +28,11 @@ const requiredXp = document.getElementById('requiredXP')
 const progressBar = document.querySelector('.progress-bar');
 const xpPopUp = document.querySelector('.xp-info__pop-up');
 const xpPopUpNumber = document.querySelector('.xp-info__number');
-
-// sa gandesc cat xp sa ti trebuiasca pentru fiecare level si cat sa
-// ti dea in functie de level
-
+const inventoryOptionsContainer = document.querySelector('.inventory-options');
+const inventoryOptions = inventoryOptionsContainer.querySelectorAll('button');
+const inventoryUIsContainer = document.querySelector('.inventory-UIs');
+const inventoryUIs = document.querySelectorAll('section');
 // sa restructurez un pic codul aici si la style sass
-
-delayRange.oninput = () => {
-    delayRangeNumber.textContent = delayRange.value;
-    DELAY_NUMBER = parseInt(delayRange.value);
-
-    optionsData.delayRangeData = delayRange.value;
-    localStorage.setItem('optionsData', JSON.stringify(optionsData));
-}
-
-soundRange.oninput = () => {
-    soundRangeNumber.textContent = soundRange.value;
-    SOUND_MULTIPLIER = parseFloat(soundRange.value / 100);
-    console.log(clickSound.volume);
-
-    optionsData.soundRangeData = soundRange.value;
-    localStorage.setItem('optionsData', JSON.stringify(optionsData));
-    changeVolumeAllSounds();
-}
 
 // global variables
 let option;
@@ -84,10 +66,13 @@ let moneyNumber = parseInt(money.textContent);
 let totalWords = 0;
 let totalCombo = 0;
 let totalFails = 0;
+let totalCoins = 0;
+let totalXp = 0;
 let currentXpNumber = 0;
 let requiredXpNumber = 50;
 let levelNumber = 1;
 
+// gets information from 1000 words.json
 fetch('./assests/scripts/1000 words.json')
     .then(
         response => response.json()
@@ -96,7 +81,7 @@ fetch('./assests/scripts/1000 words.json')
         (json) => words = json
     );
 
-onload = () => {
+onload = () => { // check if you have some data stored, if YES, then it displays it,if NO, then everything is set to default
     if(localStorage.getItem('data')) {
         data = JSON.parse(localStorage.getItem('data'));
         if(data.maxComboData) {
@@ -105,16 +90,20 @@ onload = () => {
             maxComboNumber = 0;
         }
         maxCombo.textContent = maxComboNumber;
-        failedWords = data.failedWordsData;
-        updateList();
-        failsNumber = failedWords.length;
+        if (data.failedWordsData) {
+            failedWords = data.failedWordsData;
+            updateList();
+            failsNumber = failedWords.length;
+        }
         fails.textContent = failsNumber;
-        totalCombo = data.totalComboData;
-        totalFails = data.totalFailsData;
-        totalWords = data.totalWordsData;
+        totalCombo = data.totalComboData ? data.totalComboData : 0;
+        totalFails = data.totalFailsData ? data.totalFailsData : 0;
+        totalWords = data.totalWordsData ? data.totalWordsData : 0;
+        totalXp = data.totalXpData ? data.totalXpData : 0;
         if(data.moneyData) {
             moneyNumber = data.moneyData;
             updateMoney(0);
+            totalCoins = data.totalCoinsData;
         } else {
             moneyNumber = 0;
             updateMoney(0);
@@ -176,7 +165,10 @@ onload = () => {
     }
 }
 
+// FUNCTIONS
+
 function moneyAndXpPopUpAnimation (moneyMultiplier, xpMultiplier) {
+    // animation of the coin and xp after you get something right
     let rndNum = Math.trunc(Math.random() * 80)
     moneyPopUp.classList.add('display-flex')
     moneyPopUp.style.left = `${rndNum}%`
@@ -188,12 +180,6 @@ function moneyAndXpPopUpAnimation (moneyMultiplier, xpMultiplier) {
        moneyPopUp.classList.add('fade-up-more'); 
        xpPopUp.classList.add('fade-up');
     }, 1 )
-    
-    // setTimeout( () => {
-    // }, 200)
-        
-    // setTimeout( () => {
-    // }, 201)
 
     setTimeout( () => {
         moneyPopUp.classList.remove('fade-up-more');
@@ -202,23 +188,23 @@ function moneyAndXpPopUpAnimation (moneyMultiplier, xpMultiplier) {
         xpPopUp.classList.remove('display-flex')
     }, 800)
 
-
-    // setTimeout( () => {
-    // }, 800)
 }    
 
 function updateMoney (moneyMultiplier) {
+    // updates UI of money
     moneyNumber += 1 * parseInt(moneyMultiplier);
     money.textContent = moneyNumber;
 }
 
 function updateProgressBar () {
+    // updates UI of the xp progress bar
     progressBar.style.width = `${Math.trunc( ( currentXpNumber / requiredXpNumber ) * 100 )}%`
 }
 
 function updateLevel () {
     if ( currentXpNumber < requiredXpNumber ) return;
 
+    // updates UI of level
     levelNumber++;
     level.textContent = levelNumber;
     let difference = currentXpNumber - requiredXpNumber;
@@ -231,6 +217,7 @@ function updateLevel () {
 }
 
 function updateXP (addXp) {
+    // updates UI of XP
     currentXpNumber += addXp;
     currentXp.textContent = currentXpNumber;
     updateProgressBar();
@@ -238,6 +225,7 @@ function updateXP (addXp) {
 }
 
 function changeVolumeAllSounds () {
+    // if i let it to normal volume, it's going to be so loud, so here i reset the volume of the sounds
     clickSound.volume = .5 * SOUND_MULTIPLIER;
     correctSound.volume = .5 * SOUND_MULTIPLIER;
     wrongSound.volume = .5 * SOUND_MULTIPLIER;
@@ -245,6 +233,7 @@ function changeVolumeAllSounds () {
 }
 
 function checkedStyleSoundRange () {
+    // redesigns volume range if the button is checked
     soundRange.style.cursor = 'pointer';
     soundRange.style.filter = 'grayscale(0)';
     soundRange.disabled = false;
@@ -260,6 +249,7 @@ function checkedStyleSoundRange () {
 }
 
 function uncheckedStyleSoundRange () {
+    // redesigns volume range if the button is unchecked
     soundRange.style.cursor = 'not-allowed';
     soundRange.style.filter = 'grayscale(1)';
     soundRange.disabled = true;
@@ -269,11 +259,13 @@ function uncheckedStyleSoundRange () {
 }
 
 function generateNewWord () {
+    // gets a random word from the selected json files and displays it
     rndNum = Math.floor(Math.random() * Object.keys(words).length);
     randomWord.textContent = Object.keys(words)[rndNum];
 }
 
 function generateNewFailedWord () {
+    // gets a random word from failed words lists and displays it
     rndFailedNum = Math.floor(Math.random() * failedWords.length);
     randomWord.textContent = failedWords[rndFailedNum].failedWord;
 }
@@ -284,6 +276,7 @@ function toggleFocus () {
 }
 
 function updateList () {
+    // adds a new item to fails list
     failsList.innerHTML = '';
     for (let i = 0; i < failedWords.length; i++) {
         const failedWord = failedWords[i];
@@ -308,9 +301,13 @@ function checkWords() {
         updateMoney(comboNumber);
         moneyAndXpPopUpAnimation(comboNumber, 1);
         data.moneyData = moneyNumber;
+        totalCoins += 1 * comboNumber;
+        data.totalCoinsData = totalCoins;
         updateXP(10 + levelNumber);
         data.levelData = levelNumber;
         data.currentXpNumberData = currentXpNumber;
+        totalXp += 10 + levelNumber;
+        data.totalXpData = totalXp;
         if (comboNumber > maxComboNumber ) {
             maxComboNumber = comboNumber;
             maxCombo.textContent = maxComboNumber;
@@ -346,9 +343,13 @@ function checkFailedWords () {
     if (failedWords[rndFailedNum].correctWord == randomWordInput.value.toLowerCase().trim()) {
         failedWords.splice(rndFailedNum, 1);
         updateMoney(1);
+        totalCoins ++;
+        data.totalCoinsData = totalCoins;
         updateXP(1);
         data.levelData = levelNumber;
         data.currentXpNumberData = currentXpNumber
+        totalXp++;
+        data.totalXpData = totalXp;
         moneyAndXpPopUpAnimation(1, 0);
         updateList();
         data.failedWordsData = failedWords;
@@ -371,6 +372,18 @@ function removeBackdrop () {
     if(!option) return;
     option.classList.remove('display-block');
 }
+
+function updateStatsText() {
+    document.querySelector('.highest-combo__text').textContent = maxCombo.textContent; 
+    document.querySelector('.current-words__text').textContent = combo.textContent;
+    document.querySelector('.total-words__text').textContent = totalWords;
+    document.querySelector('.total-combo__text').textContent = totalCombo;
+    document.querySelector('.total-fails__text').textContent = totalFails;
+    document.querySelector('.total-coins__text').textContent = totalCoins;
+    document.querySelector('.total-XP__text').textContent = totalXp;
+}
+
+// EVENT LISTENERS
 
 button.addEventListener('click', event => {
     event.preventDefault();
@@ -444,8 +457,6 @@ failsButton.addEventListener('click', () => {
     clickSound.play();
 })
 
-backdrop.addEventListener('click', removeBackdrop);
-
 fails.addEventListener('click', () => {
     if (button.textContent == 'Generating...') return;
 
@@ -469,11 +480,14 @@ fails.addEventListener('click', () => {
 
 })
 
+backdrop.addEventListener('click', removeBackdrop);
+
 burgerMenu.addEventListener('click', () => {
     menuUI.classList.add('display-flex');
 })
 
 menuUI.addEventListener('click', event => {
+    updateStatsText();
     if(event.target.tagName != 'LI') {
         menuUI.classList.remove('display-flex');
     } else {
@@ -505,5 +519,42 @@ soundCheck.addEventListener('change', () => {
         checkedStyleSoundRange();
     } else {
         uncheckedStyleSoundRange();
+    }
+})
+
+delayRange.oninput = () => {
+    delayRangeNumber.textContent = delayRange.value;
+    DELAY_NUMBER = parseInt(delayRange.value);
+
+    optionsData.delayRangeData = delayRange.value;
+    localStorage.setItem('optionsData', JSON.stringify(optionsData));
+}
+
+soundRange.oninput = () => {
+    soundRangeNumber.textContent = soundRange.value;
+    SOUND_MULTIPLIER = parseFloat(soundRange.value / 100);
+    console.log(clickSound.volume);
+
+    optionsData.soundRangeData = soundRange.value;
+    localStorage.setItem('optionsData', JSON.stringify(optionsData));
+    changeVolumeAllSounds();
+}
+
+inventoryOptionsContainer.addEventListener('click', event => {
+    if(event.target.className == 'inventory-options') return;
+    let inventoryOption = event.target;
+
+    for(let i = 0; i < inventoryOptions.length; i++) {
+        const element = inventoryOptions[i];
+        if (inventoryOption == element) {
+            element.style.background = '#a53b70';
+            for(let j = 0; j < inventoryUIs.length; j++) {
+                const selement = inventoryUIs[j];
+                selement.style.left = `${i * -100}%`
+            }
+        } else {
+            element.style.background = '#738bb0';
+
+        }
     }
 })

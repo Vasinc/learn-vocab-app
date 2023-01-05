@@ -172,9 +172,113 @@ body {
   width: 70%;
   height: 90%;
   max-width: 800px;
+  padding: 1rem;
   background: #1f2938;
-  z-index: 10000;
   border-radius: .5rem;
+  z-index: 10000;
+}
+
+.inventory-UI .inventory-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+}
+
+.inventory-UI .inventory-content .inventory-options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: .75rem;
+  margin: 1rem 0;
+  color: #0d1117;
+}
+
+.inventory-UI .inventory-content .inventory-options > * {
+  background: #738bb0;
+  padding: .25rem .5rem;
+  border-radius: .1rem;
+  font-weight: 700;
+  border: none;
+  -webkit-transition: background 200ms linear;
+  transition: background 200ms linear;
+  cursor: pointer;
+}
+
+.inventory-UI .inventory-content .inventory-options > *:hover {
+  background: #94a6c2;
+}
+
+.inventory-UI .inventory-content .inventory-stats {
+  background: #a53b70;
+}
+
+.inventory-UI .inventory-content .inventory-UIs > * {
+  position: relative;
+  min-width: 100%;
+  min-height: 100%;
+  padding: .5rem;
+  border-radius: .1rem;
+  overflow: scroll;
+}
+
+.inventory-UI .inventory-content .inventory-UIs > * h2 {
+  text-align: center;
+}
+
+.inventory-UI .inventory-content .inventory-UIs > * h3 {
+  margin: 2rem;
+  text-align: center;
+}
+
+.inventory-UI .inventory-content .inventory-UIs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow-x: hidden;
+  width: 100%;
+  -webkit-box-flex: .92;
+      -ms-flex: .92;
+          flex: .92;
+  background: #0d1117;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-stats__UI {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-stats__UI ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1.5rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  list-style: none;
+  font-weight: 700;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-stats__UI ul li p .number-span {
+  color: #e9db10;
 }
 
 .shop-UI {
