@@ -31,8 +31,12 @@ const xpPopUpNumber = document.querySelector('.xp-info__number');
 const inventoryOptionsContainer = document.querySelector('.inventory-options');
 const inventoryOptions = inventoryOptionsContainer.querySelectorAll('button');
 const inventoryUIsContainer = document.querySelector('.inventory-UIs');
-const inventoryUIs = document.querySelectorAll('section');
-// sa restructurez un pic codul aici si la style sass
+const inventoryUIs = inventoryUIsContainer.querySelectorAll('section');
+const shopOptionsContainer = document.querySelector('.shop-options');
+const shopOptions = shopOptionsContainer.querySelectorAll('button');
+const shopUIsContainer = document.querySelector('.shop-UIs');
+const shopUIs = shopUIsContainer.querySelectorAll('section');
+const shopCoins = document.querySelectorAll('.shop-UI-money');
 
 // global variables
 let option;
@@ -104,9 +108,11 @@ onload = () => { // check if you have some data stored, if YES, then it displays
             moneyNumber = data.moneyData;
             updateMoney(0);
             totalCoins = data.totalCoinsData;
+            updateShopMoney(moneyNumber);
         } else {
             moneyNumber = 0;
             updateMoney(0);
+            updateShopMoney(moneyNumber);
         }
 
         if (data.levelData) {
@@ -194,6 +200,12 @@ function updateMoney (moneyMultiplier) {
     // updates UI of money
     moneyNumber += 1 * parseInt(moneyMultiplier);
     money.textContent = moneyNumber;
+}
+
+function updateShopMoney (number) {
+    shopCoins.forEach(shopCoin => {
+        shopCoin.textContent = number;
+    });
 }
 
 function updateProgressBar () {
@@ -299,6 +311,7 @@ function checkWords() {
         combo.textContent = comboNumber;
         combo.style.color = '#4fbf26';
         updateMoney(comboNumber);
+        updateShopMoney(moneyNumber)
         moneyAndXpPopUpAnimation(comboNumber, 1);
         data.moneyData = moneyNumber;
         totalCoins += 1 * comboNumber;
@@ -345,6 +358,7 @@ function checkFailedWords () {
         updateMoney(1);
         totalCoins ++;
         data.totalCoinsData = totalCoins;
+        updateShopMoney(moneyNumber);
         updateXP(1);
         data.levelData = levelNumber;
         data.currentXpNumberData = currentXpNumber
@@ -550,6 +564,25 @@ inventoryOptionsContainer.addEventListener('click', event => {
             element.style.background = '#a53b70';
             for(let j = 0; j < inventoryUIs.length; j++) {
                 const selement = inventoryUIs[j];
+                selement.style.left = `${i * -100}%`
+            }
+        } else {
+            element.style.background = '#738bb0';
+
+        }
+    }
+})
+
+shopOptionsContainer.addEventListener('click', event => {
+    if(event.target.className == 'shop-options') return;
+    let shopOption = event.target;
+
+    for(let i = 0; i < shopOptions.length; i++) {
+        const element = shopOptions[i];
+        if (shopOption == element) {
+            element.style.background = '#a53b70';
+            for(let j = 0; j < shopUIs.length; j++) {
+                const selement = shopUIs[j];
                 selement.style.left = `${i * -100}%`
             }
         } else {

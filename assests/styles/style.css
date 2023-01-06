@@ -290,10 +290,109 @@ body {
           transform: translate(-50%, -50%);
   width: 70%;
   height: 90%;
-  max-width: 800px;
+  max-width: 600px;
   background: #1f2938;
+  padding: 1rem;
   z-index: 10000;
   border-radius: .5rem;
+}
+
+.shop-UI .shop-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1.5rem;
+  height: 100%;
+}
+
+.shop-UI .shop-content .shop-options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: .75rem;
+  margin: 1rem 0;
+  color: #0d1117;
+}
+
+.shop-UI .shop-content .shop-options > * {
+  background: #738bb0;
+  padding: .25rem .5rem;
+  border-radius: .1rem;
+  font-weight: 700;
+  border: none;
+  -webkit-transition: background 200ms linear;
+  transition: background 200ms linear;
+  cursor: pointer;
+}
+
+.shop-UI .shop-content .shop-options > *:hover {
+  background: #94a6c2;
+}
+
+.shop-UI .shop-content .shop-boosts {
+  background: #a53b70;
+}
+
+.shop-UI .shop-content .shop-UIs > * {
+  position: relative;
+  min-width: 100%;
+  min-height: 100%;
+  padding: .5rem;
+  border-radius: .1rem;
+  overflow: scroll;
+}
+
+.shop-UI .shop-content .shop-UIs > * .shop-UI-texts__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.shop-UI .shop-content .shop-UIs > * .shop-UI-texts__container h2 {
+  text-align: center;
+}
+
+.shop-UI .shop-content .shop-UIs > * .shop-UI-texts__container p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: .1rem;
+}
+
+.shop-UI .shop-content .shop-UIs > * .shop-UI-texts__container p span {
+  font-weight: 700;
+}
+
+.shop-UI .shop-content .shop-UIs > * .shop-UI-texts__container p img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.shop-UI .shop-content .shop-UIs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow-x: hidden;
+  width: 100%;
+  -webkit-box-flex: .92;
+      -ms-flex: .92;
+          flex: .92;
+  background: #0d1117;
 }
 
 .challenges-UI {
