@@ -37,6 +37,11 @@ const shopOptions = shopOptionsContainer.querySelectorAll('button');
 const shopUIsContainer = document.querySelector('.shop-UIs');
 const shopUIs = shopUIsContainer.querySelectorAll('section');
 const shopCoins = document.querySelectorAll('.shop-UI-money');
+const shopBoostsCointainer = document.querySelector('.shop-boosts__content');
+const shopBoosts = document.querySelectorAll('.shop-boost');
+const shopBuyButtons = shopBoostsCointainer.querySelectorAll('.shop-boost__button');
+
+console.log(shopBuyButtons);
 
 // global variables
 let option;
@@ -58,6 +63,11 @@ wooshSound.volume = .5;
 let failedWords = [];
 let data = {};
 let optionsData = {};
+let boostsData = [
+    [0,0,0],
+    [0,0,0],
+    [0,0,0]
+]
 
 // number value of elements
 let comboNumber = parseInt(combo.textContent);
@@ -137,6 +147,8 @@ onload = () => { // check if you have some data stored, if YES, then it displays
         } else {
             return;
         }
+
+        updateColorShopButton();
     }
 
     if(localStorage.getItem('optionsData')) {
@@ -168,6 +180,12 @@ onload = () => { // check if you have some data stored, if YES, then it displays
         localStorage.setItem('optionsData', JSON.stringify(optionsData));
         optionsData.soundRangeData = soundRange.value;
         localStorage.setItem('optionsData', JSON.stringify(optionsData));
+    }
+
+    if(localStorage.getItem('boostsData')) {
+        boostsData = JSON.parse(localStorage.getItem('boostsData'));
+    } else {
+        return;
     }
 }
 
@@ -397,6 +415,21 @@ function updateStatsText() {
     document.querySelector('.total-XP__text').textContent = totalXp;
 }
 
+function updateColorShopButton() {
+    shopBoosts.forEach(shopBoost => {
+        const shopButton = shopBoost.querySelector('.shop-boost__button');
+        if(moneyNumber >= parseInt(shopBoost.getAttribute('data-price'))) {
+            shopButton.style.background = '#4fbf26';
+            shopButton.style.color = '#0d1117';
+            shopButton.style.cursor = 'pointer';
+        } else {
+            shopButton.style.background = '#a7171a';
+            shopButton.style.color = '#fff';
+            shopButton.style.cursor = 'not-allowed';
+        }
+    });
+}
+
 // EVENT LISTENERS
 
 button.addEventListener('click', event => {
@@ -497,11 +530,12 @@ fails.addEventListener('click', () => {
 backdrop.addEventListener('click', removeBackdrop);
 
 burgerMenu.addEventListener('click', () => {
+    updateStatsText();
+    updateColorShopButton();
     menuUI.classList.add('display-flex');
 })
 
 menuUI.addEventListener('click', event => {
-    updateStatsText();
     if(event.target.tagName != 'LI') {
         menuUI.classList.remove('display-flex');
     } else {
@@ -589,5 +623,24 @@ shopOptionsContainer.addEventListener('click', event => {
             element.style.background = '#738bb0';
 
         }
+    }
+})
+
+shopBoostsCointainer.addEventListener('click', event => {
+    if(event.target.tagName != 'BUTTON' && event.target.tagName != 'IMG' ) return;
+    const selectedBuyButton = (event.target.tagName == 'BUTTON') ? event.target : event.target.parentElement;
+    if (selectedBuyButton.style.cursor == 'pointer') {
+        const indexOfButton = Array.prototype.indexOf.call(shopBuyButtons, selectedBuyButton);
+        const wholePart = Math.trunc(indexOfButton / 3);
+        const restPart = indexOfButton - (wholePart * 3);
+
+        moneyNumber -= parseInt(selectedBuyButton.getAttribute('data-price'));
+        updateMoney(0);
+        updateShopMoney(moneyNumber);
+        updateColorShopButton();
+        data.moneyData = moneyNumber;
+        localStorage.setItem('data', JSON.stringify(data));
+        boostsData[wholePart][restPart] += 1;
+        localStorage.setItem('boostsData', JSON.stringify(boostsData));
     }
 })

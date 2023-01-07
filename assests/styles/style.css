@@ -43,7 +43,7 @@ body {
 
 body {
   background: #0d1117;
-  color: white;
+  color: #fff;
 }
 
 #backdrop {
@@ -137,7 +137,7 @@ body {
   -webkit-appearance: none;
   width: 20px;
   height: 20px;
-  background: white;
+  background: #fff;
   border-radius: 50%;
 }
 
@@ -228,7 +228,8 @@ body {
   min-height: 100%;
   padding: .5rem;
   border-radius: .1rem;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .inventory-UI .inventory-content .inventory-UIs > * h2 {
@@ -290,7 +291,7 @@ body {
           transform: translate(-50%, -50%);
   width: 70%;
   height: 90%;
-  max-width: 600px;
+  max-width: 800px;
   background: #1f2938;
   padding: 1rem;
   z-index: 10000;
@@ -348,7 +349,8 @@ body {
   min-height: 100%;
   padding: .5rem;
   border-radius: .1rem;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .shop-UI .shop-content .shop-UIs > * .shop-UI-texts__container {
@@ -395,6 +397,97 @@ body {
   background: #0d1117;
 }
 
+.shop-UI .shop-content .shop-UIs .shop-boosts__UI .shop-boosts__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 4rem;
+  margin-top: 3rem;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-boosts__UI .shop-boosts__content .shop-boosts__line {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-boosts__UI .shop-boosts__content .shop-boosts__line .shop-boost {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 80%;
+  max-width: 150px;
+  border-radius: .5rem;
+  overflow: hidden;
+  cursor: default;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-boosts__UI .shop-boosts__content .shop-boosts__line .shop-boost .shop-boost__texts {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  height: 125px;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-boosts__UI .shop-boosts__content .shop-boosts__line .shop-boost .shop-boost__texts .shop-boost__line-text {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-boosts__UI .shop-boosts__content .shop-boosts__line .shop-boost .shop-boost__button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: .5rem 0;
+  background: #a7171a;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  cursor: not-allowed;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-boosts__UI .shop-boosts__content .shop-boosts__line .shop-boost .shop-boost__button img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-boosts__UI .shop-boosts__content .shop-boosts__line .shop-boost:first-of-type .shop-boost__texts {
+  background: #a19d94;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-boosts__UI .shop-boosts__content .shop-boosts__line .shop-boost:nth-of-type(2) .shop-boost__texts {
+  background: #FFD700;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-boosts__UI .shop-boosts__content .shop-boosts__line .shop-boost:last-of-type .shop-boost__texts {
+  background: #b9f2ff;
+  color: #0d1117;
+}
+
 .challenges-UI {
   display: none;
   position: absolute;
@@ -434,8 +527,8 @@ body {
 
 .menu-UI .options .option {
   position: relative;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
   padding: 3rem 1rem;
   font-weight: 700;
   -webkit-transition: background .3s linear;
@@ -554,7 +647,7 @@ header .header-second__section .progress-bar {
   border: 1px solid #738bb0;
   border-radius: .25rem;
   background: #1f2938;
-  color: white;
+  color: #fff;
 }
 
 #options:focus {
@@ -581,7 +674,7 @@ header .header-second__section .progress-bar {
 .burger-menu .burger-line {
   width: 100%;
   height: 2px;
-  background: white;
+  background: #fff;
 }
 
 .burger-menu .burger-line:nth-of-type(2) {
@@ -647,7 +740,7 @@ header .header-second__section .progress-bar {
 }
 
 .main-content form .xp-info__pop-up {
-  color: white;
+  color: #fff;
   -webkit-transform: translateY(5rem);
           transform: translateY(5rem);
 }
@@ -667,7 +760,7 @@ header .header-second__section .progress-bar {
 
 .main-content input {
   background: none;
-  color: white;
+  color: #fff;
   font-size: 1.25rem;
   border: none;
   border-bottom: 2px solid #30363d;
@@ -682,7 +775,7 @@ header .header-second__section .progress-bar {
   margin: auto;
   max-width: 10rem;
   border: none;
-  background: white;
+  background: #fff;
   font-size: 1rem;
   cursor: pointer;
   -webkit-transition: -webkit-transform 50ms linear;
@@ -757,7 +850,7 @@ header .header-second__section .progress-bar {
           flex-direction: column;
   gap: .3rem;
   width: 1.85rem;
-  background: white;
+  background: #fff;
   padding: .3rem;
   border-radius: .2rem;
   cursor: pointer;
