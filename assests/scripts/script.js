@@ -40,8 +40,10 @@ const shopCoins = document.querySelectorAll('.shop-UI-money');
 const shopBoostsCointainer = document.querySelector('.shop-boosts__content');
 const shopBoosts = document.querySelectorAll('.shop-boost');
 const shopBuyButtons = shopBoostsCointainer.querySelectorAll('.shop-boost__button');
-
-console.log(shopBuyButtons);
+const inventoryBoostsCointainer = document.querySelector('.inventory-boosts__content');
+const inventoryBoosts = document.querySelectorAll('.inventory-boost');
+const inventoryUseButtons = inventoryBoostsCointainer.querySelectorAll('.inventory-boost__button');
+const inventoryBoostsCount = inventoryBoostsCointainer.querySelectorAll('.inventory-boost__button-count');
 
 // global variables
 let option;
@@ -85,6 +87,9 @@ let totalXp = 0;
 let currentXpNumber = 0;
 let requiredXpNumber = 50;
 let levelNumber = 1;
+let isUsingBoost = false;
+let indexOfUsedBoost = 0;
+let boostSecondsLeft = 15;
 
 // gets information from 1000 words.json
 fetch('./assests/scripts/1000 words.json')
@@ -187,6 +192,46 @@ onload = () => { // check if you have some data stored, if YES, then it displays
     } else {
         return;
     }
+    updateDataAndColorsInventoryButton();
+
+    if(localStorage.getItem('isUsingBoostData')) {
+        isUsingBoost = JSON.parse(localStorage.getItem('isUsingBoostData'));
+        indexOfUsedBoost = JSON.parse(localStorage.getItem('indexOfUsedBoostData'));
+        const wholePart = Math.trunc(indexOfUsedBoost / 3);
+        const restPart = indexOfUsedBoost - (wholePart * 3);
+        if(isUsingBoost) {
+            inventoryUseButtons.forEach(invButton => {
+                invButton.style.background = '#30363d';
+                invButton.style.cursor = 'not-allowed';
+            })
+
+            inventoryUseButtons[indexOfUsedBoost].style.background = '#f8f29a'
+            inventoryUseButtons[indexOfUsedBoost].style.color = '#0d1117'
+
+            boostSecondsLeft = JSON.parse(localStorage.getItem('boostSecondsLeftData'));
+            const boostInterval = setInterval(() => {
+                boostSecondsLeft --;
+                localStorage.setItem('boostSecondsLeftData', JSON.stringify(boostSecondsLeft));
+                inventoryUseButtons[indexOfUsedBoost].innerHTML = `In Use ( <span class="inventory-boost__button-count">${Math.floor(boostSecondsLeft / 60)}:${boostSecondsLeft - (Math.floor(boostSecondsLeft / 60) * 60)}</span> )`
+    
+                if(boostSecondsLeft == 0) {
+                    clearInterval(boostInterval);
+                    isUsingBoost = false;
+                    localStorage.setItem('isUsingBoostData', JSON.stringify(isUsingBoost));
+    
+                    inventoryUseButtons[indexOfUsedBoost].innerHTML = `Use (<span class="inventory-boost__button-count">${boostsData[wholePart][restPart] }</span>)`
+
+                    updateDataAndColorsInventoryButton();
+    
+                    boostSecondsLeft = 15;
+                    localStorage.setItem('boostSecondsLeftData', JSON.stringify(boostSecondsLeft));
+                }
+            }, 1000);
+        } else {
+            // updateDataAndColorsInventoryButton();
+        }
+    } 
+
 }
 
 // FUNCTIONS
@@ -430,6 +475,25 @@ function updateColorShopButton() {
     });
 }
 
+function updateDataAndColorsInventoryButton() {
+    inventoryUseButtons.forEach(invButton => {
+        const indexOfInvBtn = Array.prototype.indexOf.call(inventoryUseButtons, invButton);
+        const wholePart = Math.trunc(indexOfInvBtn / 3);
+        const restPart = indexOfInvBtn - (wholePart * 3);
+
+        inventoryBoostsCount[indexOfInvBtn].textContent = boostsData[wholePart][restPart]
+        if(boostsData[wholePart][restPart] > 0) {
+            invButton.style.background = '#4fbf26';
+            invButton.style.color = '#fff'
+            invButton.style.cursor = 'pointer';
+        } else {
+            invButton.style.background = '#30363d';
+            invButton.style.color = '#fff';
+            invButton.style.cursor = 'not-allowed';
+        }
+    });
+}
+
 // EVENT LISTENERS
 
 button.addEventListener('click', event => {
@@ -642,5 +706,54 @@ shopBoostsCointainer.addEventListener('click', event => {
         localStorage.setItem('data', JSON.stringify(data));
         boostsData[wholePart][restPart] += 1;
         localStorage.setItem('boostsData', JSON.stringify(boostsData));
+
+        updateDataAndColorsInventoryButton();
+    }
+})
+
+inventoryBoostsCointainer.addEventListener('click', event => {
+    if(event.target.tagName != 'BUTTON' && event.target.tagName != 'SPAN' ) return;
+    const selectedButton = (event.target.tagName == 'BUTTON') ? event.target : event.target.parentElement;
+    if (selectedButton.style.cursor == 'pointer' ) {
+        const indexOfButton = Array.prototype.indexOf.call(inventoryUseButtons, selectedButton);
+        const wholePart = Math.trunc(indexOfButton / 3);
+        const restPart = indexOfButton - (wholePart * 3);
+
+        boostsData[wholePart][restPart] -= 1;
+        localStorage.setItem('boostsData', JSON.stringify(boostsData));
+
+        isUsingBoost = true;
+        localStorage.setItem('isUsingBoostData', JSON.stringify(isUsingBoost));
+        localStorage.setItem('indexOfUsedBoostData', JSON.stringify(indexOfButton));
+
+        inventoryUseButtons.forEach(invButton => {
+            invButton.style.background = '#30363d';
+            invButton.style.cursor = 'not-allowed';
+        })
+
+        selectedButton.style.background = '#f8f29a'
+        selectedButton.style.color = '#0d1117'
+
+        selectedButton.innerHTML = `In Use ( <span class="inventory-boost__button-count">${Math.floor(boostSecondsLeft / 60)}:${boostSecondsLeft - (Math.floor(boostSecondsLeft / 60) * 60)}</span> )`
+
+        const boostInterval = setInterval(() => {
+            boostSecondsLeft --;
+            localStorage.setItem('boostSecondsLeftData', JSON.stringify(boostSecondsLeft));
+            selectedButton.innerHTML = `In Use ( <span class="inventory-boost__button-count">${Math.floor(boostSecondsLeft / 60)}:${boostSecondsLeft - (Math.floor(boostSecondsLeft / 60) * 60)}</span> )`
+
+            if(boostSecondsLeft == 0) {
+                clearInterval(boostInterval);
+                isUsingBoost = false;
+                localStorage.setItem('isUsingBoostData', JSON.stringify(isUsingBoost));
+
+                
+                selectedButton.innerHTML = `Use (<span class="inventory-boost__button-count">${boostsData[wholePart][restPart] }</span>)`
+                
+                updateDataAndColorsInventoryButton();
+
+                boostSecondsLeft = 15;
+                localStorage.setItem('boostSecondsLeftData', JSON.stringify(boostSecondsLeft));
+            }
+        }, 1000);
     }
 })
