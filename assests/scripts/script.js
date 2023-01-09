@@ -89,7 +89,10 @@ let requiredXpNumber = 50;
 let levelNumber = 1;
 let isUsingBoost = false;
 let indexOfUsedBoost = 0;
-let boostSecondsLeft = 15;
+let boostSecondsLeft = 300;
+let boostMoneyMultiplier = 1;
+let boostXPMultiplier = 1;
+let isUsingNoFailsBoost = false;
 
 // gets information from 1000 words.json
 fetch('./assests/scripts/1000 words.json')
@@ -208,11 +211,64 @@ onload = () => { // check if you have some data stored, if YES, then it displays
             inventoryUseButtons[indexOfUsedBoost].style.background = '#f8f29a'
             inventoryUseButtons[indexOfUsedBoost].style.color = '#0d1117'
 
+            switch (wholePart) {
+                case 0:
+                    switch (restPart) {
+                        case 0:
+                            boostMoneyMultiplier = 1.5
+                            break;
+                    
+                        case 1:
+                            boostMoneyMultiplier = 2
+                            break;
+    
+                        case 2:
+                            boostMoneyMultiplier = 3
+                            break;
+                    }    
+    
+                    break;
+            
+                case 1:
+                    switch (restPart) {
+                        case 0:
+                            boostXPMultiplier = 1.5
+                            break;
+                    
+                        case 1:
+                            boostXPMultiplier = 2
+                            break;
+    
+                        case 2:
+                            boostXPMultiplier = 3
+                            break;
+    
+                        } 
+                    break;
+    
+                case 2:
+                    switch (restPart) {
+                        case 0:
+                            isUsingNoFailsBoost = true;
+                            break;
+                    
+                        case 1:
+                            isUsingNoFailsBoost = true;
+                            break;
+    
+                        case 2:
+                            isUsingNoFailsBoost = true;
+                            break;
+    
+                        } 
+                    break;
+            }
+
             boostSecondsLeft = JSON.parse(localStorage.getItem('boostSecondsLeftData'));
             const boostInterval = setInterval(() => {
-                boostSecondsLeft --;
-                localStorage.setItem('boostSecondsLeftData', JSON.stringify(boostSecondsLeft));
-                inventoryUseButtons[indexOfUsedBoost].innerHTML = `In Use ( <span class="inventory-boost__button-count">${Math.floor(boostSecondsLeft / 60)}:${boostSecondsLeft - (Math.floor(boostSecondsLeft / 60) * 60)}</span> )`
+            boostSecondsLeft --;
+            localStorage.setItem('boostSecondsLeftData', JSON.stringify(boostSecondsLeft));
+            inventoryUseButtons[indexOfUsedBoost].innerHTML = `In Use ( <span class="inventory-boost__button-count">${Math.floor(boostSecondsLeft / 60)}:${boostSecondsLeft - (Math.floor(boostSecondsLeft / 60) * 60)}</span> )`
     
                 if(boostSecondsLeft == 0) {
                     clearInterval(boostInterval);
@@ -225,10 +281,63 @@ onload = () => { // check if you have some data stored, if YES, then it displays
     
                     boostSecondsLeft = 15;
                     localStorage.setItem('boostSecondsLeftData', JSON.stringify(boostSecondsLeft));
+
+                    switch (wholePart) {
+                        case 0:
+                            switch (restPart) {
+                                case 0:
+                                    boostMoneyMultiplier = 0
+                                    break;
+                            
+                                case 1:
+                                    boostMoneyMultiplier = 0
+                                    break;
+            
+                                case 2:
+                                    boostMoneyMultiplier = 0
+                                    break;
+                            }    
+            
+                            break;
+                    
+                        case 1:
+                            switch (restPart) {
+                                case 0:
+                                    boostXPMultiplier = 0
+                                    break;
+                            
+                                case 1:
+                                    boostXPMultiplier = 0
+                                    break;
+            
+                                case 2:
+                                    boostXPMultiplier = 0
+                                    break;
+            
+                                } 
+                            break;
+            
+                        case 2:
+                            switch (restPart) {
+                                case 0:
+                                    isUsingNoFailsBoost = false;
+                                    break;
+                            
+                                case 1:
+                                    isUsingNoFailsBoost = false;
+                                    break;
+            
+                                case 2:
+                                    isUsingNoFailsBoost = false;
+                                    break;
+            
+                                } 
+                            break;
+                    }
                 }
             }, 1000);
         } else {
-            // updateDataAndColorsInventoryButton();
+            updateDataAndColorsInventoryButton();
         }
     } 
 
@@ -261,7 +370,7 @@ function moneyAndXpPopUpAnimation (moneyMultiplier, xpMultiplier) {
 
 function updateMoney (moneyMultiplier) {
     // updates UI of money
-    moneyNumber += 1 * parseInt(moneyMultiplier);
+    moneyNumber += Math.trunc( 1 * parseInt(moneyMultiplier) * boostMoneyMultiplier );
     money.textContent = moneyNumber;
 }
 
@@ -293,7 +402,7 @@ function updateLevel () {
 
 function updateXP (addXp) {
     // updates UI of XP
-    currentXpNumber += addXp;
+    currentXpNumber += Math.trunc( addXp * boostXPMultiplier );
     currentXp.textContent = currentXpNumber;
     updateProgressBar();
     updateLevel();
@@ -391,25 +500,29 @@ function checkWords() {
         }
         correctSound.play();
     } else {
-        failedWords.push({failedWord: Object.keys(words)[rndNum], typedWord: randomWordInput.value, correctWord: Object.values(words)[rndNum]});
-        updateList();
-        data.failedWordsData = failedWords;
-        randomWordInput.style.borderBottom = '2px solid #a7171a';
-        randomWordInput.style.color = '#a7171a';
-        randomWordInput.value = `${randomWordInput.value}(${Object.values(words)[rndNum]})`
-        comboNumber = 0;
-        combo.textContent = comboNumber;
-        combo.style.color = 'white';
-        failsNumber++;
-        fails.textContent = failsNumber;
-        totalFails++
-        data.totalFailsData = totalFails;
-        totalWords++;
-        data.totalWordsData = totalWords;
-        setTimeout(() => {
+        if (!isUsingNoFailsBoost) {
+            failedWords.push({failedWord: Object.keys(words)[rndNum], typedWord: randomWordInput.value, correctWord: Object.values(words)[rndNum]});
+            updateList();
+            data.failedWordsData = failedWords;
+            randomWordInput.style.borderBottom = '2px solid #a7171a';
+            randomWordInput.style.color = '#a7171a';
+            randomWordInput.value = `${randomWordInput.value}(${Object.values(words)[rndNum]})`
+            comboNumber = 0;
+            combo.textContent = comboNumber;
             combo.style.color = 'white';
-        }, DELAY_NUMBER)
-        wrongSound.play();
+            failsNumber++;
+            fails.textContent = failsNumber;
+            totalFails++
+            data.totalFailsData = totalFails;
+            totalWords++;
+            data.totalWordsData = totalWords;
+            setTimeout(() => {
+                combo.style.color = 'white';
+            }, DELAY_NUMBER)
+            wrongSound.play();
+        } else {
+            return;
+        }
     }
 
     localStorage.setItem('data', JSON.stringify(data));
@@ -736,6 +849,62 @@ inventoryBoostsCointainer.addEventListener('click', event => {
 
         selectedButton.innerHTML = `In Use ( <span class="inventory-boost__button-count">${Math.floor(boostSecondsLeft / 60)}:${boostSecondsLeft - (Math.floor(boostSecondsLeft / 60) * 60)}</span> )`
 
+        switch (wholePart) {
+            case 0:
+                switch (restPart) {
+                    case 0:
+                        boostMoneyMultiplier = 1.5
+                        break;
+                
+                    case 1:
+                        boostMoneyMultiplier = 2
+                        break;
+
+                    case 2:
+                        boostMoneyMultiplier = 3
+                        break;
+                }    
+
+                break;
+        
+            case 1:
+                switch (restPart) {
+                    case 0:
+                        boostXPMultiplier = 1.5
+                        break;
+                
+                    case 1:
+                        boostXPMultiplier = 2
+                        break;
+
+                    case 2:
+                        boostXPMultiplier = 3
+                        break;
+
+                    } 
+                break;
+
+            case 2:
+                switch (restPart) {
+                    case 0:
+                        isUsingNoFailsBoost = true;
+                        boostSecondsLeft = 60;
+                        break;
+                
+                    case 1:
+                        isUsingNoFailsBoost = true;
+                        boostSecondsLeft = 120;
+                        break;
+
+                    case 2:
+                        isUsingNoFailsBoost = true;
+                        boostSecondsLeft = 180;
+                        break;
+
+                    } 
+                break;
+        }
+
         const boostInterval = setInterval(() => {
             boostSecondsLeft --;
             localStorage.setItem('boostSecondsLeftData', JSON.stringify(boostSecondsLeft));
@@ -751,8 +920,61 @@ inventoryBoostsCointainer.addEventListener('click', event => {
                 
                 updateDataAndColorsInventoryButton();
 
-                boostSecondsLeft = 15;
+                boostSecondsLeft = 300;
                 localStorage.setItem('boostSecondsLeftData', JSON.stringify(boostSecondsLeft));
+
+                switch (wholePart) {
+                    case 0:
+                        switch (restPart) {
+                            case 0:
+                                boostMoneyMultiplier = 0
+                                break;
+                        
+                            case 1:
+                                boostMoneyMultiplier = 0
+                                break;
+        
+                            case 2:
+                                boostMoneyMultiplier = 0
+                                break;
+                        }    
+        
+                        break;
+                
+                    case 1:
+                        switch (restPart) {
+                            case 0:
+                                boostXPMultiplier = 0
+                                break;
+                        
+                            case 1:
+                                boostXPMultiplier = 0
+                                break;
+        
+                            case 2:
+                                boostXPMultiplier = 0
+                                break;
+        
+                            } 
+                        break;
+        
+                    case 2:
+                        switch (restPart) {
+                            case 0:
+                                isUsingNoFailsBoost = false;
+                                break;
+                        
+                            case 1:
+                                isUsingNoFailsBoost = false;
+                                break;
+        
+                            case 2:
+                                isUsingNoFailsBoost = false;
+                                break;
+        
+                            } 
+                        break;
+                }
             }
         }, 1000);
     }
