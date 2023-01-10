@@ -136,9 +136,11 @@ onload = () => { // check if you have some data stored, if YES, then it displays
         if (data.levelData) {
             level.textContent = data.levelData;
             levelNumber = data.levelData;
-            updateXP(data.currentXpNumberData);
+            currentXpNumber = data.currentXpNumberData;
+            currentXp.textContent = currentXpNumber;
             requiredXpNumber = levelNumber * 50;
             requiredXp.textContent = requiredXpNumber;
+            updateProgressBar();
         } else { 
             return;
         }
@@ -211,59 +213,8 @@ onload = () => { // check if you have some data stored, if YES, then it displays
             inventoryUseButtons[indexOfUsedBoost].style.background = '#f8f29a'
             inventoryUseButtons[indexOfUsedBoost].style.color = '#0d1117'
 
-            switch (wholePart) {
-                case 0:
-                    switch (restPart) {
-                        case 0:
-                            boostMoneyMultiplier = 1.5
-                            break;
-                    
-                        case 1:
-                            boostMoneyMultiplier = 2
-                            break;
-    
-                        case 2:
-                            boostMoneyMultiplier = 3
-                            break;
-                    }    
-    
-                    break;
             
-                case 1:
-                    switch (restPart) {
-                        case 0:
-                            boostXPMultiplier = 1.5
-                            break;
-                    
-                        case 1:
-                            boostXPMultiplier = 2
-                            break;
-    
-                        case 2:
-                            boostXPMultiplier = 3
-                            break;
-    
-                        } 
-                    break;
-    
-                case 2:
-                    switch (restPart) {
-                        case 0:
-                            isUsingNoFailsBoost = true;
-                            break;
-                    
-                        case 1:
-                            isUsingNoFailsBoost = true;
-                            break;
-    
-                        case 2:
-                            isUsingNoFailsBoost = true;
-                            break;
-    
-                        } 
-                    break;
-            }
-
+            updateBoostValues(1.5, 2, 3, true)
             boostSecondsLeft = JSON.parse(localStorage.getItem('boostSecondsLeftData'));
             const boostInterval = setInterval(() => {
             boostSecondsLeft --;
@@ -279,61 +230,10 @@ onload = () => { // check if you have some data stored, if YES, then it displays
 
                     updateDataAndColorsInventoryButton();
     
-                    boostSecondsLeft = 15;
+                    boostSecondsLeft = 300;
                     localStorage.setItem('boostSecondsLeftData', JSON.stringify(boostSecondsLeft));
 
-                    switch (wholePart) {
-                        case 0:
-                            switch (restPart) {
-                                case 0:
-                                    boostMoneyMultiplier = 0
-                                    break;
-                            
-                                case 1:
-                                    boostMoneyMultiplier = 0
-                                    break;
-            
-                                case 2:
-                                    boostMoneyMultiplier = 0
-                                    break;
-                            }    
-            
-                            break;
-                    
-                        case 1:
-                            switch (restPart) {
-                                case 0:
-                                    boostXPMultiplier = 0
-                                    break;
-                            
-                                case 1:
-                                    boostXPMultiplier = 0
-                                    break;
-            
-                                case 2:
-                                    boostXPMultiplier = 0
-                                    break;
-            
-                                } 
-                            break;
-            
-                        case 2:
-                            switch (restPart) {
-                                case 0:
-                                    isUsingNoFailsBoost = false;
-                                    break;
-                            
-                                case 1:
-                                    isUsingNoFailsBoost = false;
-                                    break;
-            
-                                case 2:
-                                    isUsingNoFailsBoost = false;
-                                    break;
-            
-                                } 
-                            break;
-                    }
+                    updateBoostValues(1, 1, 1, false)
                 }
             }, 1000);
         } else {
@@ -350,10 +250,10 @@ function moneyAndXpPopUpAnimation (moneyMultiplier, xpMultiplier) {
     let rndNum = Math.trunc(Math.random() * 80)
     moneyPopUp.classList.add('display-flex')
     moneyPopUp.style.left = `${rndNum}%`
-    moneyPopUpNumber.textContent = 1 * parseInt(moneyMultiplier);
+    moneyPopUpNumber.textContent = boostMoneyMultiplier * parseInt(moneyMultiplier);
     xpPopUp.classList.add('display-flex');
     xpPopUp.style.left = `${rndNum}%`
-    xpPopUpNumber.textContent = 1 + ((10 + levelNumber - 1) * xpMultiplier) ;
+    xpPopUpNumber.textContent = ( xpMultiplier == 0) ? 1 * boostXPMultiplier : (10 + levelNumber) * boostXPMultiplier ;
     setTimeout( () => {
        moneyPopUp.classList.add('fade-up-more'); 
        xpPopUp.classList.add('fade-up');
@@ -370,7 +270,7 @@ function moneyAndXpPopUpAnimation (moneyMultiplier, xpMultiplier) {
 
 function updateMoney (moneyMultiplier) {
     // updates UI of money
-    moneyNumber += Math.trunc( 1 * parseInt(moneyMultiplier) * boostMoneyMultiplier );
+    moneyNumber += Math.trunc( parseInt(moneyMultiplier) * boostMoneyMultiplier );
     money.textContent = moneyNumber;
 }
 
@@ -488,7 +388,7 @@ function checkWords() {
         data.moneyData = moneyNumber;
         totalCoins += 1 * comboNumber;
         data.totalCoinsData = totalCoins;
-        updateXP(10 + levelNumber);
+        updateXP((10 + levelNumber));
         data.levelData = levelNumber;
         data.currentXpNumberData = currentXpNumber;
         totalXp += 10 + levelNumber;
@@ -605,6 +505,64 @@ function updateDataAndColorsInventoryButton() {
             invButton.style.cursor = 'not-allowed';
         }
     });
+}
+
+function updateBoostValues(moneyAndxp1, moneyAndxp2, moneyAndxp3, booleanBoost) {
+    indexOfUsedBoost = JSON.parse(localStorage.getItem('indexOfUsedBoostData'));
+    const wholePart = Math.trunc(indexOfUsedBoost / 3);
+    const restPart = indexOfUsedBoost - (wholePart * 3);
+    switch (wholePart) {
+        case 0:
+            switch (restPart) {
+                case 0:
+                    boostMoneyMultiplier = moneyAndxp1
+                    break;
+            
+                case 1:
+                    boostMoneyMultiplier = moneyAndxp2
+                    break;
+
+                case 2:
+                    boostMoneyMultiplier = moneyAndxp3
+                    break;
+            }    
+
+            break;
+    
+        case 1:
+            switch (restPart) {
+                case 0:
+                    boostXPMultiplier = moneyAndxp1
+                    break;
+            
+                case 1:
+                    boostXPMultiplier = moneyAndxp2
+                    break;
+
+                case 2:
+                    boostXPMultiplier = moneyAndxp3
+                    break;
+
+                } 
+            break;
+
+        case 2:
+            switch (restPart) {
+                case 0:
+                    isUsingNoFailsBoost = booleanBoost ;
+                    break;
+            
+                case 1:
+                    isUsingNoFailsBoost = booleanBoost;
+                    break;
+
+                case 2:
+                    isUsingNoFailsBoost = booleanBoost;
+                    break;
+
+                } 
+            break;
+    }
 }
 
 // EVENT LISTENERS
@@ -923,58 +881,7 @@ inventoryBoostsCointainer.addEventListener('click', event => {
                 boostSecondsLeft = 300;
                 localStorage.setItem('boostSecondsLeftData', JSON.stringify(boostSecondsLeft));
 
-                switch (wholePart) {
-                    case 0:
-                        switch (restPart) {
-                            case 0:
-                                boostMoneyMultiplier = 0
-                                break;
-                        
-                            case 1:
-                                boostMoneyMultiplier = 0
-                                break;
-        
-                            case 2:
-                                boostMoneyMultiplier = 0
-                                break;
-                        }    
-        
-                        break;
-                
-                    case 1:
-                        switch (restPart) {
-                            case 0:
-                                boostXPMultiplier = 0
-                                break;
-                        
-                            case 1:
-                                boostXPMultiplier = 0
-                                break;
-        
-                            case 2:
-                                boostXPMultiplier = 0
-                                break;
-        
-                            } 
-                        break;
-        
-                    case 2:
-                        switch (restPart) {
-                            case 0:
-                                isUsingNoFailsBoost = false;
-                                break;
-                        
-                            case 1:
-                                isUsingNoFailsBoost = false;
-                                break;
-        
-                            case 2:
-                                isUsingNoFailsBoost = false;
-                                break;
-        
-                            } 
-                        break;
-                }
+                updateBoostValues(1, 1, 1, false)
             }
         }, 1000);
     }
