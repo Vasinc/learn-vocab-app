@@ -442,7 +442,7 @@ body {
   background: #94a6c2;
 }
 
-.shop-UI .shop-content .shop-boosts {
+.shop-UI .shop-content .shop-skins {
   background: #a53b70;
 }
 
@@ -454,6 +454,7 @@ body {
   border-radius: .1rem;
   overflow-y: scroll;
   overflow-x: hidden;
+  left: -100%;
 }
 
 .shop-UI .shop-content .shop-UIs > * .shop-UI-texts__container {
@@ -606,6 +607,149 @@ body {
           box-shadow: 0 0 10px #fff;
   -webkit-animation: shiny 3s ease-out 0s infinite backwards;
           animation: shiny 3s ease-out 0s infinite backwards;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 4rem;
+  margin-top: 3rem;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line .shop-skin {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 80%;
+  max-width: 150px;
+  border-radius: .5rem;
+  overflow: hidden;
+  cursor: default;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line .shop-skin .shop-skin__background {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  height: 125px;
+  overflow: hidden;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line .shop-skin .shop-skin__background .shop-skin__background-text {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line .shop-skin .shop-skin__button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: .5rem 0;
+  background: #a7171a;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  cursor: not-allowed;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line .shop-skin .shop-skin__button img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line:first-of-type .shop-skin:first-of-type .shop-skin__background {
+  background: #070043;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line:first-of-type .shop-skin:nth-of-type(2) .shop-skin__background {
+  background: #300057;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line:first-of-type .shop-skin:last-of-type .shop-skin__background {
+  background: #a7171a;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line:nth-of-type(2) .shop-skin:first-of-type .shop-skin__background {
+  background: #9e5200;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line:nth-of-type(2) .shop-skin:nth-of-type(2) .shop-skin__background {
+  background: #00d0e8;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line:nth-of-type(2) .shop-skin:nth-of-type(2) .shop-skin__background .shop-skin__background-text {
+  font-size: 1.5rem;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line:nth-of-type(2) .shop-skin:last-of-type .shop-skin__background {
+  background: #f5f5f5;
+  color: #0d1117;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line:nth-of-type(3) .shop-skin:first-of-type .shop-skin__background {
+  background: #32CD32;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line:nth-of-type(3) .shop-skin:nth-of-type(2) .shop-skin__background {
+  background: #ff58f4;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line:nth-of-type(3) .shop-skin:last-of-type .shop-skin__background {
+  background: #E3BC9A;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line:last-of-type .shop-skin:first-of-type .shop-skin__background {
+  background: url("../images/wood-skin.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line:last-of-type .shop-skin:nth-of-type(2) .shop-skin__background {
+  background: url("../images/shrek-skin.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+
+.shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line:last-of-type .shop-skin:last-of-type .shop-skin__background {
+  background: url("../images/doge-skin.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #0d1117;
 }
 
 .challenges-UI {

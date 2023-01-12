@@ -24,6 +24,14 @@ $yellow: #f8f29a
 $iron: #a19d94
 $gold: #FFD700
 $diamond: #b9f2ff
+$blue: #070043
+$purple: #300057
+$orange: #9e5200
+$turquoise: #00d0e8
+$pearl: #f5f5f5
+$lime: #32CD32
+$sakura: #ff58f4
+$nude: #E3BC9A
 
 // classes
 .display-block
@@ -292,7 +300,7 @@ body
             cursor: pointer
             &:hover
                 background: lighten($black, 60%)
-        .shop-boosts
+        .shop-skins // SA SCHIMB IN BOOSTS
             background: $pink
         .shop-UIs > *
             position: relative
@@ -302,6 +310,7 @@ body
             border-radius: .1rem
             overflow-y: scroll
             overflow-x: hidden
+            left: -100% // SA IL STERG
             .shop-UI-texts__container 
                 display: flex
                 justify-content: space-between
@@ -387,7 +396,110 @@ body
                                     transform: rotate(45deg) translateX(-5rem)
                                     box-shadow: 0 0 10px #fff
                                     animation: shiny 3s ease-out 0s infinite backwards
+            .shop-skins__UI    
+                .shop-skins__content
+                    display: flex
+                    flex-direction: column
+                    align-items: center
+                    gap: 4rem
+                    margin-top: 3rem
+                    .shop-skins__line
+                        display: flex
+                        flex-wrap: wrap
+                        justify-content: center
+                        gap: 2rem
+                        width: 100%
+                        .shop-skin
+                            display: flex
+                            flex-direction: column
+                            width: 80%
+                            max-width: 150px
+                            border-radius: .5rem
+                            overflow: hidden
+                            cursor: default
+                            .shop-skin__background
+                                display: grid
+                                place-items: center
+                                height: 125px
+                                overflow: hidden
+                                .shop-skin__background-text
+                                    font-size: 1.75rem
+                                    font-weight: 700
+                            .shop-skin__button
+                                display: flex
+                                align-items: center
+                                justify-content: center
+                                padding: .5rem 0
+                                background: $red
+                                color: $white
+                                font-weight: 700
+                                border: none
+                                cursor: not-allowed
+                                img
+                                    width: 1.5rem
+                                    height: 1.5rem
+                    .shop-skins__line:first-of-type
+                        .shop-skin:first-of-type
+                            .shop-skin__background
+                                background: $blue
+
+                        .shop-skin:nth-of-type(2)
+                            .shop-skin__background
+                                background: $purple
+
+                        .shop-skin:last-of-type
+                            .shop-skin__background
+                                background: $red
+                    .shop-skins__line:nth-of-type(2)
+                        .shop-skin:first-of-type
+                            .shop-skin__background
+                                background: $orange
+
+                        .shop-skin:nth-of-type(2)
+                            .shop-skin__background
+                                background: $turquoise
+                                .shop-skin__background-text
+                                    font-size: 1.5rem
                             
+                        .shop-skin:last-of-type
+                            .shop-skin__background
+                                background: $pearl
+                                color: $black
+                    .shop-skins__line:nth-of-type(3)
+                        .shop-skin:first-of-type
+                            .shop-skin__background
+                                background: $lime
+
+                        .shop-skin:nth-of-type(2)
+                            .shop-skin__background
+                                background: $sakura
+
+                        .shop-skin:last-of-type
+                            .shop-skin__background
+                                background: $nude
+                    .shop-skins__line:last-of-type
+                        .shop-skin:first-of-type
+                            .shop-skin__background
+                                background: url('../images/wood-skin.jpg')
+                                background-size: cover
+                                background-position: center
+                                background-repeat: no-repeat
+
+                        .shop-skin:nth-of-type(2)
+                            .shop-skin__background
+                                background: url('../images/shrek-skin.jpg')
+                                background-size: cover
+                                background-position: center
+                                background-repeat: no-repeat
+                                color: $white
+
+                        .shop-skin:last-of-type
+                            .shop-skin__background
+                                background: url('../images/doge-skin.jpg')
+                                background-size: cover
+                                background-position: center
+                                background-repeat: no-repeat
+                                color: $black
                             
 
 
