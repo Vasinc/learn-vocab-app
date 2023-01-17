@@ -40,10 +40,15 @@ const shopCoins = document.querySelectorAll('.shop-UI-money');
 const shopBoostsCointainer = document.querySelector('.shop-boosts__content');
 const shopBoosts = document.querySelectorAll('.shop-boost');
 const shopBuyButtons = shopBoostsCointainer.querySelectorAll('.shop-boost__button');
-const inventoryBoostsCointainer = document.querySelector('.inventory-boosts__content');
+const inventoryBoostsContainer = document.querySelector('.inventory-boosts__content');
 const inventoryBoosts = document.querySelectorAll('.inventory-boost');
-const inventoryUseButtons = inventoryBoostsCointainer.querySelectorAll('.inventory-boost__button');
-const inventoryBoostsCount = inventoryBoostsCointainer.querySelectorAll('.inventory-boost__button-count');
+const inventoryUseButtons = inventoryBoostsContainer.querySelectorAll('.inventory-boost__button');
+const inventoryBoostsCount = inventoryBoostsContainer.querySelectorAll('.inventory-boost__button-count');
+const shopSkinsContainer = document.querySelector('.shop-skins__content');
+const shopSkins = document.querySelectorAll('.shop-skin');
+const shopBuySkins = shopSkinsContainer.querySelectorAll('.shop-skin__button')
+
+console.log(shopSkins)
 
 // global variables
 let option;
@@ -69,7 +74,13 @@ let boostsData = [
     [0,0,0],
     [0,0,0],
     [0,0,0]
-]
+];
+let skinsData = [
+    [0,0,0],
+    [0,0,0],
+    [0,0,0],
+    [0,0,0],
+];
 
 // number value of elements
 let comboNumber = parseInt(combo.textContent);
@@ -159,6 +170,7 @@ onload = () => { // check if you have some data stored, if YES, then it displays
         }
 
         updateColorShopButton();
+        updateColorSkinsButton();
     }
 
     if(localStorage.getItem('optionsData')) {
@@ -565,6 +577,21 @@ function updateBoostValues(moneyAndxp1, moneyAndxp2, moneyAndxp3, booleanBoost) 
     }
 }
 
+function updateColorSkinsButton() {
+    shopSkins.forEach(shopSkin => {
+        const shopButton = shopSkin.querySelector('.shop-skin__button');
+        if(moneyNumber >= parseInt(shopSkin.getAttribute('data-price'))) {
+            shopButton.style.background = '#4fbf26';
+            shopButton.style.color = '#0d1117';
+            shopButton.style.cursor = 'pointer';
+        } else {
+            shopButton.style.background = '#a7171a';
+            shopButton.style.color = '#fff';
+            shopButton.style.cursor = 'not-allowed';
+        }
+    });
+}
+
 // EVENT LISTENERS
 
 button.addEventListener('click', event => {
@@ -667,6 +694,7 @@ backdrop.addEventListener('click', removeBackdrop);
 burgerMenu.addEventListener('click', () => {
     updateStatsText();
     updateColorShopButton();
+    updateColorSkinsButton();
     menuUI.classList.add('display-flex');
 })
 
@@ -782,7 +810,7 @@ shopBoostsCointainer.addEventListener('click', event => {
     }
 })
 
-inventoryBoostsCointainer.addEventListener('click', event => {
+inventoryBoostsContainer.addEventListener('click', event => {
     if(event.target.tagName != 'BUTTON' && event.target.tagName != 'SPAN' ) return;
     const selectedButton = (event.target.tagName == 'BUTTON') ? event.target : event.target.parentElement;
     if (selectedButton.style.cursor == 'pointer' ) {
