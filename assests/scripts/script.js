@@ -37,9 +37,9 @@ const shopOptions = shopOptionsContainer.querySelectorAll('button');
 const shopUIsContainer = document.querySelector('.shop-UIs');
 const shopUIs = shopUIsContainer.querySelectorAll('section');
 const shopCoins = document.querySelectorAll('.shop-UI-money');
-const shopBoostsCointainer = document.querySelector('.shop-boosts__content');
+const shopBoostsContainer = document.querySelector('.shop-boosts__content');
 const shopBoosts = document.querySelectorAll('.shop-boost');
-const shopBuyButtons = shopBoostsCointainer.querySelectorAll('.shop-boost__button');
+const shopBuyButtons = shopBoostsContainer.querySelectorAll('.shop-boost__button');
 const inventoryBoostsContainer = document.querySelector('.inventory-boosts__content');
 const inventoryBoosts = document.querySelectorAll('.inventory-boost');
 const inventoryUseButtons = inventoryBoostsContainer.querySelectorAll('.inventory-boost__button');
@@ -253,6 +253,12 @@ onload = () => { // check if you have some data stored, if YES, then it displays
         }
     } 
 
+    if(localStorage.getItem('skinsData')) {
+        skinsData = JSON.parse(localStorage.getItem('skinsData'));
+        updateColorSkinsButton();
+    } else {
+        return;
+    }
 }
 
 // FUNCTIONS
@@ -578,19 +584,32 @@ function updateBoostValues(moneyAndxp1, moneyAndxp2, moneyAndxp3, booleanBoost) 
 }
 
 function updateColorSkinsButton() {
-    shopSkins.forEach(shopSkin => {
-        const shopButton = shopSkin.querySelector('.shop-skin__button');
-        if(moneyNumber >= parseInt(shopSkin.getAttribute('data-price'))) {
-            shopButton.style.background = '#4fbf26';
-            shopButton.style.color = '#0d1117';
-            shopButton.style.cursor = 'pointer';
-        } else {
-            shopButton.style.background = '#a7171a';
-            shopButton.style.color = '#fff';
-            shopButton.style.cursor = 'not-allowed';
-        }
-    });
-}
+        shopBuySkins.forEach(skinButton => {
+            const indexOfButton = Array.prototype.indexOf.call(shopBuySkins, skinButton);
+            const wholePart = Math.trunc(indexOfButton / 3);
+            const restPart = indexOfButton - (wholePart * 3);
+
+            if(moneyNumber >= parseInt(skinButton.getAttribute('data-price'))) {
+                skinButton.style.background = '#4fbf26';
+                skinButton.style.color = '#0d1117';
+                skinButton.style.cursor = 'pointer';
+            } else {
+                skinButton.style.background = '#a7171a';
+                skinButton.style.color = '#fff';
+                skinButton.style.cursor = 'not-allowed';
+            }
+
+            if (skinsData[wholePart][restPart] == 1) {
+                skinButton.innerHTML = 'Bought';
+                skinButton.style.background  = '#30363d';
+                skinButton.style.color = '#fff';
+                skinButton.style.cursor = 'not-allowed';
+                skinButton.style.borderBottomLeftRadius = '.5rem';
+                skinButton.style.borderBottomRightRadius = '.5rem';
+            }
+        });
+    };
+
 
 // EVENT LISTENERS
 
@@ -789,7 +808,7 @@ shopOptionsContainer.addEventListener('click', event => {
     }
 })
 
-shopBoostsCointainer.addEventListener('click', event => {
+shopBoostsContainer.addEventListener('click', event => {
     if(event.target.tagName != 'BUTTON' && event.target.tagName != 'IMG' ) return;
     const selectedBuyButton = (event.target.tagName == 'BUTTON') ? event.target : event.target.parentElement;
     if (selectedBuyButton.style.cursor == 'pointer') {
@@ -912,5 +931,25 @@ inventoryBoostsContainer.addEventListener('click', event => {
                 updateBoostValues(1, 1, 1, false)
             }
         }, 1000);
+    }
+})
+
+shopSkinsContainer.addEventListener('click', event => {
+    if(event.target.tagName != 'BUTTON' && event.target.tagName != 'IMG' ) return;
+    const selectedBuyButton = (event.target.tagName == 'BUTTON') ? event.target : event.target.parentElement;
+    if (selectedBuyButton.style.cursor == 'pointer') {
+        const indexOfButton = Array.prototype.indexOf.call(shopBuySkins, selectedBuyButton);
+        const wholePart = Math.trunc(indexOfButton / 3);
+        const restPart = indexOfButton - (wholePart * 3);
+
+        moneyNumber -= parseInt(selectedBuyButton.getAttribute('data-price'));
+        updateMoney(0);
+        updateShopMoney(moneyNumber);
+        data.moneyData = moneyNumber;
+        localStorage.setItem('data', JSON.stringify(data));
+        skinsData[wholePart][restPart] += 1;
+        localStorage.setItem('skinsData', JSON.stringify(skinsData));
+        updateColorSkinsButton();
+
     }
 })
