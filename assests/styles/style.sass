@@ -26,7 +26,7 @@ $gold: #FFD700
 $diamond: #b9f2ff
 $blue: #070043
 $purple: #300057
-$orange: #9e5200
+$orange: #c36e12
 $turquoise: #00d0e8
 $pearl: #f5f5f5
 $lime: #32CD32
@@ -166,7 +166,7 @@ body
             cursor: pointer
             &:hover
                 background: lighten($black, 60%)
-        .inventory-stats
+        .inventory-skins // SA SCHIMB IN STATS
             background: $pink
         .inventory-UIs > *
             position: relative
@@ -176,6 +176,7 @@ body
             border-radius: .1rem
             overflow-y: scroll
             overflow-x: hidden
+            left: -300% // SA IL STERG
             h2
                 text-align: center  
             h3
@@ -236,7 +237,7 @@ body
                                 justify-content: center
                                 padding: .5rem 0
                                 background: $grey
-                                color: $white
+                                color: $black
                                 font-weight: 700
                                 border: none
                                 cursor: not-allowed
@@ -264,9 +265,97 @@ body
                                     transform: rotate(45deg) translateX(-5rem)
                                     box-shadow: 0 0 10px #fff
                                     animation: shiny 3s ease-out 0s infinite backwards
-
-.shop-UI
-    // display: none
+            .inventory-skins__UI
+                .inventory-skins__content
+                    display: flex
+                    flex-direction: column
+                    align-items: center
+                    gap: 4rem
+                    margin-top: 3rem
+                    .inventory-skins__line
+                        display: flex
+                        flex-wrap: wrap
+                        justify-content: center
+                        gap: 2rem
+                        width: 100%
+                        .inventory-skin
+                            display: flex
+                            flex-direction: column
+                            width: 80%
+                            max-width: 150px
+                            border-radius: .5rem
+                            overflow: hidden
+                            cursor: default
+                            .inventory-skin__background
+                                display: grid
+                                place-items: center
+                                height: 125px
+                                overflow: hidden
+                                .inventory-skin__background-text
+                                    font-size: 1.75rem
+                                    font-weight: 700
+                            .inventory-skin__button
+                                display: flex
+                                align-items: center
+                                justify-content: center
+                                padding: .5rem 0
+                                background: $green
+                                color: $black
+                                font-weight: 700
+                                border: none                     
+                                cursor: pointer
+                        .inventory-skin[data-bgtype="blue"]
+                            .inventory-skin__background
+                                background: $blue
+                        .inventory-skin[data-bgtype="purple"]
+                            .inventory-skin__background
+                                background: $purple
+                        .inventory-skin[data-bgtype="red"]
+                            .inventory-skin__background
+                                background: $red
+                        .inventory-skin[data-bgtype="orange"]
+                            .inventory-skin__background
+                                background: $orange
+                        .inventory-skin[data-bgtype="turquoise"]
+                            .inventory-skin__background
+                                background: $turquoise
+                                color: $black
+                        .inventory-skin[data-bgtype="pearl"]
+                            .inventory-skin__background
+                                background: $pearl
+                                color: $black
+                        .inventory-skin[data-bgtype="lime"]
+                            .inventory-skin__background
+                                background: $lime
+                        .inventory-skin[data-bgtype="sakura"]
+                            .inventory-skin__background
+                                background: $sakura
+                        .inventory-skin[data-bgtype="nude"]
+                            .inventory-skin__background
+                                background: $nude
+                        .inventory-skin[data-bgtype="wood"]
+                            .inventory-skin__background
+                                background: url('../images/wood-skin.jpg')
+                                background-size: cover
+                                background-position: center
+                                background-repeat: no-repeat
+                        .inventory-skin[data-bgtype="shrek"]
+                            .inventory-skin__background
+                                background: url('../images/shrek-skin.jpg')
+                                background-size: cover
+                                background-position: center
+                                background-repeat: no-repeat
+                                color: $white
+                        .inventory-skin[data-bgtype="doge"]
+                            .inventory-skin__background
+                                background: url('../images/doge-skin.jpg')
+                                background-size: cover
+                                background-position: center
+                                background-repeat: no-repeat
+                                color: $black
+                        
+.shop-UI                
+    display: none
     position: absolute
     left: 50%
     top: 50%
@@ -300,7 +389,7 @@ body
             cursor: pointer
             &:hover
                 background: lighten($black, 60%)
-        .shop-skins // SA SCHIMB IN BOOSTS
+        .shop-boosts
             background: $pink
         .shop-UIs > *
             position: relative
@@ -310,7 +399,6 @@ body
             border-radius: .1rem
             overflow-y: scroll
             overflow-x: hidden
-            left: -100% // SA IL STERG
             .shop-UI-texts__container 
                 display: flex
                 justify-content: space-between
@@ -458,6 +546,7 @@ body
                         .shop-skin:nth-of-type(2)
                             .shop-skin__background
                                 background: $turquoise
+                                color: $black
                                 .shop-skin__background-text
                                     font-size: 1.5rem
                             
@@ -843,4 +932,4 @@ header
     0%
         transform: rotate(45deg) translateX(-5rem)
     100%
-        transform: rotate(45deg) translateX(5rem)
+        transform: rotate(45deg) translateX(7rem)

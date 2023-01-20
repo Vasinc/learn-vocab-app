@@ -46,9 +46,7 @@ const inventoryUseButtons = inventoryBoostsContainer.querySelectorAll('.inventor
 const inventoryBoostsCount = inventoryBoostsContainer.querySelectorAll('.inventory-boost__button-count');
 const shopSkinsContainer = document.querySelector('.shop-skins__content');
 const shopSkins = document.querySelectorAll('.shop-skin');
-const shopBuySkins = shopSkinsContainer.querySelectorAll('.shop-skin__button')
-
-console.log(shopSkins)
+const shopBuySkins = shopSkinsContainer.querySelectorAll('.shop-skin__button');
 
 // global variables
 let option;
@@ -515,7 +513,7 @@ function updateDataAndColorsInventoryButton() {
         inventoryBoostsCount[indexOfInvBtn].textContent = boostsData[wholePart][restPart]
         if(boostsData[wholePart][restPart] > 0) {
             invButton.style.background = '#4fbf26';
-            invButton.style.color = '#fff'
+            invButton.style.color = '#0d1117'
             invButton.style.cursor = 'pointer';
         } else {
             invButton.style.background = '#30363d';

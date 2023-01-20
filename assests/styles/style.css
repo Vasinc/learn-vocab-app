@@ -218,7 +218,7 @@ body {
   background: #94a6c2;
 }
 
-.inventory-UI .inventory-content .inventory-stats {
+.inventory-UI .inventory-content .inventory-skins {
   background: #a53b70;
 }
 
@@ -230,6 +230,7 @@ body {
   border-radius: .1rem;
   overflow-y: scroll;
   overflow-x: hidden;
+  left: -300%;
 }
 
 .inventory-UI .inventory-content .inventory-UIs > * h2 {
@@ -349,7 +350,7 @@ body {
           justify-content: center;
   padding: .5rem 0;
   background: #30363d;
-  color: #fff;
+  color: #0d1117;
   font-weight: 700;
   border: none;
   cursor: not-allowed;
@@ -385,7 +386,143 @@ body {
           animation: shiny 3s ease-out 0s infinite backwards;
 }
 
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 4rem;
+  margin-top: 3rem;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 80%;
+  max-width: 150px;
+  border-radius: .5rem;
+  overflow: hidden;
+  cursor: default;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin .inventory-skin__background {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  height: 125px;
+  overflow: hidden;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin .inventory-skin__background .inventory-skin__background-text {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin .inventory-skin__button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: .5rem 0;
+  background: #4fbf26;
+  color: #0d1117;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin[data-bgtype="blue"] .inventory-skin__background {
+  background: #070043;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin[data-bgtype="purple"] .inventory-skin__background {
+  background: #300057;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin[data-bgtype="red"] .inventory-skin__background {
+  background: #a7171a;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin[data-bgtype="orange"] .inventory-skin__background {
+  background: #c36e12;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin[data-bgtype="turquoise"] .inventory-skin__background {
+  background: #00d0e8;
+  color: #0d1117;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin[data-bgtype="pearl"] .inventory-skin__background {
+  background: #f5f5f5;
+  color: #0d1117;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin[data-bgtype="lime"] .inventory-skin__background {
+  background: #32CD32;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin[data-bgtype="sakura"] .inventory-skin__background {
+  background: #ff58f4;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin[data-bgtype="nude"] .inventory-skin__background {
+  background: #E3BC9A;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin[data-bgtype="wood"] .inventory-skin__background {
+  background: url("../images/wood-skin.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin[data-bgtype="shrek"] .inventory-skin__background {
+  background: url("../images/shrek-skin.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin[data-bgtype="doge"] .inventory-skin__background {
+  background: url("../images/doge-skin.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #0d1117;
+}
+
 .shop-UI {
+  display: none;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -441,7 +578,7 @@ body {
   background: #94a6c2;
 }
 
-.shop-UI .shop-content .shop-skins {
+.shop-UI .shop-content .shop-boosts {
   background: #a53b70;
 }
 
@@ -453,7 +590,6 @@ body {
   border-radius: .1rem;
   overflow-y: scroll;
   overflow-x: hidden;
-  left: -100%;
 }
 
 .shop-UI .shop-content .shop-UIs > * .shop-UI-texts__container {
@@ -700,11 +836,12 @@ body {
 }
 
 .shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line:nth-of-type(2) .shop-skin:first-of-type .shop-skin__background {
-  background: #9e5200;
+  background: #c36e12;
 }
 
 .shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line:nth-of-type(2) .shop-skin:nth-of-type(2) .shop-skin__background {
   background: #00d0e8;
+  color: #0d1117;
 }
 
 .shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line:nth-of-type(2) .shop-skin:nth-of-type(2) .shop-skin__background .shop-skin__background-text {
@@ -1256,8 +1393,8 @@ header .header-second__section .progress-bar {
             transform: rotate(45deg) translateX(-5rem);
   }
   100% {
-    -webkit-transform: rotate(45deg) translateX(5rem);
-            transform: rotate(45deg) translateX(5rem);
+    -webkit-transform: rotate(45deg) translateX(7rem);
+            transform: rotate(45deg) translateX(7rem);
   }
 }
 
@@ -1267,8 +1404,8 @@ header .header-second__section .progress-bar {
             transform: rotate(45deg) translateX(-5rem);
   }
   100% {
-    -webkit-transform: rotate(45deg) translateX(5rem);
-            transform: rotate(45deg) translateX(5rem);
+    -webkit-transform: rotate(45deg) translateX(7rem);
+            transform: rotate(45deg) translateX(7rem);
   }
 }
 /*# sourceMappingURL=style.css.map */
