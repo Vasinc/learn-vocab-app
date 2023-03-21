@@ -499,14 +499,14 @@ body {
 }
 
 .inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin[data-bgtype="wood"] .inventory-skin__background {
-  background: url("../images/wood-skin.jpg");
+  background: url("../../images/wood-skin.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin[data-bgtype="shrek"] .inventory-skin__background {
-  background: url("../images/shrek-skin.jpg");
+  background: url("../../images/shrek-skin.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -514,7 +514,7 @@ body {
 }
 
 .inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin[data-bgtype="doge"] .inventory-skin__background {
-  background: url("../images/doge-skin.jpg");
+  background: url("../../images/doge-skin.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -866,14 +866,14 @@ body {
 }
 
 .shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line:last-of-type .shop-skin:first-of-type .shop-skin__background {
-  background: url("../images/wood-skin.jpg");
+  background: url("../../images/wood-skin.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line:last-of-type .shop-skin:nth-of-type(2) .shop-skin__background {
-  background: url("../images/shrek-skin.jpg");
+  background: url("../../images/shrek-skin.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -881,7 +881,7 @@ body {
 }
 
 .shop-UI .shop-content .shop-UIs .shop-skins__UI .shop-skins__content .shop-skins__line:last-of-type .shop-skin:last-of-type .shop-skin__background {
-  background: url("../images/doge-skin.jpg");
+  background: url("../..//images/doge-skin.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1034,7 +1034,7 @@ header .header-second__section .progress-bar {
 
 .money::after {
   content: '';
-  background: url("../images/coin.png");
+  background: url("../../images/coin.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

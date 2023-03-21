@@ -104,7 +104,7 @@ let boostXPMultiplier = 1;
 let isUsingNoFailsBoost = false;
 
 // gets information from 1000 words.json
-fetch('./assests/scripts/1000 words.json')
+fetch('./assets/scripts/1000 words.json')
     .then(
         response => response.json()
     )
@@ -156,7 +156,7 @@ onload = () => { // check if you have some data stored, if YES, then it displays
 
         if (data.selectedData) {
             options.value = data.selectedData;
-            fetch(`./assests/scripts/${options.value}.json`)
+            fetch(`./assets/scripts/${options.value}.json`)
                 .then(
                     response => response.json()
                 )
@@ -727,7 +727,7 @@ menuUI.addEventListener('click', event => {
 })
 
 options.addEventListener('change', () => {
-    fetch(`./assests/scripts/${options.value}.json`)
+    fetch(`./assets/scripts/${options.value}.json`)
     .then(
         response => response.json()
     )
