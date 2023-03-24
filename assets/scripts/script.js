@@ -74,10 +74,23 @@ let boostsData = [
     [0,0,0]
 ];
 let skinsData = [
-    [0,0,0],
-    [0,0,0],
-    [0,0,0],
-    [0,0,0],
+
+    [{name: "blue", isBought: false, isUsing: false}, 
+    {name: "purple", isBought: false, isUsing: false}, 
+    {name: "red", isBought: false, isUsing: false}],
+
+    [{name: "orange", isBought: false, isUsing: false},
+    {name: "turquoise", isBought: false, isUsing: false},
+    {name: "pearl", isBought: false, isUsing: false}],
+
+    [{name: "lime", isBought: false, isUsing: false},
+    {name: "sakura", isBought: false, isUsing: false},
+    {name: "nude", isBought: false, isUsing: false}],
+
+    [{name: "wood", isBought: false, isUsing: false},
+    {name: "shrek", isBought: false, isUsing: false},
+    {name: "doge", isBought: false, isUsing: false}]
+    
 ];
 
 // number value of elements
@@ -597,7 +610,7 @@ function updateColorSkinsButton() {
                 skinButton.style.cursor = 'not-allowed';
             }
 
-            if (skinsData[wholePart][restPart] == 1) {
+            if (skinsData[wholePart][restPart].isBought == true) {
                 skinButton.innerHTML = 'Bought';
                 skinButton.style.background  = '#30363d';
                 skinButton.style.color = '#fff';
@@ -608,6 +621,9 @@ function updateColorSkinsButton() {
         });
     };
 
+function updateInventorySkins() {
+    
+}
 
 // EVENT LISTENERS
 
@@ -945,9 +961,8 @@ shopSkinsContainer.addEventListener('click', event => {
         updateShopMoney(moneyNumber);
         data.moneyData = moneyNumber;
         localStorage.setItem('data', JSON.stringify(data));
-        skinsData[wholePart][restPart] += 1;
+        skinsData[wholePart][restPart].isBought = true;
         localStorage.setItem('skinsData', JSON.stringify(skinsData));
         updateColorSkinsButton();
-
     }
 })

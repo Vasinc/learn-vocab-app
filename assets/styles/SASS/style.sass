@@ -51,6 +51,10 @@ $nude: #E3BC9A
     transform: translateY(-3rem) !important
     opacity: 0 !important
 
+.invetory-skin__inUse
+    .inventory-skin__button
+        background: $grey !important
+        cursor: not-allowed !important
 
 // actual styling
 body
@@ -58,7 +62,8 @@ body
     color: $white
 
 #backdrop
-    display: none
+    // @@@@@@@@ AICI @@@@@@@@@
+    // display: none
     position: absolute
     top: 0
     left: 0
@@ -133,7 +138,8 @@ body
 
 
 .inventory-UI
-    display: none
+    // @@@@@@@@ AICI @@@@@@@@@
+    // display: none
     position: absolute
     left: 50%
     top: 50%
@@ -304,6 +310,10 @@ body
                                 font-weight: 700
                                 border: none                     
                                 cursor: pointer
+                        .inventory-skin[data-bgtype="default"]
+                            border: 2px solid $white
+                            .inventory-skin__background
+                                background: $black   
                         .inventory-skin[data-bgtype="blue"]
                             .inventory-skin__background
                                 background: $blue

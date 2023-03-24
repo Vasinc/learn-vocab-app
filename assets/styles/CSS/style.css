@@ -41,13 +41,17 @@ body {
   opacity: 0 !important;
 }
 
+.invetory-skin__inUse .inventory-skin__button {
+  background: #30363d !important;
+  cursor: not-allowed !important;
+}
+
 body {
   background: #0d1117;
   color: #fff;
 }
 
 #backdrop {
-  display: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -163,7 +167,6 @@ body {
 }
 
 .inventory-UI {
-  display: none;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -458,6 +461,14 @@ body {
   font-weight: 700;
   border: none;
   cursor: pointer;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin[data-bgtype="default"] {
+  border: 2px solid #fff;
+}
+
+.inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin[data-bgtype="default"] .inventory-skin__background {
+  background: #0d1117;
 }
 
 .inventory-UI .inventory-content .inventory-UIs .inventory-skins__UI .inventory-skins__content .inventory-skins__line .inventory-skin[data-bgtype="blue"] .inventory-skin__background {
