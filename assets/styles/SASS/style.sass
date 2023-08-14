@@ -1,0 +1,945 @@
+// fonts
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap')
+    
+// resets
+*, *::before, *::after
+    margin: 0
+    padding: 0
+    box-sizing: inherit
+    webkit-tap-highlight-color: transparent
+
+body
+    box-sizing: border-box
+    font-size: 100%
+    font-family: 'Rubik', sans-serif
+
+// variabes
+$black: #0d1117
+$white: #fff
+$grey: #30363d
+$pink: #a53b70
+$red : #a7171a
+$green: #4fbf26
+$yellow: #f8f29a
+$iron: #a19d94
+$gold: #FFD700
+$diamond: #b9f2ff
+$blue: #070043
+$purple: #300057
+$orange: #c36e12
+$turquoise: #00d0e8
+$pearl: #f5f5f5
+$lime: #32CD32
+$sakura: #ff58f4
+$nude: #E3BC9A
+
+// classes
+.display-block
+    display: block !important
+
+.display-flex
+    display: flex !important
+
+.display-grid
+    display: grid !important
+
+.fade-up
+    transform: translateY(-1rem) !important
+    opacity: 0 !important
+
+.fade-up-more
+    transform: translateY(-3rem) !important
+    opacity: 0 !important
+
+.invetory-skin__inUse
+    .inventory-skin__button
+        background: $grey !important
+        cursor: not-allowed !important
+
+// actual styling
+body
+    background: $black
+    color: $white
+
+#backdrop
+    // @@@@@@@@ AICI @@@@@@@@@
+    display: none
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100vh
+    background: rgba(0, 0, 0, .5)
+    z-index: 9999
+
+.options-UI
+    display: none
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+    width: 70%
+    height: 70%
+    max-width: 600px
+    background: lighten($black, 10%)
+    padding: 2rem 3rem
+    z-index: 10000
+    border-radius: .5rem
+    h2
+        text-align: center
+    .options-UI__options
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+        gap: 2rem
+        height: 100%
+        width: 100%
+        .options-UI__option
+            display: flex
+            align-items: center
+            flex-direction: column
+            gap: .5rem
+            width: 100%
+            text-align: center
+            [type='range']
+                -webkit-appearance: none
+                height: 20px
+                max-width: 350px
+                background: lighten($black, 30%)
+                border: none
+                border-radius: .5rem
+                box-shadow: 4px 4px 4px rgba(0, 0, 0, .4)
+                cursor: pointer
+                overflow: hidden
+                &:focus
+                    outline: none
+                &::-webkit-slider-runnable-track
+                    background: lighten($black, 30%)
+                &::-webkit-slider-thumb
+                    -webkit-appearance: none
+                    width: 20px
+                    height: 20px
+                    background: $white
+                    border-radius: 50%
+        .options-UI__option:first-of-type        
+            .delay-range__number
+                font-weight: 700
+                &::after
+                    content: 'ms'
+        .options-UI__option:nth-of-type(2)
+            border-top: 2px solid $black
+            padding-top: 2rem
+        .options-UI__option:last-of-type
+            .sounds-range__number
+                font-weight: 700
+                &::after
+                    content: '%'
+
+
+.inventory-UI
+    // @@@@@@@@ AICI @@@@@@@@@
+    display: none
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+    width: 70%
+    height: 90%
+    max-width: 800px
+    padding: 1rem
+    background: lighten($black, 10%)
+    border-radius: .5rem
+    z-index: 10000
+    .inventory-content
+        display: flex
+        flex-direction: column
+        height: 100%
+        .inventory-options
+            display: flex
+            justify-content: space-evenly
+            flex-wrap: wrap
+            gap: .75rem
+            margin: 1rem 0
+            color: $black
+        .inventory-options > *
+            background: lighten($black, 50%)
+            padding: .25rem .5rem
+            border-radius: .1rem
+            font-weight: 700
+            border: none
+            transition: background 200ms linear
+            cursor: pointer
+            &:hover
+                background: lighten($black, 60%)
+        .inventory-skins // SA SCHIMB IN STATS
+            background: $pink
+        .inventory-UIs > *
+            position: relative
+            min-width: 100%
+            min-height: 100%
+            padding: .5rem
+            border-radius: .1rem
+            overflow-y: scroll
+            overflow-x: hidden
+            left: -300% // SA IL STERG
+            h2
+                text-align: center  
+            h3
+                margin: 2rem
+                text-align: center          
+        .inventory-UIs
+            display: flex
+            overflow-x: hidden
+            width: 100%
+            flex: .92
+            background: $black
+            .inventory-stats__UI
+                display: flex
+                flex-direction: column
+                gap: 1.5rem
+                text-align: center
+                ul
+                    display: flex
+                    gap: 1.5rem
+                    flex-direction: column
+                    list-style: none
+                    font-weight: 700
+                    li
+                        p
+                            .number-span
+                                color: darken($yellow, 30%)
+            .inventory-boosts__UI
+                .inventory-boosts__content
+                    display: flex
+                    flex-direction: column
+                    align-items: center
+                    gap: 4rem
+                    margin-top: 3rem
+                    .inventory-boosts__line
+                        display: flex
+                        flex-wrap: wrap
+                        justify-content: center
+                        gap: 2rem
+                        width: 100%
+                        .inventory-boost
+                            display: flex
+                            flex-direction: column
+                            width: 80%
+                            max-width: 150px
+                            border-radius: .5rem
+                            overflow: hidden
+                            cursor: default
+                            .inventory-boost__texts
+                                display: grid
+                                place-items: center
+                                height: 125px
+                                .inventory-boost__line-text
+                                    font-size: 1.75rem
+                                    font-weight: 700
+                            .inventory-boost__button
+                                display: flex
+                                align-items: center
+                                justify-content: center
+                                padding: .5rem 0
+                                background: $grey
+                                color: $black
+                                font-weight: 700
+                                border: none
+                                cursor: not-allowed
+                        .inventory-boost:first-of-type
+                            .inventory-boost__texts
+                                background: $iron
+                        .inventory-boost:nth-of-type(2)
+                            .inventory-boost__texts
+                                background: $gold
+                        .inventory-boost:last-of-type
+                            .inventory-boost__texts
+                                position: relative
+                                background: $diamond
+                                color: $black
+                                overflow: hidden
+                                &::after
+                                    content: ''
+                                    position: absolute
+                                    // top: -2rem
+                                    // left: -2rem
+                                    width: 1rem
+                                    height: 150%
+                                    background: $white
+                                    opacity: .6
+                                    transform: rotate(45deg) translateX(-5rem)
+                                    box-shadow: 0 0 10px #fff
+                                    animation: shiny 3s ease-out 0s infinite backwards
+            .inventory-skins__UI
+                .inventory-skins__content
+                    display: flex
+                    flex-direction: column
+                    align-items: center
+                    gap: 4rem
+                    margin-top: 3rem
+                    .inventory-skins__line
+                        display: flex
+                        flex-wrap: wrap
+                        justify-content: center
+                        gap: 2rem
+                        width: 100%
+                        .inventory-skin
+                            display: flex
+                            flex-direction: column
+                            width: 80%
+                            max-width: 150px
+                            border-radius: .5rem
+                            overflow: hidden
+                            cursor: default
+                            .inventory-skin__background
+                                display: grid
+                                place-items: center
+                                height: 125px
+                                overflow: hidden
+                                .inventory-skin__background-text
+                                    font-size: 1.75rem
+                                    font-weight: 700
+                            .inventory-skin__button
+                                display: flex
+                                align-items: center
+                                justify-content: center
+                                padding: .5rem 0
+                                background: $green
+                                color: $black
+                                font-weight: 700
+                                border: none                     
+                                cursor: pointer
+                        .inventory-skin[data-bgtype="default"]
+                            border: 2px solid $white
+                            .inventory-skin__background
+                                background: $black   
+                        .inventory-skin[data-bgtype="blue"]
+                            .inventory-skin__background
+                                background: $blue
+                        .inventory-skin[data-bgtype="purple"]
+                            .inventory-skin__background
+                                background: $purple
+                        .inventory-skin[data-bgtype="red"]
+                            .inventory-skin__background
+                                background: $red
+                        .inventory-skin[data-bgtype="orange"]
+                            .inventory-skin__background
+                                background: $orange
+                        .inventory-skin[data-bgtype="turquoise"]
+                            .inventory-skin__background
+                                background: $turquoise
+                                color: $black
+                        .inventory-skin[data-bgtype="pearl"]
+                            .inventory-skin__background
+                                background: $pearl
+                                color: $black
+                        .inventory-skin[data-bgtype="lime"]
+                            .inventory-skin__background
+                                background: $lime
+                        .inventory-skin[data-bgtype="sakura"]
+                            .inventory-skin__background
+                                background: $sakura
+                        .inventory-skin[data-bgtype="nude"]
+                            .inventory-skin__background
+                                background: $nude
+                        .inventory-skin[data-bgtype="wood"]
+                            .inventory-skin__background
+                                background: url('../../images/wood-skin.jpg')
+                                background-size: cover
+                                background-position: center
+                                background-repeat: no-repeat
+                        .inventory-skin[data-bgtype="shrek"]
+                            .inventory-skin__background
+                                background: url('../../images/shrek-skin.jpg')
+                                background-size: cover
+                                background-position: center
+                                background-repeat: no-repeat
+                                color: $white
+                        .inventory-skin[data-bgtype="doge"]
+                            .inventory-skin__background
+                                background: url('../../images/doge-skin.jpg')
+                                background-size: cover
+                                background-position: center
+                                background-repeat: no-repeat
+                                color: $black
+                        
+.shop-UI                
+    display: none
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+    width: 70%
+    height: 90%
+    max-width: 800px
+    background: lighten($black, 10%)
+    padding: 1rem
+    z-index: 10000
+    border-radius: .5rem
+    .shop-content
+        display: flex
+        flex-direction: column
+        gap: 1.5rem
+        height: 100%
+        .shop-options
+            display: flex
+            justify-content: space-evenly
+            flex-wrap: wrap
+            gap: .75rem
+            margin: 1rem 0
+            color: $black
+        .shop-options > *
+            background: lighten($black, 50%)
+            padding: .25rem .5rem
+            border-radius: .1rem
+            font-weight: 700
+            border: none
+            transition: background 200ms linear
+            cursor: pointer
+            &:hover
+                background: lighten($black, 60%)
+        .shop-boosts
+            background: $pink
+        .shop-UIs > *
+            position: relative
+            min-width: 100%
+            min-height: 100%
+            padding: .5rem
+            border-radius: .1rem
+            overflow-y: scroll
+            overflow-x: hidden
+            .shop-UI-texts__container 
+                display: flex
+                justify-content: space-between
+                h2  
+                    text-align: center 
+                p
+                    display: flex
+                    align-items: center
+                    gap: .1rem
+                    span
+                        font-weight: 700
+                    img
+                        width: 1.5rem
+                        height: 1.5rem
+        .shop-UIs
+            display: flex
+            overflow-x: hidden
+            width: 100%
+            flex: .92
+            background: $black
+            .shop-boosts__UI
+                .shop-boosts__content
+                    display: flex
+                    flex-direction: column
+                    align-items: center
+                    gap: 4rem
+                    margin-top: 3rem
+                    .shop-boosts__line
+                        display: flex
+                        flex-wrap: wrap
+                        justify-content: center
+                        gap: 2rem
+                        width: 100%
+                        .shop-boost
+                            display: flex
+                            flex-direction: column
+                            width: 80%
+                            max-width: 150px
+                            border-radius: .5rem
+                            overflow: hidden
+                            cursor: default
+                            .shop-boost__texts
+                                display: grid
+                                place-items: center
+                                height: 125px
+                                .shop-boost__line-text
+                                    font-size: 1.75rem
+                                    font-weight: 700
+                            .shop-boost__button
+                                display: flex
+                                align-items: center
+                                justify-content: center
+                                padding: .5rem 0
+                                background: $red
+                                color: $white
+                                font-weight: 700
+                                border: none
+                                cursor: not-allowed
+                                img
+                                    width: 1.5rem
+                                    height: 1.5rem
+                        .shop-boost:first-of-type
+                            .shop-boost__texts
+                                background: $iron
+                        .shop-boost:nth-of-type(2)
+                            .shop-boost__texts
+                                background: $gold
+                        .shop-boost:last-of-type
+                            .shop-boost__texts
+                                position: relative
+                                background: $diamond
+                                color: $black
+                                overflow: hidden
+                                &::after
+                                    content: ''
+                                    position: absolute
+                                    // top: -2rem
+                                    // left: -2rem
+                                    width: 1rem
+                                    height: 150%
+                                    background: $white
+                                    opacity: .6
+                                    transform: rotate(45deg) translateX(-5rem)
+                                    box-shadow: 0 0 10px #fff
+                                    animation: shiny 3s ease-out 0s infinite backwards
+            .shop-skins__UI    
+                .shop-skins__content
+                    display: flex
+                    flex-direction: column
+                    align-items: center
+                    gap: 4rem
+                    margin-top: 3rem
+                    .shop-skins__line
+                        display: flex
+                        flex-wrap: wrap
+                        justify-content: center
+                        gap: 2rem
+                        width: 100%
+                        .shop-skin
+                            display: flex
+                            flex-direction: column
+                            width: 80%
+                            max-width: 150px
+                            border-radius: .5rem
+                            overflow: hidden
+                            cursor: default
+                            .shop-skin__background
+                                display: grid
+                                place-items: center
+                                height: 125px
+                                overflow: hidden
+                                .shop-skin__background-text
+                                    font-size: 1.75rem
+                                    font-weight: 700
+                            .shop-skin__button
+                                display: flex
+                                align-items: center
+                                justify-content: center
+                                padding: .5rem 0
+                                background: $red
+                                color: $white
+                                font-weight: 700
+                                border: none
+                                cursor: not-allowed
+                                img
+                                    width: 1.5rem
+                                    height: 1.5rem
+                    .shop-skins__line:first-of-type
+                        .shop-skin:first-of-type
+                            .shop-skin__background
+                                background: $blue
+
+                        .shop-skin:nth-of-type(2)
+                            .shop-skin__background
+                                background: $purple
+
+                        .shop-skin:last-of-type
+                            .shop-skin__background
+                                background: $red
+                    .shop-skins__line:nth-of-type(2)
+                        .shop-skin:first-of-type
+                            .shop-skin__background
+                                background: $orange
+
+                        .shop-skin:nth-of-type(2)
+                            .shop-skin__background
+                                background: $turquoise
+                                color: $black
+                                .shop-skin__background-text
+                                    font-size: 1.5rem
+                            
+                        .shop-skin:last-of-type
+                            .shop-skin__background
+                                background: $pearl
+                                color: $black
+                    .shop-skins__line:nth-of-type(3)
+                        .shop-skin:first-of-type
+                            .shop-skin__background
+                                background: $lime
+
+                        .shop-skin:nth-of-type(2)
+                            .shop-skin__background
+                                background: $sakura
+
+                        .shop-skin:last-of-type
+                            .shop-skin__background
+                                background: $nude
+                    .shop-skins__line:last-of-type
+                        .shop-skin:first-of-type
+                            .shop-skin__background
+                                background: url('../../images/wood-skin.jpg')
+                                background-size: cover
+                                background-position: center
+                                background-repeat: no-repeat
+
+                        .shop-skin:nth-of-type(2)
+                            .shop-skin__background
+                                background: url('../../images/shrek-skin.jpg')
+                                background-size: cover
+                                background-position: center
+                                background-repeat: no-repeat
+                                color: $white
+
+                        .shop-skin:last-of-type
+                            .shop-skin__background
+                                background: url('../..//images/doge-skin.jpg')
+                                background-size: cover
+                                background-position: center
+                                background-repeat: no-repeat
+                                color: $black
+                            
+
+
+
+.challenges-UI
+    display: none
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+    width: 70%
+    height: 90%
+    max-width: 800px
+    background: lighten($black, 10%)
+    z-index: 10000
+    border-radius: .5rem
+
+.menu-UI
+    display: none
+    align-items: center
+    font-size: 2rem
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100vh
+    padding: 2rem 0
+    background: lighten($black, 5%)
+    z-index: 1000
+    .options
+        list-style: none
+        height: 100%
+        width: 100%
+        .option
+            position: relative
+            border-top: 1px solid $white
+            border-bottom: 1px solid $white
+            padding: 3rem 1rem
+            font-weight: 700
+            transition: background .3s linear
+            z-index: 11
+            cursor: pointer
+            &::after
+                content: 'OPTIONS'
+                position: absolute
+                padding: 3rem 1rem
+                top: 0
+                left: 0
+                width: 0
+                height: 100%
+                background: linear-gradient(to right, #261946 17%, #120843 58%, #64daad 95%)
+                z-index: 10
+                opacity: 0
+                transition: width 400ms ease-out
+            &:hover
+                &::after
+                    width: 100%
+                    opacity: 1
+        .option:nth-of-type(2)
+            &::after
+                content: 'INVENTORY'
+        .option:nth-of-type(3)
+            &::after
+                content: 'SHOP'
+        .option:nth-of-type(4)
+            &::after
+                content: 'CHALLENGES'
+
+header
+    position: absolute
+    width: 100%
+    display: flex
+    flex-direction: column
+    .header-first__section
+        display: flex
+        justify-content: flex-end
+        align-items: center
+        padding: .5rem
+        gap: 1.5rem
+    .header-second__section
+        position: relative
+        margin-top: .25rem
+        padding: .5rem
+        height: 2rem
+        background: lighten($black, 20%)
+        .header-text
+            position: absolute
+            font-weight: 700
+            z-index: 2
+        .progress-bar
+            position: absolute
+            left: 0
+            top: 0
+            z-index: 1
+            height: 100%
+            width: 0
+            background: darken($pink, 10%)
+            
+
+.money
+    display: flex
+    align-items: center
+    gap: .3rem
+    font-weight: 700
+    font-size: 1.25rem
+    &::after
+        content: ''
+        background: url('../../images/coin.png')
+        background-repeat: no-repeat
+        background-size: cover
+        background-position: center
+        width: 1.5rem
+        height: 1.5rem
+
+#options
+    padding: .25rem .5rem
+    border: 1px solid lighten($black, 50%)
+    border-radius: .25rem
+    background: lighten($black, 10%)
+    color: $white
+    &:focus
+        outline: none
+    option
+        &:checked
+            background: $black
+
+.burger-menu
+    display: flex
+    flex-direction: column
+    gap: .3rem
+    width: 1.75rem
+    cursor: pointer
+    .burger-line
+        width: 100%
+        height: 2px
+        background: $white
+    .burger-line:nth-of-type(2)
+        width: 75%
+    .burger-line:last-of-type
+        width: 50%
+
+
+
+.main-content
+    height: 100vh
+    width: 100%
+    display: flex
+    flex-direction: column
+    gap: 1.5rem
+    align-items: center
+    justify-content: center
+    form
+        position: relative
+        display: flex
+        flex-direction: column
+        gap: 1.5rem
+        .money-info__pop-up
+            position: absolute
+            top: -3rem
+            left: 0
+            display: none
+            align-items: center
+            gap: .2rem
+            color: $green
+            font-weight: 700
+            font-size: 1.15rem
+            transform: translateY(3rem)
+            transition: all 750ms linear
+            img
+                width: 1.5rem
+                height: 100%
+        .xp-info__pop-up
+            @extend .money-info__pop-up
+            color: $white
+            transform: translateY(5rem)
+            img
+                width: 1.5rem
+                height: 100%
+    h1
+        font-size: 2rem
+        user-select: none
+    input
+        background: none
+        color: $white
+        font-size: 1.25rem
+        border: none
+        border-bottom: 2px solid $grey
+        &:focus
+            outline: none
+    button
+        padding: .5rem 1rem
+        margin: auto
+        max-width: 10rem
+        border: none
+        background: $white
+        // font-weight: 700
+        font-size: 1rem
+        cursor: pointer
+        transition: transform 50ms linear
+        &:active
+            transform: scale(.95)
+
+.combos
+    display: flex
+    align-items: center
+    font-size: 1.75rem
+    font-weight: 400
+    gap: .2rem
+    user-select: none     
+    #combo
+        font-weight: 700
+        transition: color 100ms linear
+    #max-combo
+        color: yellow
+        font-weight: 700
+
+.fails-section
+    display: flex
+    align-items: center
+    font-size: 1.75rem
+    font-weight: 400
+    gap: .5rem
+    #fails
+        font-weight: 700
+        color: red
+        transition: color 100ms linear
+        cursor: pointer
+        user-select: none
+    .fails-list__button
+        display: flex
+        flex-direction: column
+        gap: .3rem
+        width: 1.85rem
+        background: $white
+        padding: .3rem
+        border-radius: .2rem
+        cursor: pointer
+        &:hover
+            .fail-list__line
+                background: lighten($black, 25%)
+        .fail-list__line
+            width: 100%
+            height: 2px
+            background: $black
+            transition: background 200ms linear
+
+.fails-list__UI
+    display: none
+    flex-direction: column
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    height: 90%
+    width: 75%
+    max-width: 600px
+    background: lighten($black, 7%)
+    z-index: 10000
+    h2
+        position: relative
+        padding: 1.5rem
+        text-align: center
+        &::after
+            content: '"word(typed word) - correct word"'
+            position: absolute
+            text-align: center
+            bottom: -.25rem
+            left: 50%
+            transform: translateX(-50%)
+            font-size: .75rem
+            color: lighten($pink, 15%)
+    .fails-list
+        display: flex
+        flex-direction: column
+        gap: .5rem
+        width: 90%
+        max-width: 400px
+        height: 75%
+        padding: .5rem 2rem
+        font-size: 1.15rem
+        margin: auto
+        overflow-y: auto
+        background: lighten($black, 10%)
+        color: darken($white, 20%)
+        .word
+            color: $yellow
+        .wrong-word
+            color: lighten($red, 16%)
+        .correct-word
+            color: $green
+
+@media screen and ( min-width: 360px )
+    body
+        .options-UI
+            .options-UI__options 
+                .options-UI__option 
+                    [type='range']
+                        width: 100%
+
+@media screen and ( min-width: 800px )
+    body
+        header
+            .header-first__section
+                gap: 3rem
+                padding: 1rem
+            .header-second__section
+                padding: .75rem 1rem 1rem 1rem
+                height: 3rem
+                font-size: 1.25rem
+        .options-UI
+            .options-UI__options 
+                .options-UI__option 
+                    font-size: 1.5rem
+                    [type='range']
+                        width: 100%
+                        height: 30px
+                        border-radius: 30px
+                        &::-webkit-slider-thumb
+                            height: 30px
+                            width: 30px
+        .fails-list__UI
+            h2
+                font-size: 2.5rem
+            &::after
+                font-size: 1rem
+                bottom: -.05rem
+            .fails-list
+                padding: 1rem 2rem
+                font-size: 1.25rem
+                font-weight: 700
+        main
+            .main-content
+                h1
+                    font-size: 3rem
+                .combos
+                    font-size: 2rem
+                .fails-section
+                    font-size: 2rem
+
+@keyframes shiny 
+    0%
+        transform: rotate(45deg) translateX(-5rem)
+    100%
+        transform: rotate(45deg) translateX(7rem)

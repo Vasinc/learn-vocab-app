@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Learn language</title>
+        <link rel="stylesheet" href="./assets/styles/CSS/style.css">
+        <script src="./assets/scripts/script.js" defer></script>
+        <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon-16x16.png">
+        <!-- <link rel="manifest" href="/site.webmanifest"> -->
+    </head>
+    <body>
+        <div id="backdrop"></div>
+        <div class="menu-UI">
+            <ul class="options">
+                <li class="option">
+                    OPTIONS 
+                </li>
+                <li class="option">
+                    INVENTORY
+                </li>
+                <li class="option">
+                    SHOP    
+                </li>
+                <li class="option">
+                    CHALLENGES
+                </li>
+            </ul>
+        </div>
+        <div class="options-UI">
+            <h2>OPTIONS</h2>
+            <div class="options-UI__options">
+                <div class="options-UI__option">
+                    <label for="delay-range">Delay(<span class="delay-range__number"></span>):</label>
+                    <input type="range" name="delay-range" id="delay-range" min="600" max="2000">
+                </div>
+                <div class="options-UI__option">
+                    <label for="soundsCheck">Enable Sound</label>
+                    <input type="checkbox" name="soundsCheck" id="soundsCheck" checked="true">
+                </div>
+                <div class="options-UI__option options-UI__option-sound">
+                    <label for="sounds-range">Volume( <span class="sounds-range__number"></span> )</label>
+                    <input type="range" name="sounds-range" id="sounds-range" min="10" max="200">
+                </div>
+            </div>
+        </div>
+        <div class="inventory-UI">
+            <h2>INVENTORY</h2>
+            <div class="inventory-content">
+                <div class="inventory-options">
+                    <button class="inventory-stats">Stats</button>
+                    <button class="inventory-boosts">Boosts</button>
+                    <button class="inventory-medals">Medals</button>
+                    <button class="inventory-skins">Skins</button>
+                    <button class="inventory-pets">Pets</button>
+                </div>
+                <div class="inventory-UIs">
+                    <section class="inventory-stats__UI">
+                        <h2>
+                            Stats
+                        </h2>
+                        <ul>
+                            <li>
+                                <p>
+                                    Highest combo: <span class="highest-combo__text number-span">0</span>
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Current words: <span class="current-words__text number-span">0</span>
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Total words: <span class="total-words__text number-span">0</span>
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                   
+                                    Total combo: <span class="total-combo__text number-span">0</span>
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                   
+                                    Total fails: <span class="total-fails__text number-span">0</span>
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                   
+                                    Total coins: <span class="total-coins__text number-span">0</span>
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                   
+                                    Total XP: <span class="total-XP__text number-span">0</span>
+                                </p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    Capacity of words: coming soon...
+                                </p>
+                            </li>
+
+                            <li>
+                                Boosts activated: coming soon...
+                            </li>
+                        </ul>
+                    </section>    
+                    <section class="inventory-boosts__UI">
+                        <h2>
+                            Boosts
+                        </h2>
+                        <div class="inventory-boosts__content">
+                            <div class="inventory-boosts__line">
+                                <div class="inventory-boost">
+                                    <div class="inventory-boost__texts">
+                                        <p class="inventory-boost__line-text">
+                                            1.5X
+                                        </p>
+                                        <p class="inventory-boost__line-text">
+                                            Coins
+                                        </p>    
+                                    </div>
+                                    <button class="inventory-boost__button">
+                                        Use (<span class="inventory-boost__button-count">0</span>)
+                                    </button>
+                                </div>
+                                <div class="inventory-boost">
+                                    <div class="inventory-boost__texts">
+                                        <p class="inventory-boost__line-text">
+                                            2X
+                                        </p>
+                                        <p class="inventory-boost__line-text">
+                                            Coins
+                                        </p>  
+                                    </div>
+                                    <button class="inventory-boost__button">
+                                        Use (<span class="inventory-boost__button-count">0</span>)
+                                    </button>
+                                </div>
+                                <div class="inventory-boost">
+                                    <div class="inventory-boost__texts">
+                                        <p class="inventory-boost__line-text">
+                                            3X
+                                        </p>
+                                        <p class="inventory-boost__line-text">
+                                            Coins
+                                        </p>  
+                                    </div>
+                                    <button class="inventory-boost__button">
+                                        Use (<span class="inventory-boost__button-count">0</span>)
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="inventory-boosts__line">
+                                <div class="inventory-boost">
+                                    <div class="inventory-boost__texts">
+                                        <p class="inventory-boost__line-text">
+                                            1.5X
+                                        </p>
+                                        <p class="inventory-boost__line-text">
+                                            XP
+                                        </p>  
+                                    </div>
+                                    <button class="inventory-boost__button">
+                                        Use (<span class="inventory-boost__button-count">0</span>)
+                                    </button>
+                                </div>
+                                <div class="inventory-boost">
+                                    <div class="inventory-boost__texts">
+                                        <p class="inventory-boost__line-text">
+                                            2X
+                                        </p>
+                                        <p class="inventory-boost__line-text">
+                                            XP
+                                        </p>  
+                                    </div>
+                                    <button class="inventory-boost__button">
+                                        Use (<span class="inventory-boost__button-count">0</span>)
+                                    </button>
+                                </div>
+                                <div class="inventory-boost">
+                                    <div class="inventory-boost__texts">
+                                        <p class="inventory-boost__line-text">
+                                            3X
+                                        </p>
+                                        <p class="inventory-boost__line-text">
+                                            XP
+                                        </p>  
+                                    </div>
+                                    <button class="inventory-boost__button">
+                                        Use (<span class="inventory-boost__button-count">0</span>)
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="inventory-boosts__line">
+                                <div class="inventory-boost">
+                                    <div class="inventory-boost__texts">
+                                        <p class="inventory-boost__line-text">
+                                            1 Min
+                                        </p>
+                                        <p class="inventory-boost__line-text">
+                                            No Fails
+                                        </p>  
+                                    </div>
+                                    <button class="inventory-boost__button">
+                                        Use (<span class="inventory-boost__button-count">0</span>)
+                                    </button>
+                                </div>
+                                <div class="inventory-boost">
+                                    <div class="inventory-boost__texts">
+                                        <p class="inventory-boost__line-text">
+                                            2 Min
+                                        </p>
+                                        <p class="inventory-boost__line-text">
+                                            No Fails
+                                        </p>  
+                                    </div>
+                                    <button class="inventory-boost__button">
+                                        Use (<span class="inventory-boost__button-count">0</span>)
+                                    </button>
+                                </div>
+                                <div class="inventory-boost">
+                                    <div class="inventory-boost__texts">
+                                        <p class="inventory-boost__line-text">
+                                            3 Min
+                                        </p>
+                                        <p class="inventory-boost__line-text">
+                                            No Fails
+                                        </p>  
+                                    </div>
+                                    <button class="inventory-boost__button">
+                                        Use (<span class="inventory-boost__button-count">0</span>)
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>    
+                    <section class="inventory-medals__UI">
+                        <h2>
+                            Medals
+                        </h2>
+                        <h3>
+                            Coming soon...
+                        </h3>
+                    </section>    
+                    <section class="inventory-skins__UI">
+                        <h2>
+                            Skins
+                        </h2>
+                        <div class="inventory-skins__content">
+                            <div class="inventory-skins__line">
+                                <div class="inventory-skin invetory-skin__inUse" data-bgtype="default">
+                                    <div class="inventory-skin__background">
+                                        <p class="inventory-skin__background-text">
+                                            DEFAULT
+                                        </p>
+                                        <p class="inventory-skin__background-text">
+                                            SKIN
+                                        </p>
+                                    </div>
+                                    <button class="inventory-skin__button">
+                                        In use
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="inventory-skins__line">
+                                
+                            </div>
+                            <div class="inventory-skins__line">
+                                
+                            </div>
+                            <div class="inventory-skins__line">
+                                
+                            </div>
+                            <div class="inventory-skins__line">
+                                
+                            </div>
+                    </section>    
+                    <section class="inventory-pets__UI">
+                        <h2>
+                            Pets
+                        </h2>
+                        <h3>
+                            Coming soon...
+                        </h3>
+                    </section>    
+                </div>
+            </div>
+        </div>
+        <div class="shop-UI">
+            <h2>SHOP</h2>
+            <div class="shop-content">
+                <div class="shop-options">
+                    <button class="shop-boosts">
+                        Boosts
+                    </button>
+                    <button class="shop-skins">
+                        Skins
+                    </button>
+                    <button class="shop-pets">
+                        Pets
+                    </button>
+                </div>
+                <div class="shop-UIs">
+                    <section class="shop-boosts__UI">
+                        <div class="shop-UI-texts__container">
+                            <h2>
+                                Boosts
+                            </h2>
+                            <p>
+                                <span class="shop-UI-money">0</span>
+                                <img src="./assets/images/coin.png" alt="coin">
+                            </p>
+                        </div>                            
+                        <div class="shop-boosts__content">
+                            <div class="shop-boosts__line">
+                                <div class="shop-boost" data-price="1000">
+                                    <div class="shop-boost__texts">
+                                        <p class="shop-boost__line-text">1.5X</p>
+                                        <p class="shop-boost__line-text">Coins</p>
+                                    </div>
+                                    <button class="shop-boost__button" data-price="1000">Buy (1000 <img src="./assets/images/coin.png" alt="coin">)</button>
+                                </div>
+                                <div class="shop-boost" data-price="3000">
+                                    <div class="shop-boost__texts">
+                                        <p class="shop-boost__line-text">2X</p>
+                                        <p class="shop-boost__line-text">Coins</p>
+                                    </div>
+                                    <button class="shop-boost__button" data-price="3000">Buy (3000 <img src="./assets/images/coin.png" alt="coin">)</button>
+                                </div>
+                                <div class="shop-boost" data-price="5000">
+                                    <div class="shop-boost__texts">
+                                        <p class="shop-boost__line-text">3X</p>
+                                        <p class="shop-boost__line-text">Coins</p>
+                                    </div>
+                                    <button class="shop-boost__button" data-price="5000">Buy (5000 <img src="./assets/images/coin.png" alt="coin">)</button>
+                                </div>
+                            </div>
+
+                            <div class="shop-boosts__line">
+                                <div class="shop-boost" data-price="500">
+                                    <div class="shop-boost__texts">
+                                        <p class="shop-boost__line-text">1.5X</p>
+                                        <p class="shop-boost__line-text">XP</p>
+                                    </div>
+                                    <button class="shop-boost__button" data-price="500">Buy (500 <img src="./assets/images/coin.png" alt="coin">)</button>
+                                </div>
+                                <div class="shop-boost" data-price="1500">
+                                    <div class="shop-boost__texts">
+                                        <p class="shop-boost__line-text">2X</p>
+                                        <p class="shop-boost__line-text">XP</p>
+                                    </div>
+                                    <button class="shop-boost__button" data-price="1500">Buy (1500 <img src="./assets/images/coin.png" alt="coin">)</button>
+                                </div>
+                                <div class="shop-boost" data-price="3000">
+                                    <div class="shop-boost__texts">
+                                        <p class="shop-boost__line-text">3X</p>
+                                        <p class="shop-boost__line-text">XP</p>
+                                    </div>
+                                    <button class="shop-boost__button" data-price="3000">Buy (3000 <img src="./assets/images/coin.png" alt="coin">)</button>
+                                </div>
+                            </div>
+
+                            <div class="shop-boosts__line">
+                                <div class="shop-boost" data-price="750">
+                                    <div class="shop-boost__texts">
+                                        <p class="shop-boost__line-text">1 Min</p>
+                                        <p class="shop-boost__line-text">No Fails</p>
+                                    </div>
+                                    <button class="shop-boost__button" data-price="750">Buy (750 <img src="./assets/images/coin.png" alt="coin">)</button>
+                                </div>
+                                <div class="shop-boost" data-price="1250">
+                                    <div class="shop-boost__texts">
+                                        <p class="shop-boost__line-text">2 Min</p>
+                                        <p class="shop-boost__line-text">No Fails</p>
+                                    </div>
+                                    <button class="shop-boost__button" data-price="1250">Buy (1250 <img src="./assets/images/coin.png" alt="coin">)</button>
+                                </div>
+                                <div class="shop-boost" data-price="2000">
+                                    <div class="shop-boost__texts">
+                                        <p class="shop-boost__line-text">3 Min</p>
+                                        <p class="shop-boost__line-text">No Fails</p>
+                                    </div>
+                                    <button class="shop-boost__button" data-price="2000">Buy (2000 <img src="./assets/images/coin.png" alt="coin">)</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="shop-skins__UI">
+                        <div class="shop-UI-texts__container">
+                            <h2>
+                                Skins
+                            </h2>
+                            <p>
+                                <span class="shop-UI-money">0</span>
+                                <img src="./assets/images/coin.png" alt="coin">
+                            </p>
+                        </div>
+                        <div class="shop-skins__content">
+                            <div class="shop-skins__line">
+                                <div class="shop-skin" data-price="500">
+                                    <div class="shop-skin__background">
+                                        <p class="shop-skin__background-text">
+                                            BLUE
+                                        </p>
+                                        <p class="shop-skin__background-text">
+                                            SKIN
+                                        </p>
+                                    </div>
+                                    <button class="shop-skin__button" data-price="500">
+                                        Buy (500 <img src="./assets/images/coin.png" alt="coin">)
+                                    </button>
+                                </div>
+                                <div class="shop-skin" data-price="500">
+                                    <div class="shop-skin__background">
+                                        <p class="shop-skin__background-text">
+                                            PURPLE
+                                        </p>
+                                        <p class="shop-skin__background-text">
+                                            SKIN
+                                        </p>
+                                    </div>
+                                    <button class="shop-skin__button" data-price="500">
+                                        Buy (500 <img src="./assets/images/coin.png" alt="coin">)
+                                    </button>
+                                </div>
+                                <div class="shop-skin" data-price="500">
+                                    <div class="shop-skin__background">
+                                        <p class="shop-skin__background-text">
+                                            RED
+                                        </p>
+                                        <p class="shop-skin__background-text">
+                                            SKIN
+                                        </p>
+                                    </div>
+                                    <button class="shop-skin__button" data-price="500">
+                                        Buy (500 <img src="./assets/images/coin.png" alt="coin">)
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="shop-skins__line">
+                                <div class="shop-skin" data-price="1000">
+                                    <div class="shop-skin__background">
+                                        <p class="shop-skin__background-text">
+                                            ORANGE
+                                        </p>
+                                        <p class="shop-skin__background-text">
+                                            SKIN
+                                        </p>
+                                    </div>
+                                    <button class="shop-skin__button" data-price="1000">
+                                        Buy (1000 <img src="./assets/images/coin.png" alt="coin">)
+                                    </button>
+                                </div>
+                                <div class="shop-skin" data-price="1000">
+                                    <div class="shop-skin__background">
+                                        <p class="shop-skin__background-text">
+                                            TURQUOISE
+                                        </p>
+                                        <p class="shop-skin__background-text">
+                                            SKIN
+                                        </p>
+                                    </div>
+                                    <button class="shop-skin__button" data-price="1000">
+                                        Buy (1000 <img src="./assets/images/coin.png" alt="coin">)
+                                    </button>
+                                </div>
+                                <div class="shop-skin" data-price="1000">
+                                    <div class="shop-skin__background">
+                                        <p class="shop-skin__background-text">
+                                            PEARL
+                                        </p>
+                                        <p class="shop-skin__background-text">
+                                            SKIN
+                                        </p>
+                                    </div>
+                                    <button class="shop-skin__button" data-price="1000">
+                                        Buy (1000 <img src="./assets/images/coin.png" alt="coin">)
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="shop-skins__line">
+                                <div class="shop-skin" data-price="3500">
+                                    <div class="shop-skin__background">
+                                        <p class="shop-skin__background-text">
+                                            LIME
+                                        </p>
+                                        <p class="shop-skin__background-text">
+                                            SKIN
+                                        </p>
+                                    </div>
+                                    <button class="shop-skin__button" data-price="3500">
+                                        Buy (3500 <img src="./assets/images/coin.png" alt="coin">)
+                                    </button>
+                                </div>
+                                <div class="shop-skin" data-price="3500">
+                                    <div class="shop-skin__background">
+                                        <p class="shop-skin__background-text">
+                                            SAKURA
+                                        </p>
+                                        <p class="shop-skin__background-text">
+                                            SKIN
+                                        </p>
+                                    </div>
+                                    <button class="shop-skin__button" data-price="3500">
+                                        Buy (3500 <img src="./assets/images/coin.png" alt="coin">)
+                                    </button>
+                                </div>
+                                <div class="shop-skin" data-price="3500">
+                                    <div class="shop-skin__background">
+                                        <p class="shop-skin__background-text">
+                                            NUDE
+                                        </p>
+                                        <p class="shop-skin__background-text">
+                                            SKIN
+                                        </p>
+                                    </div>
+                                    <button class="shop-skin__button" data-price="3500">
+                                        Buy (3500 <img src="./assets/images/coin.png" alt="coin">)
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="shop-skins__line">
+                                <div class="shop-skin" data-price="10000">
+                                    <div class="shop-skin__background">
+                                        <p class="shop-skin__background-text">
+                                            WOOD
+                                        </p>
+                                        <p class="shop-skin__background-text">
+                                            SKIN
+                                        </p>
+                                    </div>
+                                    <button class="shop-skin__button" data-price="10000">
+                                        Buy (10000 <img src="./assets/images/coin.png" alt="coin">)
+                                    </button>
+                                </div>
+                                <div class="shop-skin" data-price="20000">
+                                    <div class="shop-skin__background">
+                                        <p class="shop-skin__background-text">
+                                            SHREK
+                                        </p>
+                                        <p class="shop-skin__background-text">
+                                            SKIN
+                                        </p>
+                                    </div>
+                                    <button class="shop-skin__button" data-price="20000">
+                                        Buy (20000 <img src="./assets/images/coin.png" alt="coin">)
+                                    </button>
+                                </div>
+                                <div class="shop-skin" data-price="99999">
+                                    <div class="shop-skin__background">
+                                        <p class="shop-skin__background-text">
+                                            DOGE
+                                        </p>
+                                        <p class="shop-skin__background-text">
+                                            SKIN
+                                        </p>
+                                    </div>
+                                    <button class="shop-skin__button" data-price="99999">
+                                        Buy (99999 <img src="./assets/images/coin.png" alt="coin">)
+                                    </button>
+                                </div>
+                            </div>
+                        </div>                                
+                    </section>
+                    <section class="shop-pets__UI">
+                        <div class="shop-UI-texts__container">
+                            <h2>
+                                Pets
+                            </h2>
+                            <p>
+                                <span class="shop-UI-money">0</span>
+                                <img src="./assets/images/coin.png" alt="coin">
+                            </p>
+                        </div>                            
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="challenges-UI">
+            <h2>CHALLENGES</h2>
+        </div>
+        <div class="fails-list__UI">
+            <h2>Failed Words</h2>
+            <ul class="fails-list">
+
+            </ul>
+        </div>
+        <header>
+            <div class="header-first__section">
+                <div class="money">0</div>
+                <select id="options">
+                    <option value="1000 words">1000 words</option>
+                    <option value="German drills">German drills</option>
+                    <option value="Notebook">Notebook</option>
+                    <option value="NotebookRO">Notebook(RO)</option>
+                    <option value="Redewendugen">Idioms</option>
+                    <option value="1-50">1-50</option>
+                    <option value="51-100">51-100</option>
+                    <option value="101-150">101-150</option>
+                    <option value="151-200">151-200</option>
+                    <option value="201-250">201-250</option>
+                    <option value="251-300">251-300</option>
+                </select>
+                <div class="burger-menu">
+                    <span class="burger-line"></span>
+                    <span class="burger-line"></span>
+                    <span class="burger-line"></span>
+                </div>
+            </div>
+            <div class="header-second__section">
+                <div class="progress-bar"></div>
+                <p class="header-text">
+                    Level <span id="level">1</span> ( <span id="currentXP">0</span> / <span id="requiredXP">50</span> )
+                </p>
+            </div>
+        </header>
+        <main>
+            <div class="main-content">
+                <h1>
+                    Random word
+                </h1>
+                <form>
+                    <div class="money-info__pop-up">
+                        +
+                        <span class="money-info__number">
+                            0
+                        </span>
+                        <img src="./assets/images/coin.png" alt="coin">
+                    </div>
+                    <div class="xp-info__pop-up">
+                        +
+                        <span class="xp-info__number">
+                            0
+                        </span>
+                        <img src="./assets/images/xp.png" alt="xp">
+                    </div>
+                    <input type="text" id="randomWordInput" placeholder="Write here...">
+                    <button type="submit" id="generate-button">Generate word</button>
+                </form>
+                <div class="combos">
+                    <div id="combo">
+                        0
+                    </div>
+                    x combo
+                    (<span id="max-combo">0</span>)
+                </div>
+                <div class="fails-section">
+                    <div id="fails">
+                        0
+                    </div>
+                    x fails
+                    <div class="fails-list__button">
+                        <span class="fail-list__line"></span>
+                        <span class="fail-list__line"></span>
+                        <span class="fail-list__line"></span>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            
+        </footer>
+    </body>
+</html>
