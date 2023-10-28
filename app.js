@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-const mongoConnect = require('./util/database').mongoConnect;
+const mongoose = require('mongoose');
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -21,6 +21,8 @@ app.use(wordsRoutes);
 
 app.use(errorControllers.get404)
 
-mongoConnect(client => {
-    app.listen(3000);
+mongoose.connect('mongodb+srv://DaniZeu:NtOPCucGQN8u3Epy@cluster0.w4cjk7i.mongodb.net/learnVocab?retryWrites=true&w=majority')
+.then(result => {
+    app.listen(3000)
 })
+.catch(err => console.log(err))

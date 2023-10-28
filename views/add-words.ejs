@@ -13,13 +13,11 @@
 
         </header>
         <main>
-            <h1>Main Page</h1>
-            <form action="/add-words">
-                <button type="submit">Add Words Page</button>
-            </form>
-
-            <form action="/practice">
-                <button type="submit">Practice Page</button>
+            <h1>ADD WORDS PAGE</h1>
+            <form action="/add-words" method="POST">
+                <input type="text" placeholder="Enter the first word" name="firstWord">
+                <input type="text" placeholder="Enter the second word" name="secondWord">
+                <button type="submit">Send words</button>
             </form>
         </main>
         <footer>

@@ -1,0 +1,59 @@
+main {
+  height: calc(100vh - 3rem);
+}
+
+button {
+  border: none;
+  border: 0.1rem solid #f7c59f;
+  border-radius: 0.25rem;
+  background: none;
+  color: #fafaff;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 400ms ease-out;
+}
+button:hover {
+  background: rgba(252, 224, 66, 0.6);
+}
+
+#main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  width: 100%;
+  height: 100%;
+}
+#main-container #random-text {
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+#main-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+#main-container form input {
+  outline: none;
+  border: none;
+  background: transparent;
+  border-bottom: 0.3rem solid #363946;
+  font-size: 1.5rem;
+  color: #fafaff;
+}
+#main-container #comboParagraph {
+  font-size: 1.5rem;
+}
+#main-container #comboParagraph #comboText {
+  font-weight: 700;
+  color: #f7c59f;
+}
+#main-container #comboParagraph #maxComboText {
+  font-weight: 700;
+  color: #00cc99;
+}/*# sourceMappingURL=practice.css.map */
