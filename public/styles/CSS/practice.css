@@ -2,7 +2,7 @@ main {
   height: calc(100vh - 3rem);
 }
 
-button {
+.button {
   border: none;
   border: 0.1rem solid #f7c59f;
   border-radius: 0.25rem;
@@ -14,8 +14,58 @@ button {
   cursor: pointer;
   transition: background 400ms ease-out;
 }
-button:hover {
+.button:hover {
   background: rgba(252, 224, 66, 0.6);
+}
+
+#changeUI {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem;
+  width: 60%;
+  max-width: 800px;
+  height: 80%;
+  background: #1e2749;
+  border-radius: 0.5rem;
+  z-index: 1000;
+}
+#changeUI #changeUI-header {
+  color: #d72638;
+}
+#changeUI #change-container {
+  flex: 1;
+  padding: 1rem;
+  background: #273469;
+  border-radius: 0.5rem;
+}
+#changeUI #change-container .parent-container {
+  background: #363946;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+#changeUI #change-container .parent-container .parent-container-title {
+  font-size: 1.5rem;
+}
+#changeUI #change-container .parent-container .children-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 50%;
+  margin: 0 auto 0 2rem;
+  background: #33ffcc;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+#changeUI #change-container .parent-container .children-container .child-container {
+  width: 100%;
+  background: #00cc99;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
 }
 
 #main-container {

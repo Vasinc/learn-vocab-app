@@ -7,11 +7,11 @@ $darkBlue: #1e2749
 $nude: #f7c59f
 $red: #d72638
 $green: #00cc99
-    
+
 main
     height: calc( 100vh - 3rem )
 
-button
+.button
     border: none
     border: .1rem solid $nude
     border-radius: .25rem
@@ -24,6 +24,49 @@ button
     transition: background 400ms ease-out
     &:hover
         background: rgba(252, 224, 66, .6)
+
+#changeUI
+    position: absolute
+    display: none
+    flex-direction: column
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    padding: 1rem
+    width: 60%
+    max-width: 800px
+    height: 80%
+    background: $darkBlue
+    border-radius: .5rem
+    z-index: 1000
+    #changeUI-header
+        color: $red
+    #change-container
+        flex: 1
+        padding: 1rem
+        background: $lightBlue
+        border-radius: .5rem
+        .parent-container
+            background: $onyx
+            width: 100%
+            padding: .5rem
+            border-radius: .5rem
+            .parent-container-title
+                font-size: 1.5rem
+            .children-container
+                display: flex
+                flex-direction: column
+                gap: .5rem
+                width: 50%
+                margin: 0 auto 0 2rem
+                background: lighten($green, 20%)
+                padding: .5rem
+                border-radius: .5rem
+                .child-container
+                    width: 100%
+                    background: $green
+                    padding: .25rem
+                    border-radius: .25rem
     
 #main-container
     display: flex
