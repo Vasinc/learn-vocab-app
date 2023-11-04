@@ -3,24 +3,54 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><%= pageTitle %></title>
+        <title><%=pageTitle%></title>
         <link rel="stylesheet" href="/styles/CSS/index.css">
+        <link rel="stylesheet" href="/styles/CSS/practice.css">
         <link rel="icon" href="/images/logo.ico">
-        <script src="/scripts/main.js" defer></script>
+        <script src="/scripts/practice.js" defer></script>
     </head>
     <body>
+        <div id="backdrop"></div>
         <header>
-
-        </header>
-        <main>
-            <h1>Main Page</h1>
+            <h1>Main</h1>
             <form action="/add-words">
                 <button type="submit">Add Words Page</button>
             </form>
-
-            <form action="/practice">
-                <button type="submit">Practice Page</button>
-            </form>
+        </header>
+        <main>
+            <div id="changeUI">
+                <h2 id="changeUI-header">Change array</h2>
+                <div id="change-container">
+                    <div class="parents-container">
+                        <div class="parent-container">
+                            <div class="parent-container-title">
+                                German 🍺 
+                            </div>
+                            <div class="children-container">
+                                <div class="child-container">
+                                    <div class="child-name">
+                                        Foods 🍕
+                                    </div>
+                                </div>
+                                <div class="child-container">
+                                    <div class="child-name">
+                                        Cars 🚗
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="main-container">
+                <p id="random-text">Random Text</p>
+                <form action="/practice" method="GET">
+                    <input type="text" name="writtenText" id="writtenText" placeholder="Type here...">
+                    <button type="submit" id="randomWordButton" class="button">Get another word</button>
+                </form>
+                <p id="comboParagraph">Combo <span id="comboText">3</span>x (<span id="maxComboText">12</span>)</p>
+                <button id="changeButton" class="button">Change</button>
+            </div>
         </main>
         <footer>
 

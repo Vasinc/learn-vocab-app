@@ -5,25 +5,101 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><%= pageTitle %></title>
         <link rel="stylesheet" href="/styles/CSS/index.css">
+        <link rel="stylesheet" href="/styles/CSS/add-words.css">
         <link rel="icon" href="/images/logo.ico">
+        <script src="/scripts/add-words.js" defer></script>
         <script src="/scripts/main.js" defer></script>
     </head>
     <body>
+        <!-- REMOVE CLASS FROM BACKDROP -->
+        <div id="backdrop"></div>
+
+        <!-- REMOVE CLASS FROM ADD-PARENTUI -->
+        <div id="add-parentUI">
+            <div id="add-parent__title">Add parent</div>
+            <div class="add-parent__content">
+                <form action="/add-words" method="post" id="addParentForm">
+                    <label for="parentName">Parent name:</label>
+                    <input type="text" name="parentName" id="parentName" placeholder="Type here..." maxlength="30">
+                    <label for="parentBackground">Select the background color:</label>
+                    <input type="color" name="parentBackground" id="parentBackground">
+                    <label for="parentTextColor">Select the color of the text:</label>
+                    <input type="color" name="parentTextColor" id="parentTextColor">
+                    <div id="previewParent">
+                    </div>
+                    <button type="submit" id="addParentSubmitButton">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="add-childUI">
+
+        </div>
+
+        <div id="add-wordsUI">
+            
+        </div>
+
         <header>
             <h1>ADD WORDS PAGE</h1>
-            <form action="/practice">
-                <button type="submit">Practice Page</button>
-            </form>
             <form action="/">
                 <button type="submit">Main Page</button>
             </form>
         </header>
         <main>
-            <form action="/add-words" method="POST">
+            <div id="add-words__container">
+                <div id="add-words__main">
+
+                    <div class="parents-container">
+                        <% if (parents.length > 0) { %>
+                           <% parents.forEach(parent => { %>
+                                <div class="parent-container" style="background: <%=parent.parentBackground %>">
+                                    <div class="parent-container-title" style="color: <%=parent.parentTextColor %>">
+                                        <%=parent.parentName%> <span class="parent-symbol">+</span>
+                                    </div>
+                                    <div class="children-container">
+                                        <div class="child-container">
+                                            <div class="child-name">
+                                                Foods 🍕
+                                            </div>
+                                        </div>
+                                        <div class="child-container">
+                                            <div class="child-name">
+                                                Cars 🚗
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <%  }) %>
+                        <%  } %>
+                        
+                    </div>
+                        
+                        
+
+                    <!-- <div id="add-words__main-prompt">
+                        <p>
+                            Mesaj smecher!
+                        </p>
+                    </div> -->
+
+                </div>
+
+                <div id="add-words__footer">
+                    <div id="add-words__footer-buttons">
+                        <button id="add-parent__button" class="add-words__footer-button">Add parent</button>
+                        <button id="add-child__button" class="add-words__footer-button">Add child</button>
+                        <button id="add-words__button" class="add-words__footer-button">Add words</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- <form action="/add-words" method="POST">
                 <input type="text" placeholder="Enter the first word" name="firstWord">
                 <input type="text" placeholder="Enter the second word" name="secondWord">
                 <button type="submit">Send words</button>
-            </form>
+            </form> -->
         </main>
         <footer>
 

@@ -8,9 +8,9 @@ router.get('/', wordsControllers.showMainPage);
 
 router.get('/add-words', wordsControllers.addWordsPage)
 
-router.post('/add-words', wordsControllers.postWords)
+// router.post('/add-words', wordsControllers.postWords)
 
-router.get('/practice', wordsControllers.renderPracticePage);
+router.post('/add-words', wordsControllers.postParent)
 
 router.get('/getRandomWord', wordsControllers.getRandomWord)
 

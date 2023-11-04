@@ -1,41 +1,42 @@
 const PairOfWords = require('../models/words');
+const Parent = require('../models/parents');
 
 
 exports.showMainPage = (req, res, next) => {
-    res.render('index', {
-        pageTitle: 'Learn Vocab App',
-        path: 'index'
-    })
+        res.render('index', {
+            pageTitle: 'Learn Vocab App',
+            path: 'index'
+        })
 }
 
 exports.addWordsPage = (req, res, next) => {
-    res.render('add-words', {
-        pageTitle: 'Add Words',
-        path: 'add-words'
+    Parent.find()
+    .then(parents => {
+        res.render('add-words', {
+            parents: parents,
+            pageTitle: 'Add Words',
+            path: 'add-words'
+        })
     })
 }
 
-exports.postWords = (req, res, next) => {
-    const firstWord = req.body.firstWord;
-    const secondWord = req.body.secondWord;
-    const newPair = new PairOfWords({
-        firstWord: firstWord,
-        secondWord: secondWord
-    });
-    newPair.save()
+exports.postParent = (req, res, next) => {
+    const parentName = req.body.parentName;
+    const parentBackground = req.body.parentBackground;
+    const parentTextColor = req.body.parentTextColor;
+    const newParent = new Parent({
+        parentName: parentName,
+        parentBackground: parentBackground,
+        parentTextColor: parentTextColor,
+        children: []
+    })
+
+    newParent.save()
     .then(result => {
-        console.log(req.body)
-        res.redirect('/')
+        console.log(result)
+        res.redirect('/add-words')
     })
-    .catch(err => console.log(err))
 }
-
-exports.renderPracticePage = (req, res) => {
-    res.render('practice', {
-        pageTitle: 'Practice',
-        path: '/practice',
-    });
-};
 
 exports.getRandomWord = (req, res, next) => {
     PairOfWords.getRandomWord()
