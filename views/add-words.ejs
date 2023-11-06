@@ -11,10 +11,10 @@
         <script src="/scripts/main.js" defer></script>
     </head>
     <body>
-        <!-- REMOVE CLASS FROM BACKDROP -->
         <div id="backdrop"></div>
 
-        <!-- REMOVE CLASS FROM ADD-PARENTUI -->
+        <div id="second-backdrop"></div>
+
         <div id="add-parentUI">
             <div id="add-parent__title">Add parent</div>
             <div class="add-parent__content">
@@ -26,14 +26,47 @@
                     <label for="parentTextColor">Select the color of the text:</label>
                     <input type="color" name="parentTextColor" id="parentTextColor">
                     <div id="previewParent">
+                        Preview parent
                     </div>
+                    <input type="hidden" name="condition" value="addParent">
                     <button type="submit" id="addParentSubmitButton">Submit</button>
                 </form>
             </div>
         </div>
-
+    
         <div id="add-childUI">
+            <div id="add-child__title">Add child</div>
+            <div class="add-child__content">
+                <form action="/add-words" method="post" id="addChildForm">
+                    <label for="childName">Child name:</label>
+                    <input type="text" name="childName" id="childName" placeholder="Type here..." maxlength="30">
+                    <label for="childBackground">Select the background color:</label>
+                    <input type="color" name="childBackground" id="childBackground">
+                    <label for="childTextColor">Select the color of the text:</label>
+                    <input type="color" name="childTextColor" id="childTextColor">
+                    <div id="previewChild">
+                        Preview child
+                    </div>
+                    <label for="select-parent">Choose a parent in which your child will be stored!</label>
+                    <div id="select-parent">
+                        Choose a parent
+                    </div>
+                    <input type="hidden" name="selectedParent" id="selectedParentId">
+                    <input type="hidden" name="condition" value="addChild">
+                    <button type="submit" id="addChildSubmitButton">Submit</button>
+                </form>
+            </div>
+        </div>
 
+        <div id="select-parent-list">
+            <% if (parents.length > 0) { %>
+                <% parents.forEach(parent => { %>
+                    <div <% /* eslint-disable css-propertyvalueexpected */ %> class="list-parent" style="background: <%=parent.parentBackground %>" data-selectedParentValue="<%=parent._id%>">
+                        <p <% /* eslint-disable css-propertyvalueexpected */ %> class="list-parent-name" style="color: <%=parent.parentTextColor %>"><%= parent.parentName%></p>
+                        <input type="hidden" name="selectedParentValue" value="<%=parent._id%>">
+                    </div>
+                <% }) %>
+            <% } %>
         </div>
 
         <div id="add-wordsUI">
@@ -53,22 +86,22 @@
                     <div class="parents-container">
                         <% if (parents.length > 0) { %>
                            <% parents.forEach(parent => { %>
-                                <div class="parent-container" style="background: <%=parent.parentBackground %>">
-                                    <div class="parent-container-title" style="color: <%=parent.parentTextColor %>">
-                                        <%=parent.parentName%> <span class="parent-symbol">+</span>
+                                <div <% /* eslint-disable css-propertyvalueexpected */ %>  class="parent-container" style="background: <%=parent.parentBackground %>">
+                                    <div <% /* eslint-disable css-propertyvalueexpected */ %>  class="parent-container-title" style="color: <%=parent.parentTextColor %>">
+                                        <%=parent.parentName%> (<span class="parent-symbol">+</span>)
                                     </div>
-                                    <div class="children-container">
-                                        <div class="child-container">
-                                            <div class="child-name">
-                                                Foods 🍕
+                                    <% if (parent.children.length > 0) { %>
+                                        <% parent.children.forEach(child => { %>
+
+                                            <div class="children-container">
+                                                <div <% /* eslint-disable css-propertyvalueexpected */ %> class="child-container" style="background: <%=child.childBackground %>">
+                                                    <div  <% /* eslint-disable css-propertyvalueexpected */ %> class="child-name" style="color: <%=child.childTextColor %>">
+                                                        <%= child.childName %>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="child-container">
-                                            <div class="child-name">
-                                                Cars 🚗
-                                            </div>
-                                        </div>
-                                    </div>
+                                        <% })%>
+                                    <% } %>
                                 </div>
                             <%  }) %>
                         <%  } %>
