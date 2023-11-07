@@ -1,6 +1,15 @@
 //imports
 @import 'partials/variables'
+@import 'partials/classes'
 
+// placeholders
+%list-item
+    padding: .5rem
+    background: $green
+    font-size: 1.1rem
+    border-radius: .5rem
+    user-select: none
+    cursor: pointer
 
 // actual styling 
 body
@@ -91,20 +100,7 @@ main
                 padding: .5rem  
                 background: $black
                 border-radius: .5rem
-            button
-                max-width: 8rem
-                border: .1rem solid $nude
-                border-radius: .25rem
-                background: none
-                color: $ghostWhite
-                padding: .5rem 1rem
-                font-size: 1rem
-                font-weight: 700
-                cursor: pointer
-                transition: background 400ms ease-out
-                &:hover
-                    background: rgba(252, 224, 66, .6)
-
+                
 #add-childUI
     display: none
     flex-direction: column
@@ -160,11 +156,7 @@ main
                 height: 2rem
                 cursor: pointer
             #childTextColor
-                appearance: none
-                border: none
-                width: 8rem
-                height: 2rem
-                cursor: pointer
+                @extend #childBackground
             #previewChild
                 margin-bottom: 3rem
                 cursor: pointer
@@ -172,7 +164,7 @@ main
                 padding: .5rem  
                 background: $black
                 border-radius: .5rem
-            #select-parent
+            #childUI-select-parent
                 margin-bottom: 2rem
                 border: .1rem solid $green
                 border-radius: .25rem
@@ -184,23 +176,8 @@ main
                 user-select: none
                 cursor: pointer
                 transition: background 400ms ease-out
-                // &:hover
-                //     background: rgba(0, 204, 153, .3)
-            #addChildSubmitButton
-                max-width: 8rem
-                border: .1rem solid $nude
-                border-radius: .25rem
-                background: none
-                color: $ghostWhite
-                padding: .5rem 1rem
-                font-size: 1rem
-                font-weight: 700
-                cursor: pointer
-                transition: background 400ms ease-out
-                &:hover
-                    background: rgba(252, 224, 66, .6)
 
-#select-parent-list
+#childUI-select-parent-list
     display: none
     flex-direction: column
     gap: 1rem
@@ -217,15 +194,75 @@ main
     overflow-y: scroll
     z-index: 10001
     .list-parent
-        padding: .5rem
-        background: $green
-        font-size: 1.1rem
-        border-radius: .5rem
-        user-select: none
-        cursor: pointer
+        @extend %list-item
 
-#select-parent-list::-webkit-scrollbar
+#childUI-select-parent-list::-webkit-scrollbar
     display: none
+
+#add-wordsUI
+    @extend #add-parentUI
+    #add-words__title
+        font-size: 1.5rem
+        font-weight: 700
+    .add-words__content
+        flex: 1
+        display: grid
+        place-items: center
+        height: 100%
+        width: 100%
+        form
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            gap: .5rem
+            width: 75%
+            height: 100%
+            label
+                font-size: 1.25rem
+            #first-word
+                width: 75%
+                font-size: 1rem
+                font-weight: 700
+                max-width: 32ch
+                padding: .5rem 0
+                background: transparent
+                color: $ghostWhite
+                border: none
+                border-bottom: 2px solid $nude
+                margin-bottom: 2rem
+                &:focus
+                    outline: none
+            #second-word
+                @extend #first-word
+                border-bottom-color: darken($nude, 25%)
+            #wordsUI-select-parent
+                margin-bottom: 2rem
+                border: .1rem solid $green
+                border-radius: .25rem
+                background: none
+                color: $ghostWhite
+                padding: .5rem 1rem
+                font-size: 1rem
+                font-weight: 700
+                user-select: none
+                cursor: pointer
+                transition: background 400ms ease-out
+            #wordsUI-select-child
+                @extend #wordsUI-select-parent
+                border-color: darken($red, 10%)
+
+#wordsUI-select-parent-list
+    @extend #childUI-select-parent-list
+    .list-words-parent
+        @extend %list-item
+
+#wordsUI-select-child-list
+    @extend #childUI-select-parent-list
+    .errorMessage
+        color: $red
+    .list-words-child
+        @extend %list-item
 
 #add-words__container
     display: flex

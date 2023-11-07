@@ -48,6 +48,7 @@ exports.postParent = (req, res, next) => {
                 childName: childName,
                 childBackground: childBackground,
                 childTextColor: childTextColor,
+                childPosition: parent[0].children.length,
                 words: []
             }
             const updatedChildren = [...parent[0].children, newChild];
@@ -56,6 +57,27 @@ exports.postParent = (req, res, next) => {
                 res.redirect('/add-words')
             })
             
+        })
+    } else if (req.body.condition == 'addWords') {
+        const parentId = req.body.selectedParentId;
+        const childPosition = req.body.selectedWordsChild
+        Parent.find({_id: parentId})
+        .then(parent => {
+            const firstWord = req.body.firstWord.trim();
+            const secondWord = req.body.secondWord.trim();
+            const newWords = {
+                firstWord: firstWord,
+                secondWord: secondWord,
+                timesShown: 0,
+                succesRate: 0
+            };
+            const child = parent[0].children[childPosition];
+            const updatedChildWords = [...parent[0].children[childPosition].words, newWords];
+            child.words = updatedChildWords;
+            Parent.findOneAndUpdate({_id: parentId}, {children: child})
+            .then(result => {
+                res.redirect('/add-words')
+            })
         })
     }
 }

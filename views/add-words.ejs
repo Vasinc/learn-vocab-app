@@ -29,7 +29,7 @@
                         Preview parent
                     </div>
                     <input type="hidden" name="condition" value="addParent">
-                    <button type="submit" id="addParentSubmitButton">Submit</button>
+                    <button type="submit" id="addParentSubmitButton" class="button">Submit</button>
                 </form>
             </div>
         </div>
@@ -47,21 +47,21 @@
                     <div id="previewChild">
                         Preview child
                     </div>
-                    <label for="select-parent">Choose a parent in which your child will be stored!</label>
-                    <div id="select-parent">
+                    <label for="childUI-select-parent">Choose a parent in which your child will be stored!</label>
+                    <div id="childUI-select-parent">
                         Choose a parent
                     </div>
-                    <input type="hidden" name="selectedParent" id="selectedParentId">
+                    <input type="hidden" name="selectedParent" id="childUISelectedParentId">
                     <input type="hidden" name="condition" value="addChild">
-                    <button type="submit" id="addChildSubmitButton">Submit</button>
+                    <button type="submit" id="addChildSubmitButton" class="button">Submit</button>
                 </form>
             </div>
         </div>
 
-        <div id="select-parent-list">
+        <div id="childUI-select-parent-list">
             <% if (parents.length > 0) { %>
                 <% parents.forEach(parent => { %>
-                    <div <% /* eslint-disable css-propertyvalueexpected */ %> class="list-parent" style="background: <%=parent.parentBackground %>" data-selectedParentValue="<%=parent._id%>">
+                    <div <% /* eslint-disable css-propertyvalueexpected */ %> class="list-parent" style="background: <%=parent.parentBackground %>">
                         <p <% /* eslint-disable css-propertyvalueexpected */ %> class="list-parent-name" style="color: <%=parent.parentTextColor %>"><%= parent.parentName%></p>
                         <input type="hidden" name="selectedParentValue" value="<%=parent._id%>">
                     </div>
@@ -70,9 +70,46 @@
         </div>
 
         <div id="add-wordsUI">
-            
+            <div id="add-words__title">Add words</div>
+            <div class="add-words__content">
+                <form action="/add-words" method="post" id="addWordsForm">
+                    <label for="firs-word">Enter the first word:</label>
+                    <input type="text" name="firstWord" id="first-word" placeholder="Type here...">
+                    <label for="second-word">Enter the second word:</label>
+                    <input type="text" name="secondWord" id="second-word" placeholder="Type here...">
+                    <label for="wordsUI-select-parent">Choose a parent in which your words will be stored!</label>
+                    <div id="wordsUI-select-parent">
+                        Choose a parent
+                    </div>
+                    <input type="hidden" name="selectedParentId" id="wordsUISelectedParentId">
+                    <input type="hidden" name="selectedParentChildren" id="wordsUISelectedParentChildren">
+                    <label for="wordsUI-select-child">Choose a child in which your words will be stored!</label>
+                    <div id="wordsUI-select-child">
+                        Choose a child
+                    </div>
+                    <input type="hidden" name="selectedWordsChild" id="selectedWordsChildPosition">
+                    <input type="hidden" name="condition" value="addWords">
+                    <button type="submit" id="addWordsSubmitButton" class="button">Submit</button>
+                </form>
+            </div>
         </div>
 
+        <div id="wordsUI-select-parent-list">
+            <% if (parents.length > 0) { %>
+                <% parents.forEach(parent => { %>
+                    <div <% /* eslint-disable css-propertyvalueexpected */ %> class="list-words-parent" style="background: <%=parent.parentBackground %>">
+                        <p <% /* eslint-disable css-propertyvalueexpected */ %> class="list-words-parent-name" style="color: <%=parent.parentTextColor %>"><%= parent.parentName%></p>
+                        <input type="hidden" name="selectedWordsParentValue" value="<%=parent._id%>">
+                        <input type="hidden" name="selectedParentChildrenValue" class="selectedParentChildrenValue" value="<%= JSON.stringify(parent.children)%>">
+                    </div> 
+                <% }) %>
+            <% } %>
+        </div>
+
+        <div id="wordsUI-select-child-list"> 
+            
+        </div>
+        
         <header>
             <h1>ADD WORDS PAGE</h1>
             <form action="/">
@@ -87,6 +124,7 @@
                         <% if (parents.length > 0) { %>
                            <% parents.forEach(parent => { %>
                                 <div <% /* eslint-disable css-propertyvalueexpected */ %>  class="parent-container" style="background: <%=parent.parentBackground %>">
+                                    <input type="hidden" name="parentID" value="<%=parent._id%>">
                                     <div <% /* eslint-disable css-propertyvalueexpected */ %>  class="parent-container-title" style="color: <%=parent.parentTextColor %>">
                                         <%=parent.parentName%> (<span class="parent-symbol">+</span>)
                                     </div>
@@ -97,6 +135,11 @@
                                                 <div <% /* eslint-disable css-propertyvalueexpected */ %> class="child-container" style="background: <%=child.childBackground %>">
                                                     <div  <% /* eslint-disable css-propertyvalueexpected */ %> class="child-name" style="color: <%=child.childTextColor %>">
                                                         <%= child.childName %>
+                                                        <% if (child.words.length > 0) { %>
+                                                            (<%=child.words.length%>)
+                                                        <% } else { %>
+                                                            (0)
+                                                        <% } %> 
                                                     </div>
                                                 </div>
                                             </div>
