@@ -11,6 +11,36 @@
     user-select: none
     cursor: pointer
 
+%UI-title
+    display: flex
+    justify-content: space-between
+    align-items: center
+    p
+        font-size: 1.5rem
+        font-weight: 700
+    .close-main-page
+        background: $red
+        color: $black
+        padding: 0 .5rem
+        border-radius: 50%
+        user-select: none
+        cursor: pointer
+        transition: background 300ms linear, color 300ms linear
+        &:hover
+            background: darken($red, 5%)
+            color: $ghostWhite
+
+%UI-error-message
+    display: flex
+    flex-direction: column
+    background: $red
+    color: $white
+    font-size: .75rem
+    p
+        border-bottom: 1px solid $darkBlue
+    p:last-of-type
+        border: none
+
 // actual styling 
 body
     display: flex
@@ -49,8 +79,7 @@ main
     border-radius: 1rem
     z-index: 1001
     #add-parent__title
-        font-size: 1.5rem
-        font-weight: 700
+        @extend %UI-title
     .add-parent__content
         flex: 1
         display: grid
@@ -100,6 +129,8 @@ main
                 padding: .5rem  
                 background: $black
                 border-radius: .5rem
+            #parentUI-error-message
+                @extend %UI-error-message
                 
 #add-childUI
     display: none
@@ -117,8 +148,7 @@ main
     border-radius: 1rem
     z-index: 1001
     #add-child__title
-        font-size: 1.5rem
-        font-weight: 700
+        @extend %UI-title
     .add-child__content
         flex: 1
         display: grid
@@ -176,6 +206,8 @@ main
                 user-select: none
                 cursor: pointer
                 transition: background 400ms ease-out
+            #childUI-error-message
+                @extend %UI-error-message
 
 #childUI-select-parent-list
     display: none
@@ -202,8 +234,7 @@ main
 #add-wordsUI
     @extend #add-parentUI
     #add-words__title
-        font-size: 1.5rem
-        font-weight: 700
+        @extend %UI-title
     .add-words__content
         flex: 1
         display: grid
@@ -251,6 +282,8 @@ main
             #wordsUI-select-child
                 @extend #wordsUI-select-parent
                 border-color: darken($red, 10%)
+            #wordsUI-error-message
+                @extend %UI-error-message
 
 #wordsUI-select-parent-list
     @extend #childUI-select-parent-list

@@ -41,6 +41,45 @@
   cursor: pointer;
 }
 
+#add-wordsUI #add-words__title, #add-childUI #add-child__title, #add-parentUI #add-parent__title, #add-wordsUI #add-parent__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#add-wordsUI #add-words__title p, #add-childUI #add-child__title p, #add-parentUI #add-parent__title p, #add-wordsUI #add-parent__title p {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+#add-wordsUI #add-words__title .close-main-page, #add-childUI #add-child__title .close-main-page, #add-parentUI #add-parent__title .close-main-page, #add-wordsUI #add-parent__title .close-main-page {
+  background: #d72638;
+  color: #000;
+  padding: 0 0.5rem;
+  border-radius: 50%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  transition: background 300ms linear, color 300ms linear;
+}
+#add-wordsUI #add-words__title .close-main-page:hover, #add-childUI #add-child__title .close-main-page:hover, #add-parentUI #add-parent__title .close-main-page:hover, #add-wordsUI #add-parent__title .close-main-page:hover {
+  background: #c12232;
+  color: #fafaff;
+}
+
+#add-wordsUI .add-words__content form #wordsUI-error-message, #add-childUI .add-child__content form #childUI-error-message, #add-parentUI .add-parent__content form #parentUI-error-message, #add-wordsUI .add-parent__content form #parentUI-error-message {
+  display: flex;
+  flex-direction: column;
+  background: #d72638;
+  color: #fff;
+  font-size: 0.75rem;
+}
+#add-wordsUI .add-words__content form #wordsUI-error-message p, #add-childUI .add-child__content form #childUI-error-message p, #add-parentUI .add-parent__content form #parentUI-error-message p, #add-wordsUI .add-parent__content form #parentUI-error-message p {
+  border-bottom: 1px solid #1e2749;
+}
+#add-wordsUI .add-words__content form #wordsUI-error-message p:last-of-type, #add-childUI .add-child__content form #childUI-error-message p:last-of-type, #add-parentUI .add-parent__content form #parentUI-error-message p:last-of-type, #add-wordsUI .add-parent__content form #parentUI-error-message p:last-of-type {
+  border: none;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -80,10 +119,6 @@ main {
   padding: 1rem;
   border-radius: 1rem;
   z-index: 1001;
-}
-#add-parentUI #add-parent__title, #add-wordsUI #add-parent__title {
-  font-size: 1.5rem;
-  font-weight: 700;
 }
 #add-parentUI .add-parent__content, #add-wordsUI .add-parent__content {
   flex: 1;
@@ -147,7 +182,6 @@ main {
   background: #000;
   border-radius: 0.5rem;
 }
-
 #add-childUI {
   display: none;
   flex-direction: column;
@@ -163,10 +197,6 @@ main {
   padding: 1rem;
   border-radius: 1rem;
   z-index: 1001;
-}
-#add-childUI #add-child__title {
-  font-size: 1.5rem;
-  font-weight: 700;
 }
 #add-childUI .add-child__content {
   flex: 1;
@@ -236,7 +266,6 @@ main {
   cursor: pointer;
   transition: background 400ms ease-out;
 }
-
 #childUI-select-parent-list, #wordsUI-select-child-list, #wordsUI-select-parent-list {
   display: none;
   flex-direction: column;
@@ -258,10 +287,6 @@ main {
   display: none;
 }
 
-#add-wordsUI #add-words__title {
-  font-size: 1.5rem;
-  font-weight: 700;
-}
 #add-wordsUI .add-words__content {
   flex: 1;
   display: grid;
@@ -317,7 +342,6 @@ main {
 #add-wordsUI .add-words__content form #wordsUI-select-child {
   border-color: #ac1e2d;
 }
-
 #wordsUI-select-child-list .errorMessage {
   color: #d72638;
 }

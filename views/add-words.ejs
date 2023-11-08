@@ -16,7 +16,12 @@
         <div id="second-backdrop"></div>
 
         <div id="add-parentUI">
-            <div id="add-parent__title">Add parent</div>
+            <div id="add-parent__title">
+                <p>Add parent</p>
+                <div class="close-main-page">
+                    X
+                </div> 
+            </div>
             <div class="add-parent__content">
                 <form action="/add-words" method="post" id="addParentForm">
                     <label for="parentName">Parent name:</label>
@@ -24,18 +29,24 @@
                     <label for="parentBackground">Select the background color:</label>
                     <input type="color" name="parentBackground" id="parentBackground">
                     <label for="parentTextColor">Select the color of the text:</label>
-                    <input type="color" name="parentTextColor" id="parentTextColor">
+                    <input type="color" name="parentTextColor" id="parentTextColor" value="#ffffff">
                     <div id="previewParent">
                         Preview parent
                     </div>
                     <input type="hidden" name="condition" value="addParent">
+                    <div id="parentUI-error-message"></div>
                     <button type="submit" id="addParentSubmitButton" class="button">Submit</button>
                 </form>
             </div>
         </div>
     
         <div id="add-childUI">
-            <div id="add-child__title">Add child</div>
+            <div id="add-child__title">
+                <p>Add child</p>
+                <div class="close-main-page">
+                    X
+                </div> 
+            </div>
             <div class="add-child__content">
                 <form action="/add-words" method="post" id="addChildForm">
                     <label for="childName">Child name:</label>
@@ -43,7 +54,7 @@
                     <label for="childBackground">Select the background color:</label>
                     <input type="color" name="childBackground" id="childBackground">
                     <label for="childTextColor">Select the color of the text:</label>
-                    <input type="color" name="childTextColor" id="childTextColor">
+                    <input type="color" name="childTextColor" id="childTextColor" value="#ffffff">
                     <div id="previewChild">
                         Preview child
                     </div>
@@ -53,6 +64,7 @@
                     </div>
                     <input type="hidden" name="selectedParent" id="childUISelectedParentId">
                     <input type="hidden" name="condition" value="addChild">
+                    <div id="childUI-error-message"></div>
                     <button type="submit" id="addChildSubmitButton" class="button">Submit</button>
                 </form>
             </div>
@@ -70,7 +82,12 @@
         </div>
 
         <div id="add-wordsUI">
-            <div id="add-words__title">Add words</div>
+            <div id="add-words__title">
+                <p>Add words</p>
+                <div class="close-main-page">
+                    X
+                </div>    
+            </div>
             <div class="add-words__content">
                 <form action="/add-words" method="post" id="addWordsForm">
                     <label for="firs-word">Enter the first word:</label>
@@ -89,6 +106,7 @@
                     </div>
                     <input type="hidden" name="selectedWordsChild" id="selectedWordsChildPosition">
                     <input type="hidden" name="condition" value="addWords">
+                    <div id="wordsUI-error-message"></div>
                     <button type="submit" id="addWordsSubmitButton" class="button">Submit</button>
                 </form>
             </div>
@@ -107,7 +125,7 @@
         </div>
 
         <div id="wordsUI-select-child-list"> 
-            
+            <h2 class='errorMessage'>You must select a parent!</h2>
         </div>
         
         <header>
