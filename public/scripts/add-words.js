@@ -30,6 +30,7 @@ const wordsUISelectChildList = document.getElementById('wordsUI-select-child-lis
 const wordsUISelectedParentChildren = document.getElementById('wordsUISelectedParentChildren');
 const wordsUISelectedParentId = document.getElementById('wordsUISelectedParentId');
 const selectedChildPosition = document.getElementById('selectedWordsChildPosition');
+const editUI = document.getElementById('editUI');
 
 //buttons
 const addParentButton = document.getElementById('add-parent__button');
@@ -39,6 +40,7 @@ const addWordsButton = document.getElementById('add-words__button');
 const wordsUISelectParentButton = document.getElementById('wordsUI-select-parent');
 const wordsUISelectChildButton = document.getElementById('wordsUI-select-child');
 const closeMainPageButtons = document.querySelectorAll('.close-main-page');
+const editButtons = document.querySelectorAll('.edit-button');
 
 // global variables
 let SELECTED_UI;
@@ -82,6 +84,9 @@ function removeBackdropAndUI () {
             addWordsUI.classList.remove('display-flex');
             addWordsErrorMessage.innerHTML = '';
             break;
+        case 'edit':
+            editUI.classList.remove('display-flex');
+            break;
     }
 }
 
@@ -106,7 +111,7 @@ function removeSecondBackdropAndUI () {
 
 // event listeners
 addWordsMain.addEventListener('click', event => {
-    if(event.target.className !== 'parent-container-title' && event.target.className !== 'parent-symbol') {
+    if(event.target.className !== 'parent-container-title' && event.target.className !== 'parent-symbol' && event.target.className !== 'parent-container-text' && event.target.className !== 'settings-button') {
         parentContainerTitles.forEach(parentTitle => {
             const parent = parentTitle.parentNode;
             parent.style.maxHeight = '3.18rem';
@@ -114,11 +119,15 @@ addWordsMain.addEventListener('click', event => {
             return;
         })
     };
-    const selectedParentTitle = (event.target.className == 'parent-container-title') ? event.target : event.target.parentNode;
+
+    const selectedParentTitle = (event.target.className == 'parent-container-title') ? event.target 
+                                : (event.target.className == 'parent-container-text') ? event.target.parentNode
+                                : (event.target.className == 'parent-container-text') ? event.target.parentNode
+                                : (event.target.className == 'parent-symbol') ? event.target.parentNode.parentNode : null;
     
     parentContainerTitles.forEach(parentTitle => {
         const parent = parentTitle.parentNode;
-        if (parentTitle == selectedParentTitle) {
+        if (parentTitle == selectedParentTitle && selectedParentTitle) {
             parent.style.maxHeight = '100%';
             parentTitle.querySelector('.parent-symbol').textContent = '-';
         } else {
@@ -192,6 +201,14 @@ closeMainPageButtons.forEach(closeMainButton => {
 });
 
 secondBackdrop.addEventListener('click', removeSecondBackdropAndUI);
+
+editButtons.forEach(editButton => {
+    editButton.addEventListener('click', () => {
+        backdrop.classList.add('display-block');
+        editUI.classList.add('display-flex');
+        SELECTED_UI = 'edit';
+    })
+})
 
 childUISelectedParentButton.addEventListener('click', () => {
     secondBackdrop.classList.add('display-block');

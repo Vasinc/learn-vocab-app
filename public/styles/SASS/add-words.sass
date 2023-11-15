@@ -30,6 +30,37 @@
             background: darken($red, 5%)
             color: $ghostWhite
 
+%preview-element
+    cursor: pointer
+    font-size: 1.5rem
+    padding: .5rem  
+    background: $black
+    border-radius: .5rem
+
+%UI-section
+    label
+        font-size: 1.25rem
+    input[type="text"]
+        width: 75%
+        font-size: 1rem
+        font-weight: 700
+        max-width: 32ch
+        padding: .5rem 0
+        background: transparent
+        color: $ghostWhite
+        border: none
+        border-bottom: 2px solid $nude
+        &:focus
+            outline: none
+    input[type="color"]
+        appearance: none
+        border: none
+        width: 8rem
+        height: 2rem
+        cursor: pointer
+    .preview-element
+        @extend %preview-element
+
 %UI-error-message
     display: flex
     flex-direction: column
@@ -40,6 +71,30 @@
         border-bottom: 1px solid $darkBlue
     p:last-of-type
         border: none
+
+%delete-button
+    border: .1rem solid $red
+    border-radius: .25rem
+    background: none
+    color: $ghostWhite
+    padding: .5rem 1rem
+    font-size: 1rem
+    font-weight: 700
+    cursor: pointer
+    transition: background 400ms ease-out
+    &:hover
+        background: rgba(215, 38, 56, .6)
+
+%move-button
+    border: .1rem solid lighten($nude, 10%)
+    border-radius: .25rem
+    background: none
+    color: $ghostWhite
+    padding: .5rem 1rem
+    font-size: 1rem
+    font-weight: 700
+    cursor: pointer
+    transition: background 400ms ease-out
 
 // actual styling 
 body
@@ -63,6 +118,98 @@ main
     align-items: center
     padding: 2rem 0
 
+#editUI
+    display: none
+    flex-direction: column
+    gap: 2rem
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    width: 90%
+    max-width: 700px
+    height: 80%
+    background: $darkBlue
+    border-radius: 1rem
+    padding: 1rem
+    z-index: 1001
+    #editUI-title
+        @extend %UI-title
+        #editUI-title-preview
+            @extend %preview-element
+    #editUI-content
+        flex: 1
+        width: 100%
+        height: 100%
+        overflow-y: auto
+        #editForm
+            display: flex
+            flex-direction: column
+            padding-bottom: 2rem
+            gap: 1rem
+            section
+                display: flex
+                flex-direction: column
+                justify-content: center
+                align-items: center
+                gap: .75rem
+                .margin-label
+                    margin-top: 2rem
+            #editUI-parent-section
+                @extend %UI-section
+                #editUI-select-child
+                    border: .1rem solid $green
+                    border-radius: .25rem
+                    background: none
+                    color: $ghostWhite
+                    padding: .5rem 1rem
+                    font-size: 1rem
+                    font-weight: 700
+                    user-select: none
+                    cursor: pointer
+                    transition: background 400ms ease-out
+                .delete-button
+                        @extend %delete-button
+                        margin-top: .5rem
+            #editUI-child-section
+                display: none
+                @extend %UI-section
+                #editUI-select-words
+                    border-radius: .25rem
+                    background: lighten($lightBlue, 5%)
+                    color: $ghostWhite
+                    padding: .5rem 1.25rem
+                    font-size: 1rem
+                    font-weight: 700
+                    text-decoration: underline
+                    user-select: none
+                    cursor: pointer
+                .editUI-buttons-container
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    gap: 3rem
+                    margin-top: .5rem
+                    .delete-button
+                        @extend %delete-button
+                    .move-button
+                        @extend %move-button
+            #editUI-words-section
+                display: none
+                @extend %UI-section
+                .editUI-buttons-container
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    gap: 3rem
+                    margin-top: .5rem
+                    .delete-button
+                        @extend %delete-button
+                    .move-button
+                        @extend %move-button
+        #editUISubmitButton
+            max-width: none
+            margin: auto
 #add-parentUI
     display: none
     flex-direction: column
@@ -326,9 +473,19 @@ main
                 max-height: 3.18rem
                 overflow: hidden
                 .parent-container-title
+                    display: flex
+                    justify-content: space-between
+                    align-items: center
                     cursor: pointer
                     font-size: 1.5rem
                     padding: .5rem  
+                    .edit-button
+                        background: url('../../images/settings.png')
+                        background-position: center
+                        background-repeat: no-repeat
+                        background-size: cover
+                        width: 2rem
+                        height: 2rem
                 .children-container
                     display: flex
                     flex-direction: column

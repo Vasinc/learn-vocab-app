@@ -15,10 +15,79 @@
 
         <div id="second-backdrop"></div>
 
-        <div id="add-parentUI">
-            <div id="add-parent__title">
-                <p>Add parent</p>
-                <div class="close-main-page">
+        <div id="editUI">
+            <div id="editUI-title">
+                <p>
+                    Currently editing <span id="editUI-title-preview" class="preview-element">Example</span>
+                </p>
+                <div class="close-main-page"> 
+                    X
+                </div>
+            </div>
+            <div id="editUI-content">
+                <form action="/add-words" method="post" id="editForm">
+
+                    <section id="editUI-parent-section">
+                        <label for="editUIParentName">Parent name:</label>
+                        <input type="text" name="editUIParentName" id="editUIParentName" placeholder="Type here..." maxlength="30">
+                        <label for="editParentBackground">Select the background color:</label>
+                        <input type="color" name="editParentBackground" id="editParentBackground">
+                        <label for="editParentTextColor">Select the color of the text:</label>
+                        <input type="color" name="editParentTextColor" id="editParentTextColor" value="#ffffff">
+                        <div id="previewEditedParent" class="preview-element">
+                            Preview Example
+                        </div>
+                        <div class="delete-button" id="editUI-delete-parent-button">Delete parent</div>
+                        <label for="editUISelectedChildPosition" class="margin-label">Choose a child that you want to edit:</label>
+                        <div id="editUI-select-child">
+                            Select a child
+                        </div>
+                        <input type="hidden" name="editUISelectedChildPosition" id="editUISelectedChildPosition">
+                    </section>
+
+                    <section id="editUI-child-section">
+                        <label for="editChildName">Child name:</label>
+                        <input type="text" name="editChildName" id="editChildName" placeholder="Type here..." maxlength="30">
+                        <label for="editChildBackground">Select the background color:</label>
+                        <input type="color" name="editChildBackground" id="editChildBackground">
+                        <label for="childTextColor">Select the color of the text:</label>
+                        <input type="color" name="editChildTextColor" id="editChildTextColor" value="#ffffff">
+                        <div id="previewEditedChild" class="preview-element">
+                            Preview child example
+                        </div>
+                        <div class="editUI-buttons-container">
+                            <div class="delete-button" id="editUI-delete-child-button">Delete child</div>
+                            <div class="move-button" id="editUI-move-child-button">Move child</div>
+                        </div>
+                        <label for="editUISelectedWordsPosition" class="margin-label">Choose a pair of words you want to edit:</label>
+                        <div id="editUI-select-words">
+                            Example - pair
+                        </div>
+                        <input type="hidden" name="editUISelectedWordsPosition" id="editUISelectedWordsPosition">
+                    </section>
+
+                    <section id="editUI-words-section">
+                        <label for="edited-first-word">Enter the first word:</label>
+                        <input type="text" name="edited-firstWord" id="edited-first-word" placeholder="Type here...">
+                        <label for="edited-second-word">Enter the second word:</label>
+                        <input type="text" name="edited-secondWord" id="edited-second-word" placeholder="Type here...">
+                        <div class="editUI-buttons-container">
+                            <div class="delete-button" id="editUI-delete-words-button">Delete words</div>
+                            <div class="move-button" id="editUI-move-words-button">Move words</div>
+                        </div>
+                    </section>
+
+                    <input type="hidden" name="condition" value="editing">
+                    <div id="editUI-error-message"></div>
+                    <button type="submit" id="editUISubmitButton" class="button">Submit changes</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="add-parentUI"> 
+            <div id="add-parent__title"> 
+                <p>Add parent</p> 
+                <div class="close-main-page"> 
                     X
                 </div> 
             </div>
@@ -70,6 +139,7 @@
             </div>
         </div>
 
+
         <div id="childUI-select-parent-list">
             <% if (parents.length > 0) { %>
                 <% parents.forEach(parent => { %>
@@ -90,7 +160,7 @@
             </div>
             <div class="add-words__content">
                 <form action="/add-words" method="post" id="addWordsForm">
-                    <label for="firs-word">Enter the first word:</label>
+                    <label for="first-word">Enter the first word:</label>
                     <input type="text" name="firstWord" id="first-word" placeholder="Type here...">
                     <label for="second-word">Enter the second word:</label>
                     <input type="text" name="secondWord" id="second-word" placeholder="Type here...">
@@ -144,7 +214,10 @@
                                 <div <% /* eslint-disable css-propertyvalueexpected */ %>  class="parent-container" style="background: <%=parent.parentBackground %>">
                                     <input type="hidden" name="parentID" value="<%=parent._id%>">
                                     <div <% /* eslint-disable css-propertyvalueexpected */ %>  class="parent-container-title" style="color: <%=parent.parentTextColor %>">
-                                        <%=parent.parentName%> (<span class="parent-symbol">+</span>)
+                                        <div class="parent-container-text">
+                                            <%=parent.parentName%> (<span class="parent-symbol">+</span>)
+                                        </div>
+                                        <div class="edit-button"></div>
                                     </div>
                                     <% if (parent.children.length > 0) { %>
                                         <% parent.children.forEach(child => { %>

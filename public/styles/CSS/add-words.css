@@ -41,16 +41,16 @@
   cursor: pointer;
 }
 
-#add-wordsUI #add-words__title, #add-childUI #add-child__title, #add-parentUI #add-parent__title, #add-wordsUI #add-parent__title {
+#add-wordsUI #add-words__title, #add-childUI #add-child__title, #add-parentUI #add-parent__title, #add-wordsUI #add-parent__title, #editUI #editUI-title {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-#add-wordsUI #add-words__title p, #add-childUI #add-child__title p, #add-parentUI #add-parent__title p, #add-wordsUI #add-parent__title p {
+#add-wordsUI #add-words__title p, #add-childUI #add-child__title p, #add-parentUI #add-parent__title p, #add-wordsUI #add-parent__title p, #editUI #editUI-title p {
   font-size: 1.5rem;
   font-weight: 700;
 }
-#add-wordsUI #add-words__title .close-main-page, #add-childUI #add-child__title .close-main-page, #add-parentUI #add-parent__title .close-main-page, #add-wordsUI #add-parent__title .close-main-page {
+#add-wordsUI #add-words__title .close-main-page, #add-childUI #add-child__title .close-main-page, #add-parentUI #add-parent__title .close-main-page, #add-wordsUI #add-parent__title .close-main-page, #editUI #editUI-title .close-main-page {
   background: #d72638;
   color: #000;
   padding: 0 0.5rem;
@@ -61,11 +61,45 @@
   cursor: pointer;
   transition: background 300ms linear, color 300ms linear;
 }
-#add-wordsUI #add-words__title .close-main-page:hover, #add-childUI #add-child__title .close-main-page:hover, #add-parentUI #add-parent__title .close-main-page:hover, #add-wordsUI #add-parent__title .close-main-page:hover {
+#add-wordsUI #add-words__title .close-main-page:hover, #add-childUI #add-child__title .close-main-page:hover, #add-parentUI #add-parent__title .close-main-page:hover, #add-wordsUI #add-parent__title .close-main-page:hover, #editUI #editUI-title .close-main-page:hover {
   background: #c12232;
   color: #fafaff;
 }
 
+#editUI #editUI-title #editUI-title-preview, #editUI #editUI-content #editForm #editUI-words-section .preview-element, #editUI #editUI-content #editForm #editUI-child-section .preview-element, #editUI #editUI-content #editForm #editUI-parent-section .preview-element {
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  background: #000;
+  border-radius: 0.5rem;
+}
+
+#editUI #editUI-content #editForm #editUI-words-section label, #editUI #editUI-content #editForm #editUI-child-section label, #editUI #editUI-content #editForm #editUI-parent-section label {
+  font-size: 1.25rem;
+}
+#editUI #editUI-content #editForm #editUI-words-section input[type=text], #editUI #editUI-content #editForm #editUI-child-section input[type=text], #editUI #editUI-content #editForm #editUI-parent-section input[type=text] {
+  width: 75%;
+  font-size: 1rem;
+  font-weight: 700;
+  max-width: 32ch;
+  padding: 0.5rem 0;
+  background: transparent;
+  color: #fafaff;
+  border: none;
+  border-bottom: 2px solid #f7c59f;
+}
+#editUI #editUI-content #editForm #editUI-words-section input[type=text]:focus, #editUI #editUI-content #editForm #editUI-child-section input[type=text]:focus, #editUI #editUI-content #editForm #editUI-parent-section input[type=text]:focus {
+  outline: none;
+}
+#editUI #editUI-content #editForm #editUI-words-section input[type=color], #editUI #editUI-content #editForm #editUI-child-section input[type=color], #editUI #editUI-content #editForm #editUI-parent-section input[type=color] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: none;
+  width: 8rem;
+  height: 2rem;
+  cursor: pointer;
+}
 #add-wordsUI .add-words__content form #wordsUI-error-message, #add-childUI .add-child__content form #childUI-error-message, #add-parentUI .add-parent__content form #parentUI-error-message, #add-wordsUI .add-parent__content form #parentUI-error-message {
   display: flex;
   flex-direction: column;
@@ -78,6 +112,33 @@
 }
 #add-wordsUI .add-words__content form #wordsUI-error-message p:last-of-type, #add-childUI .add-child__content form #childUI-error-message p:last-of-type, #add-parentUI .add-parent__content form #parentUI-error-message p:last-of-type, #add-wordsUI .add-parent__content form #parentUI-error-message p:last-of-type {
   border: none;
+}
+
+#editUI #editUI-content #editForm #editUI-words-section .editUI-buttons-container .delete-button, #editUI #editUI-content #editForm #editUI-child-section .editUI-buttons-container .delete-button, #editUI #editUI-content #editForm #editUI-parent-section .delete-button {
+  border: 0.1rem solid #d72638;
+  border-radius: 0.25rem;
+  background: none;
+  color: #fafaff;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 400ms ease-out;
+}
+#editUI #editUI-content #editForm #editUI-words-section .editUI-buttons-container .delete-button:hover, #editUI #editUI-content #editForm #editUI-child-section .editUI-buttons-container .delete-button:hover, #editUI #editUI-content #editForm #editUI-parent-section .delete-button:hover {
+  background: rgba(215, 38, 56, 0.6);
+}
+
+#editUI #editUI-content #editForm #editUI-words-section .editUI-buttons-container .move-button, #editUI #editUI-content #editForm #editUI-child-section .editUI-buttons-container .move-button {
+  border: 0.1rem solid #fbe1ce;
+  border-radius: 0.25rem;
+  background: none;
+  color: #fafaff;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 400ms ease-out;
 }
 
 body {
@@ -102,6 +163,99 @@ main {
   flex-direction: column;
   align-items: center;
   padding: 2rem 0;
+}
+
+#editUI {
+  display: none;
+  flex-direction: column;
+  gap: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 700px;
+  height: 80%;
+  background: #1e2749;
+  border-radius: 1rem;
+  padding: 1rem;
+  z-index: 1001;
+}
+#editUI #editUI-content {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+#editUI #editUI-content #editForm {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 2rem;
+  gap: 1rem;
+}
+#editUI #editUI-content #editForm section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+}
+#editUI #editUI-content #editForm section .margin-label {
+  margin-top: 2rem;
+}
+#editUI #editUI-content #editForm #editUI-parent-section #editUI-select-child {
+  border: 0.1rem solid #00cc99;
+  border-radius: 0.25rem;
+  background: none;
+  color: #fafaff;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  transition: background 400ms ease-out;
+}
+#editUI #editUI-content #editForm #editUI-parent-section .delete-button {
+  margin-top: 0.5rem;
+}
+#editUI #editUI-content #editForm #editUI-child-section {
+  display: none;
+}
+#editUI #editUI-content #editForm #editUI-child-section #editUI-select-words {
+  border-radius: 0.25rem;
+  background: #2e3d7c;
+  color: #fafaff;
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: underline;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+}
+#editUI #editUI-content #editForm #editUI-child-section .editUI-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  margin-top: 0.5rem;
+}
+#editUI #editUI-content #editForm #editUI-words-section {
+  display: none;
+}
+#editUI #editUI-content #editForm #editUI-words-section .editUI-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  margin-top: 0.5rem;
+}
+#editUI #editUI-content #editUISubmitButton {
+  max-width: none;
+  margin: auto;
 }
 
 #add-parentUI, #add-wordsUI {
@@ -378,9 +532,20 @@ main {
   overflow: hidden;
 }
 #add-words__container #add-words__main .parents-container .parent-container .parent-container-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   cursor: pointer;
   font-size: 1.5rem;
   padding: 0.5rem;
+}
+#add-words__container #add-words__main .parents-container .parent-container .parent-container-title .edit-button {
+  background: url("../../images/settings.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 2rem;
+  height: 2rem;
 }
 #add-words__container #add-words__main .parents-container .parent-container .children-container {
   display: flex;
