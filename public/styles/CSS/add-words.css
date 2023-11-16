@@ -220,9 +220,6 @@ main {
 #editUI #editUI-content #editForm #editUI-parent-section .delete-button {
   margin-top: 0.5rem;
 }
-#editUI #editUI-content #editForm #editUI-child-section {
-  display: none;
-}
 #editUI #editUI-content #editForm #editUI-child-section #editUI-select-words {
   border-radius: 0.25rem;
   background: #2e3d7c;
@@ -242,9 +239,6 @@ main {
   align-items: center;
   gap: 3rem;
   margin-top: 0.5rem;
-}
-#editUI #editUI-content #editForm #editUI-words-section {
-  display: none;
 }
 #editUI #editUI-content #editForm #editUI-words-section .editUI-buttons-container {
   display: flex;
@@ -546,6 +540,8 @@ main {
   background-size: cover;
   width: 2rem;
   height: 2rem;
+  cursor: pointer;
+  border: none;
 }
 #add-words__container #add-words__main .parents-container .parent-container .children-container {
   display: flex;

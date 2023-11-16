@@ -203,10 +203,25 @@ closeMainPageButtons.forEach(closeMainButton => {
 secondBackdrop.addEventListener('click', removeSecondBackdropAndUI);
 
 editButtons.forEach(editButton => {
-    editButton.addEventListener('click', () => {
+    editButton.addEventListener('click', event => {
+        event.preventDefault();
         backdrop.classList.add('display-block');
         editUI.classList.add('display-flex');
         SELECTED_UI = 'edit';
+
+        
+        const parentId = editButton.parentNode.parentNode.querySelector('[name="parentId"]').value;
+        
+        fetch(`/api/parentData?parentId=${parentId}`, { method: 'GET' })
+        .then(response => response.json())
+        .then(data => {
+            // populating editUI
+            const parentContainer = editButton.parentNode.parentNode;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
     })
 })
 

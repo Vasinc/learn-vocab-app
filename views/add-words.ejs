@@ -212,12 +212,13 @@
                         <% if (parents.length > 0) { %>
                            <% parents.forEach(parent => { %>
                                 <div <% /* eslint-disable css-propertyvalueexpected */ %>  class="parent-container" style="background: <%=parent.parentBackground %>">
-                                    <input type="hidden" name="parentID" value="<%=parent._id%>">
+                                    <input type="hidden" name="parentId" value="<%=parent._id%>">
                                     <div <% /* eslint-disable css-propertyvalueexpected */ %>  class="parent-container-title" style="color: <%=parent.parentTextColor %>">
                                         <div class="parent-container-text">
                                             <%=parent.parentName%> (<span class="parent-symbol">+</span>)
                                         </div>
-                                        <div class="edit-button"></div>
+                                        <div class="edit-button">
+                                        </div>
                                     </div>
                                     <% if (parent.children.length > 0) { %>
                                         <% parent.children.forEach(child => { %>
@@ -261,12 +262,6 @@
                 </div>
 
             </div>
-
-            <!-- <form action="/add-words" method="POST">
-                <input type="text" placeholder="Enter the first word" name="firstWord">
-                <input type="text" placeholder="Enter the second word" name="secondWord">
-                <button type="submit">Send words</button>
-            </form> -->
         </main>
         <footer>
 

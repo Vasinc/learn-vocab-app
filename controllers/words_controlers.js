@@ -68,6 +68,7 @@ exports.postParent = (req, res, next) => {
             const newWords = {
                 firstWord: firstWord,
                 secondWord: secondWord,
+                wordsPosition: parent[0].children[childPosition].words.length,
                 timesShown: 0,
                 succesRate: 0
             };
@@ -83,8 +84,21 @@ exports.postParent = (req, res, next) => {
 }
 
 exports.getRandomWord = (req, res, next) => {
-    PairOfWords.getRandomWord()
-    .then(randomPairOfWords => {
-        res.json({randomPairOfWords: randomPairOfWords})
-    })
+    // PairOfWords.getRandomWord()
+    // .then(randomPairOfWords => {
+    //     res.json({randomPairOfWords: randomPairOfWords})
+    // })
+}
+
+exports.getParent = (req, res, next) => {
+    const parentId = req.query.parentId;
+
+    Parent.findOne({ _id: parentId }).select('-children')
+        .then(parent => {
+            res.json({ data: parent });
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
 }
