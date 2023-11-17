@@ -31,6 +31,11 @@ const wordsUISelectedParentChildren = document.getElementById('wordsUISelectedPa
 const wordsUISelectedParentId = document.getElementById('wordsUISelectedParentId');
 const selectedChildPosition = document.getElementById('selectedWordsChildPosition');
 const editUI = document.getElementById('editUI');
+const editParentContainer = document.getElementById('editUI-parent-section');
+const previewEditedParent = document.getElementById('previewEditedParent');
+const editParentName = document.getElementById('editParentName');
+const editParentBackground = document.getElementById('editParentBackground');
+const editParentTextColor = document.getElementById('editParentTextColor');
 
 //buttons
 const addParentButton = document.getElementById('add-parent__button');
@@ -41,6 +46,7 @@ const wordsUISelectParentButton = document.getElementById('wordsUI-select-parent
 const wordsUISelectChildButton = document.getElementById('wordsUI-select-child');
 const closeMainPageButtons = document.querySelectorAll('.close-main-page');
 const editButtons = document.querySelectorAll('.edit-button');
+const editUIDeleteParentButton = document.getElementById('editUI-delete-parent-button');
 
 // global variables
 let SELECTED_UI;
@@ -205,24 +211,49 @@ secondBackdrop.addEventListener('click', removeSecondBackdropAndUI);
 editButtons.forEach(editButton => {
     editButton.addEventListener('click', event => {
         event.preventDefault();
-        backdrop.classList.add('display-block');
-        editUI.classList.add('display-flex');
-        SELECTED_UI = 'edit';
-
+        
         
         const parentId = editButton.parentNode.parentNode.querySelector('[name="parentId"]').value;
         
         fetch(`/api/parentData?parentId=${parentId}`, { method: 'GET' })
         .then(response => response.json())
-        .then(data => {
-            // populating editUI
-            const parentContainer = editButton.parentNode.parentNode;
+        .then(result => {
+            backdrop.classList.add('display-block');
+            editUI.classList.add('display-flex');
+            SELECTED_UI = 'edit';
+
+            // populate editUI title
+            const data = result.parent;
+            const editUIPreviewTitle = document.getElementById('editUI-title-preview');
+            editUIPreviewTitle.textContent = data.parentName;
+            editUIPreviewTitle.style.background = data.parentBackground;
+            editUIPreviewTitle.style.color = data.parentTextColor;
+
+            // populate editUI parent inputs
+
+            const editParentId = editParentContainer.querySelector('[name="editParentId"]');
+
+            editParentName.value = data.parentName;
+            editParentBackground.value = data.parentBackground;
+            editParentTextColor.value = data.parentTextColor;
+            editParentId.value = data._id;
+
+            // populate editUI parent preview
+
+            previewEditedParent.textContent = data.parentName;
+            previewEditedParent.style.background = data.parentBackground;
+            previewEditedParent.style.color = data.parentTextColor;
         })
         .catch(error => {
             console.error(error);
         });
 
     })
+})
+
+editUIDeleteParentButton.addEventListener('click', () => {
+    editParentContainer.style.background = 'rgba(255, 0, 0, .4)';
+    editUIDeleteParentButton.style.background = 'rgba(215, 38, 56, .6)'
 })
 
 childUISelectedParentButton.addEventListener('click', () => {
@@ -350,11 +381,14 @@ secondWord.addEventListener('change', () => {
 });
 
 
-// NEAR EACH PARENT AND CHILD NAME THERES AN EDIT ICON THAT CAN EDIT IT AND YOU CAN ALSO DELETE IT
-// IF YOU PRESS ON A CHILD, IT WILL SHOW UP A LIST OF THE WORDS THAT ARE STORED AND A DELETE CHILD BUTTON
-// THERES AN EDIT BUTTON THAT APEARS WHEN THE LIST OF WORDS APPERS, YOU HAVE TO SELECT A WORD AND EITHER EDIT IT OR DELETE IT
+editParentName.addEventListener('change', () => {
+    previewEditedParent.textContent = editParentName.value;
+})
 
-// RIGHT NEXT TO EACH COLOR PICKER, YOU'LL HAVE A LIST WITH THE PREVIOUS USED COLORS
+editParentBackground.addEventListener('change', () => {
+    previewEditedParent.style.background = editParentBackground.value;
+})
 
-// ADD EXTENDS FOR EACH CLASS AND ID THAT REPEATS ITSELF
-// MAKE MAIN PAGE WORK
+editParentTextColor.addEventListener('change', () => {
+    previewEditedParent.style.color = editParentTextColor.value;
+})

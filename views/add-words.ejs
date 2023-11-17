@@ -28,8 +28,8 @@
                 <form action="/add-words" method="post" id="editForm">
 
                     <section id="editUI-parent-section">
-                        <label for="editUIParentName">Parent name:</label>
-                        <input type="text" name="editUIParentName" id="editUIParentName" placeholder="Type here..." maxlength="30">
+                        <label for="editParentName">Parent name:</label>
+                        <input type="text" name="editParentName" id="editParentName" placeholder="Type here..." maxlength="30">
                         <label for="editParentBackground">Select the background color:</label>
                         <input type="color" name="editParentBackground" id="editParentBackground">
                         <label for="editParentTextColor">Select the color of the text:</label>
@@ -37,6 +37,7 @@
                         <div id="previewEditedParent" class="preview-element">
                             Preview Example
                         </div>
+                        <input type="hidden" name="editParentId">
                         <div class="delete-button" id="editUI-delete-parent-button">Delete parent</div>
                         <label for="editUISelectedChildPosition" class="margin-label">Choose a child that you want to edit:</label>
                         <div id="editUI-select-child">

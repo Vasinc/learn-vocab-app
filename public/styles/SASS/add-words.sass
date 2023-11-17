@@ -153,6 +153,8 @@ main
                 justify-content: center
                 align-items: center
                 gap: .75rem
+                padding: 2rem 0
+                transition: background 300ms linear
                 .margin-label
                     margin-top: 2rem
             #editUI-parent-section
@@ -172,7 +174,7 @@ main
                         @extend %delete-button
                         margin-top: .5rem
             #editUI-child-section
-                // display: none
+                display: none
                 @extend %UI-section
                 #editUI-select-words
                     border-radius: .25rem
@@ -195,7 +197,7 @@ main
                     .move-button
                         @extend %move-button
             #editUI-words-section
-                // display: none
+                display: none
                 @extend %UI-section
                 .editUI-buttons-container
                     display: flex

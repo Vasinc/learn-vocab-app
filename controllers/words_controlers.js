@@ -95,7 +95,7 @@ exports.getParent = (req, res, next) => {
 
     Parent.findOne({ _id: parentId }).select('-children')
         .then(parent => {
-            res.json({ data: parent });
+            res.json({ parent });
         })
         .catch(error => {
             console.error(error);
